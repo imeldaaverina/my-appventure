@@ -53,7 +53,7 @@ const LoginContainer = () => {
  
     return ( 
         <NoAuthProvider> 
-          <main className="font-Poppins flex justify-center items-center bg-cover bg-center min-h-screen bg-[url('../../public/blur_bg.png')]">
+          <main className="font-Poppins flex justify-center items-center bg-cover bg-center min-h-screen bg-[url('/blur_bg.png')]">
             <div className="text-white rounded-xl w-1/3 min-w-max max-w-lg bg-[#457275]"> 
                 <div className="w-full">
                     <div className="w-full"> 
