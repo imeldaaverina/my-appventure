@@ -4,14 +4,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import landing from './reducers/landing';
 import login from './reducers/login';
 import registration from './reducers/registration';
-import home from './reducers/home';
-import upload from './reducers/upload';
+
 // rootReducer
 const rootReducer = combineReducers({
   landing,
   login,
-  home,
-  upload,
   registration,
 });
 // store (main storage)
