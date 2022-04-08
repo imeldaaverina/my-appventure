@@ -102,7 +102,7 @@ const RegistrationContainer = () => {
  
   return ( 
     <NoAuthProvider>  
-      <main className="font-Poppins min-h-screen bg-cover flex justify-center items-center bg-center bg-[url('blur_bg.png')]">
+      <main className="font-Poppins min-h-screen bg-cover flex justify-center items-center bg-center bg-[url('../../public/blur_bg.png')]">
       <div className="text-white rounded-xl w-1/3 min-w-max max-w-lg bg-[#457275]"> 
       <div className="w-full">
       <div className="w-full">
