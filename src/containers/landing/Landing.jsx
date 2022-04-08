@@ -47,7 +47,7 @@ const LandingContainer = () => {
  
     return ( 
         <NoAuthProvider> 
-        <main className="font-Poppins min-h-screen flex justify-center items-center bg-cover bg-center bg-[url('../../public/blur_bg.png')]">
+        <main className="font-Poppins min-h-screen flex justify-center items-center bg-cover bg-center bg-[url('/blur_bg.png')]">
             <div className="text-white rounded-xl w-max mx-4 max-w-md pb-2 bg-[#457275]"> 
                 
                 <div className="w-full">
