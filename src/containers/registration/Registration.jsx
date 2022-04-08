@@ -103,22 +103,22 @@ const RegistrationContainer = () => {
   return ( 
     <NoAuthProvider>  
       <main className="font-Poppins min-h-screen bg-cover flex justify-center items-center bg-center bg-[url('/blur_bg.png')]">
-      <div className="text-white rounded-xl w-1/3 min-w-max max-w-lg bg-[#457275]"> 
-      <div className="w-full">
+      <div className="text-white rounded-xl pl-5 lg:max-w-7-xl max-w-sm bg-[#457275]"> 
+      <div className="lg:max-w-7-xl max-w-sm">
       <div className="w-full">
         <div className="flex justify-between"> 
-          <div className="px-5 pt-5">
+          <div className="pr-9 pt-5">
             <Title text="Hai," />
           </div>
           <a href="#">
             <ButtonExit />
           </a>
         </div>
-          <div className="px-5">
+          <div className="pr-9">
             <SubTitle content="Belum punya akun?" /> 
           </div>
         </div> 
-          <form className="w-full rounded-xl px-5 p-2 pt-7 pb-4 bg-[#457275]" onSubmit={handleSubmit}>
+          <form className="w-full rounded-xl pr-5 pl-1 p-2 pt-7 pb-4 bg-[#457275]" onSubmit={handleSubmit}>
               <div className="text-center flex-col justify-center items-center">
                   <TitleForm text="Yuk daftar!" /> 
                   <div className="pt-2">

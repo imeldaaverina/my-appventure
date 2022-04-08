@@ -54,11 +54,11 @@ const LoginContainer = () => {
     return ( 
         <NoAuthProvider> 
           <main className="font-Poppins flex justify-center items-center bg-cover bg-center min-h-screen bg-[url('/blur_bg.png')]">
-            <div className="text-white rounded-xl w-1/3 min-w-max max-w-lg bg-[#457275]"> 
-                <div className="w-full">
+            <div className="text-white pl-5 rounded-xl lg:max-w-7-xl max-w-sm bg-[#457275]"> 
+                <div className="lg:max-w-7-xl max-w-sm">
                     <div className="w-full"> 
                       <div className="flex justify-between">
-                        <div className="px-5 pt-5">
+                        <div className="pr-9 pt-5">
                         <Title text="Hai," />
                         <Title /> 
                         </div>
@@ -66,11 +66,11 @@ const LoginContainer = () => {
                         <ButtonExit />
                         </a>
                       </div>
-                      <div className="px-5">
+                      <div className="pr-9">
                         <SubTitle content="Selamat Datang!" /> 
                         </div>
                     </div> 
-                    <form className="w-full rounded-xl px-5 p-2 pt-10 pb-4 bg-[#457275]" onSubmit={handleSubmit}>
+                    <form className="w-full rounded-xl pr-5 pl-1 p-2 pt-10 pb-4 bg-[#457275]" onSubmit={handleSubmit}>
                         <div className="pb-7 pt-4 text-center">
                         <TitleForm text="Masuk ke akun Anda" />   
                         </div>
