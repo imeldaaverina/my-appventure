@@ -1,16 +1,16 @@
 import AuthProvider from '../../providers/auth/AuthProvider';
-import MainLayout from '../../components/layout/MainLayout';
+import FollowingLayout from '../../components/layout/FollowingLayout';
 // import Posts from './elements/Posts';
 // import HomeProvider from './HomeProvider';
-const HomeContainer = () => {
+const FollowingContainer = () => {
   return (
     <AuthProvider>
-      <MainLayout>
+      <FollowingLayout>
         {/* <HomeProvider>
           <Posts />
         </HomeProvider> */}
-      </MainLayout>
+      </FollowingLayout>
     </AuthProvider>
   );
 };
-export default HomeContainer;
+export default FollowingContainer;

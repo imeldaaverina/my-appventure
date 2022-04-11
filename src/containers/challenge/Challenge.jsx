@@ -1,16 +1,16 @@
 import AuthProvider from '../../providers/auth/AuthProvider';
-import MainLayout from '../../components/layout/MainLayout';
+import ChallengeLayout from '../../components/layout/ChallengeLayout';
 // import Posts from './elements/Posts';
 // import HomeProvider from './HomeProvider';
-const HomeContainer = () => {
+const ChallengeContainer = () => {
   return (
     <AuthProvider>
-      <MainLayout>
+      <ChallengeLayout>
         {/* <HomeProvider>
           <Posts />
         </HomeProvider> */}
-      </MainLayout>
+      </ChallengeLayout>
     </AuthProvider>
   );
 };
-export default HomeContainer;
+export default ChallengeContainer;
