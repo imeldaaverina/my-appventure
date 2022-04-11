@@ -1,10 +1,13 @@
 import { getUser } from '../helpers/auth';
 import usePostItem from '../containers/home/hooks/usePostItem';
 import { HeartIcon, ChatIcon, LinkIcon} from '@heroicons/react/outline';
-import Image from 'next/image'
+import Image from 'next/image';
+import { useHomeDispatcher } from '../redux/reducers/home/slice';
+
 
 const PostItem = ({ id, data }) => {
   const { handleRemove, handleEdit } = usePostItem();
+  const { home, makeIncrement } = useHomeDispatcher();
   return (
     <main className='m-auto flex justify-center'>
     <div className="bg-indigo-400 rounded-xl flex justify-center items-center flex-col w-96">
@@ -23,7 +26,12 @@ const PostItem = ({ id, data }) => {
         </div>
 
         <div className='bg-white flex justify-start mt-4'>
-          <HeartIcon className='text-red-500 w-5 h-5'/>
+        <div className="flex justify-center items-center -mx-1 my-3">
+            <HeartIcon className='text-red-500 w-12 h-12' onClick={() => makeIncrement()}/>
+            <span className="text-2xl block w-full">
+            {home.counter}
+          </span>
+          </div>
           <ChatIcon className='w-5 h-5'/>
           <LinkIcon className='w-5 h-5'/>
         </div>
