@@ -1,14 +1,14 @@
 import AuthProvider from '../providers/auth/AuthProvider';
-import MainLayout from '../components/layout';
-import Posts from '../containers/home/elements/Posts';
-import HomeProvider from '../containers/home';
+import MainLayout from '../components/layout/MainLayout';
+// import Posts from '../containers/home/elements/Posts';
+// import HomeProvider from '../containers/home';
 const HomeContainer = () => {
   return (
     <AuthProvider>
       <MainLayout>
-        <HomeProvider>
+        {/* <HomeProvider>
           <Posts />
-        </HomeProvider>
+        </HomeProvider> */}
       </MainLayout>
     </AuthProvider>
   );

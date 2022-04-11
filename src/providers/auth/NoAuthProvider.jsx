@@ -5,7 +5,7 @@ const NoAuthProvider = ({ children }) => {
   useEffect(() => {
     const jwt = getJwt();
     if (jwt) {
-      window.location.href = '/home';
+      // window.location.href = '/home';
     }
     setMounted(true);
   }, []);

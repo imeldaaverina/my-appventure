@@ -1,5 +1,5 @@
 import NoAuthProvider from '../../providers/auth/NoAuthProvider';
-import MainLayout from '../../components/layout/MainLayout';
+import UploadLayout from '../../components/layout/UploadLayout';
 import Button from '../../components/button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -115,7 +115,7 @@ const Edit = () => {
   };
   return (
     <NoAuthProvider>
-      <MainLayout>
+      <UploadLayout>
         <form onSubmit={handleSubmit}>
           <div className="h-60 bg-gray-100 ">
             <label
@@ -154,7 +154,7 @@ const Edit = () => {
             <Button type="submit" label={loading ? 'Please wait...' : 'Update post'} />
           </div>
         </form>
-      </MainLayout>
+      </UploadLayout>
     </NoAuthProvider>
   );
 };
