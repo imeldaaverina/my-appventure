@@ -14,7 +14,6 @@ const PostItem = ({ id, data }) => {
   return (
     <main className='m-auto flex justify-center font-Poppins'>
     <div className=" rounded-2xl flex justify-center items-center flex-col w-96 shadow-xl">
-      <img src="blur_bg.png" className='w-full h-full rounded-t-2xl' alt=''/>
       <div className=' p-4 flex flex-col w-full rounded-2xl'>
         <div className='flex justify-between'>
           <div className='flex w-full'>
@@ -36,14 +35,14 @@ const PostItem = ({ id, data }) => {
 
         </div>
         <div className='text-sm mt-4'>
-        {/* My happy place!!! Here’s to more solo adventure around labuan bajo in 2022 ..... <span className='font-bold'>Baca lebih lanjut</span>*/}
-        <ReadMoreReact 
+        My happy place!!! Here’s to more solo adventure around labuan bajo in 2022
+        {/* <ReadMoreReact 
                 text={postData}
                 min={0}
                 ideal={50}
                 max={60}
                 className='font-bold'
-                readMoreText="... Baca lebih lanjut"/>
+                readMoreText="... Baca lebih lanjut"/> */}
         {/* {postData.length > 60 ? (<div>{postData.substring(0, 60)} ...<a className=' font-bold'> Baca lebih lanjut</a></div>) : (<></>)} */}
         </div>
 

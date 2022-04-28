@@ -36,6 +36,15 @@ export const useHomeDispatcher = () => {
   const makePosts = (posts) => dispatch(setPosts(posts));
   const makeIncrement = () => {
     dispatch(increase());
+    const response = await callAPI({
+      url: '/like',
+      method: 'POST',
+      data: values,
+    });
+    const { data } = response;
+    localStorage.setItem('access_token', data.access_token);
+    // localStorage.setItem('user', JSON.stringify(data.user));
+    dispatch(toggleLoading(false));
   };
   return {
     useHomeDispatcher,

@@ -13,12 +13,12 @@ const ButtonFollow = ({
        onClick={() => setFollow(!follow)}>
        {follow ? 
        <button
-    //    label= {"Ikuti"}
-       className="flex justify-center bg-transparent border-2 border-[#457275] text-[#457275]  text-xs font-light rounded p-2 w-24 h-18"> 
+       label= "Ikuti"
+       className="flex justify-center bg-[#457275] border-2 border-[#457275] text-white text-xs font-light rounded p-2 w-24 h-18"> 
        </button> : 
        <button
-    //    label= {"Mengikuti"}
-       className="flex justify-center bg-[#457275]  border-2 border-[#457275] text-white p-2 text-xs font-light rounded w-24 h-18"> 
+       label= "Mengikuti"
+       className="flex justify-center bg-transparent border-2 border-[#457275] text-[#457275] p-2 text-xs font-light rounded w-24 h-18"> 
        
        </button>}
     </button> 

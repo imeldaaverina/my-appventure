@@ -7,7 +7,7 @@ const ChallengeContainer = () => {
     <AuthProvider>
       <ChallengeLayout>
         {/* <HomeProvider>
-          <Posts />
+          <Challange />
         </HomeProvider> */}
       </ChallengeLayout>
     </AuthProvider>

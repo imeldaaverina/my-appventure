@@ -10,7 +10,7 @@ import { ExclamationCircleIcon, EyeIcon } from "@heroicons/react/outline";
  
 const validationSchema = Yup.object({ 
     email: Yup.string().required("diperlukan email").email("email tidak valid"), 
-    password: Yup.string().required("diperlukan kata sandi"),
+    password: Yup.string().required("diperlukan kata sandi"),  
 }); 
 
  
@@ -18,11 +18,32 @@ const initialValues = {
     email: "", 
     password: "" 
 }; 
+
+// const ErrorHandling = () => {
+//     const { login: { loading, datauser, errMessage }, getDatauser } = useLoginDispatcher();
+
+//     const handleClickHitMeButton = async () => {
+//         await getProducts();
+    
+// }  
+// }
+
+//     return(
+//         <div className="flex items-center justify-center text-xs font-semibold text-[#FF8181] pb-4" data-testid="error-password"> 
+//             <ExclamationCircleIcon className="w-9 h-9 " />
+//             <p className="px-1 leading-5">Alamat email atau kata sandi yang <br></br> anda masukan tidak valid</p>
+//         </div> 
+//     )
+// }
  
 const LoginContainer = () => { 
-    const { login: { loading }, doLogin } = useLoginDispatcher(); 
+    const { login: { loading, errMessage }, doLogin } = useLoginDispatcher(); 
 
     const {push} = useRouter();
+
+    // const handleOnSubmit = async (values) => {
+    //     await doLogin(values);
+    //   };
 
     const onSubmit = async (values) => { 
  
@@ -32,10 +53,21 @@ const LoginContainer = () => {
                 password: values.password, 
             }; 
             await doLogin(payload); 
-            // window.location.href = "/"; 
-            push('/success_login');
+            // if (payload === "") {
+                
+            //     dispatch(toggleLoading(false));
+            //     dispatch(
+            //       setErrMessage({
+            //         title: "Oops... terjadi kesalahan",
+            //         content: data.message,
+            //       })
+            //     );
+            //     return;
+            //   } push('/success_login');
+            
         } catch (error) { 
-            alert(error); 
+            alert(error);
+          
         } 
     } 
  
@@ -48,7 +80,7 @@ const LoginContainer = () => {
     } = useFormik({ 
         initialValues, 
         validationSchema, 
-        onSubmit 
+        onSubmit,
     }); 
  
     return ( 
@@ -75,12 +107,15 @@ const LoginContainer = () => {
                         <TitleForm text="Masuk ke akun Anda" />   
                         </div>
 
-                        {getIn(touched, "password") && getIn(errors, "password") && getIn(touched, "email") && getIn(errors, "email")&& ( 
+                        {/* {getIn(touched, "password") && getIn(errors, "password") && getIn(touched, "email") && getIn(errors, "email")&& (  */}
+                        {
+                            errMessage.title && errMessage.content &&(
                         <div className="flex items-center justify-center text-xs font-semibold text-[#FF8181] pb-4" data-testid="error-password"> 
                            <ExclamationCircleIcon className="w-9 h-9 " />
                            <p className="px-1 leading-5">Alamat email atau kata sandi yang <br></br> anda masukan tidak valid</p>
                         </div> 
-                        )} 
+                            )}
+                        {/* )}  */}
 
                     <div className="font-normal text-sm mb-1 flex justify-between">
                         Email
@@ -129,7 +164,7 @@ const LoginContainer = () => {
                             </a>
                         </div>
                     </div>
-                        <Button type="submit" label={loading ? 'Please wait...' : 'Masuk'} href="../success_registration"/> 
+                        <Button type="submit" label={loading ? 'Silahkan tunggu...' : 'Masuk'}/> 
                         <div className="text-sm flex justify-center mt-2">
                             <p className="text-white font-light text-xs">
                             Belum punya akun? <a className="underline font-semibold text-[#FEC868]" href="../registration">Daftar Disini</a>
