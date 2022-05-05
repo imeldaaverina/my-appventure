@@ -19,7 +19,7 @@ import { getJwt, getUser } from "../helpers/auth";
 import { useRouter } from "next/router";
 import { Icon } from '@iconify/react';
 
-import { HeartIcon, ChatIcon, LinkIcon, ArrowCircleLeftIcon, UsersIcon, ClipboardCheckIcon, CameraIcon} from '@heroicons/react/outline';
+import { HeartIcon, ChatIcon, LinkIcon, ArrowCircleLeftIcon, UsersIcon, ClipboardCheckIcon, CameraIcon, ExclamationCircleIcon} from '@heroicons/react/outline';
 import { Button3, ButtonFollow, Button, ButtonPost} from '../components/button';
 
 
@@ -28,6 +28,7 @@ import { useCreatePostDispatcher } from "../redux/reducers/post";
 
 const validationSchema = Yup.object({
     post: Yup.string().required(),
+    files: Yup.array().max(10, "File maksimal 10")
 });
 
 const initialValues = {
@@ -133,10 +134,21 @@ const CreatePost = () => {
         if (previews && previews.length > 0) {
           return previews.map((item) => (
             <div className="inline-flex justify-center items-center text-center h-28 w-28  text-sm cursor-pointer hover:bg-gray-300 rounded-lg">
-              <img
+              {/* <img
                 src={URL.createObjectURL(item)}
                 className="object-cover h-full w-full rounded-lg"
-              />
+              /> */}
+              {item.type.includes("image") ?
+              (<img
+                src={URL.createObjectURL(item)}
+                className="object-cover h-full w-full rounded-lg"
+              /> )
+              : 
+              (<video  
+              className="object-cover h-full w-full rounded-lg" 
+              controls
+              src={URL.createObjectURL(item)}/>
+              )}
             </div>
           ));
         }
@@ -154,9 +166,9 @@ const CreatePost = () => {
 <div className="min-h-screen font-Poppins flex justify-center ">
 <div className="max-w-lg">
 <div className='flex flex-col mt-5 w-96 justify-center items-center'>
-      <div className='flex'> 
+      <div className='flex justify-center'> 
         <ArrowCircleLeftIcon className='w-10 h-10 '/>
-        <div className='font-medium text-2xl flex justify-center items-center ml-5 w-72'>Buat Postingan Baru</div>
+        <div className='font-medium text-2xl flex justify-center items-center ml-1 mr-4 w-72'>Buat Postingan Baru</div>
       </div>
     <div className='mt-14 border rounded-lg border-[#35BBBA] w-96 px-4 py-3 flex flex-col'>
     <div className='flex'>
@@ -194,6 +206,12 @@ const CreatePost = () => {
       <div className=" -ml-4 pl-2 pr-1 my-3 w-96 grid grid-cols-3 lg:grid-cols-3 gap-1">
         {renderPreviews()}
       </div>
+      <div>{getIn(touched, "files") && getIn(errors, "files") && ( 
+                        <div className="flex items-center justify-start" data-testid="error-files"> 
+                            <ExclamationCircleIcon className="w-5 h-5 text-[#FF8181] pr-1" />
+                           {getIn(errors, "files")}
+                        </div> 
+                        )} </div>
       <div className='flex justify-between w-96 -ml-4 pl-2 pr-3'>
           <div>
       <label
@@ -206,7 +224,7 @@ const CreatePost = () => {
             name="files"
             id="uploads"
             className="hidden"
-            accept="image/*"
+            accept="image/*, video/*"
             onChange={handleChangeFiles}
             multiple
           />

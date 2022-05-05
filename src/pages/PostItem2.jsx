@@ -2,7 +2,7 @@ import { getUser } from '../helpers/auth';
 import usePostItem from '../containers/home/hooks/usePostItem';
 import { HeartIcon, ChatIcon, LinkIcon, ArrowCircleLeftIcon, UsersIcon, ClipboardCheckIcon, CameraIcon} from '@heroicons/react/outline';
 import { Button3, ButtonFollow, Button, ButtonPost} from '../components/button';
-import { Input } from '../components/input';
+import { InputKomen } from '../components/input';
 import Image from 'next/image';
 import ReadMoreReact from 'read-more-react';
 import { Danau, Reboisasi, Hiking } from '../components/card';
@@ -111,7 +111,8 @@ const textareaRef = useRef(null);
       </div>
       
     </div>
-    <div className=' pt-3 pl-2 pr-5 flex'>
+    <div className=' pt-3  px-3 flex'>
+      <div className='flex flex-col '>
       <div className='flex'>
       <img src="blur_bg.png" className='rounded-full w-10 h-10 ' alt='' />
         <div className='pr-3 flex '>
@@ -135,12 +136,23 @@ const textareaRef = useRef(null);
               {/* Saya Pernah! Seruu sekali loh!, Saya merekomendasikan patai lainnya yang mirip seperti gambar di atas, ada pa.... */}
               </div>
               <div className='flex text-xs font-light mt-1 underline'>Balas</div>
-              <Input/>
             </div>
           </div>
         </div>
       </div>
       
+      <div className='flex mt-9 w-full'>
+              <InputKomen
+              name="komentar" 
+              label="" 
+              type="text" 
+              placeholder="Tulis Komentar" 
+              onChange={handleChange} 
+              onBlur={handleBlur} 
+              />
+              <Icon icon="akar-icons:send" className='text-white w-6 h-6 ml-2 mt-1'/>
+      </div>
+    </div>
     </div>
     </div>
 

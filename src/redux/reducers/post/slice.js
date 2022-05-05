@@ -52,7 +52,7 @@ export const useCreatePostDispatcher = () => {
       formData.append("post", values.post);
       formData.append("files[]", values.files);
       const { data } = await axios({
-        url: "http://create.post.com",
+        url: "post/addpost",
         method: "post",
         data: formData,
         headers: {
