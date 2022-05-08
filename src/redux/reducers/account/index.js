@@ -6,7 +6,7 @@ const initialState = {
 };
 const slices = createSlice({
   initialState,
-  name: 'registration',
+  name: 'account',
   reducers: {
     toggleLoading(state, action) {
       Object.assign(state, {
@@ -17,10 +17,10 @@ const slices = createSlice({
   },
 });
 const { toggleLoading } = slices.actions;
-export const useRegistrationDispatcher = () => {
-  const { registration } = useSelector((state) => state);
+export const useAccountDispatcher = () => {
+  const { account } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const doRegistration = async (values) => {
+  const doAccount = async (values) => {
     dispatch(toggleLoading(true));
     const response = await callAPI({
       url: '/user/daftar',
@@ -34,8 +34,8 @@ export const useRegistrationDispatcher = () => {
     dispatch(toggleLoading(false));
   };
   return {
-    registration,
-    doRegistration,
+    account,
+    doAccount,
   };
 };
 export default slices.reducer;

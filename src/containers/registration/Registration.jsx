@@ -56,6 +56,7 @@ const RegistrationContainer = () => {
           Authorization: `Bearer ${getJwt()}`,
         },
       });
+
       const fileUrl = upload.data[0].url;
       const payload = {
         data: {
@@ -64,6 +65,7 @@ const RegistrationContainer = () => {
           postedBy: `${getUser().username}`,
         },
       };
+
       const submitRegistration = await callAPI({
         url: '/user/daftar',
         method: 'post',
@@ -72,6 +74,7 @@ const RegistrationContainer = () => {
           Authorization: `Bearer ${getJwt()}`,
         },
       });
+      
       if (submitRegistration.status === 200) {
         setLoading(false);
         alert('Create posts success!');
@@ -91,6 +94,7 @@ const RegistrationContainer = () => {
         validationSchema,  
         onSubmit  
     });  
+    
     const [preview, setPreview] = useState();
     const handleChangeFile = (e) => {
       const files = e.target.files;

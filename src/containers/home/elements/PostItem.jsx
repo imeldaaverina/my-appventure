@@ -1,4 +1,4 @@
-import { getUser } from '../../../helpers/auth';
+// import { getUser } from '../../../helpers/auth';
 import usePostItem from '../hooks/usePostItem';
 import { HeartIcon, ChatIcon, LinkIcon} from '@heroicons/react/outline';
 import { ButtonFollow} from "../../../components/button";

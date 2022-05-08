@@ -4,7 +4,7 @@ const AccountPage = () => {
   return (
     <>
       <Head>
-        <title>BinarGram - Account</title>
+        <title>Account - My Appventure</title>
       </Head>
       <AccountContainer />
     </>

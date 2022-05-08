@@ -1,7 +1,7 @@
-import { getUser } from '../helpers/auth';
-import usePostItem from '../containers/home/hooks/usePostItem';
+// import { getUser } from '../helpers/auth';
+// import usePostItem from '../containers/home/hooks/usePostItem';
 import { HeartIcon, ChatIcon, LinkIcon} from '@heroicons/react/outline';
-import { ButtonFollow } from '../components/button';
+// import { ButtonFollow } from '../components/button';
 import Image from 'next/image';
 import ReadMoreReact from 'read-more-react';
 

@@ -1,7 +1,6 @@
-import Navbar from "./elements/Navbar";
 import Footer from "./elements/Footer";
 
-const UploadLayout = ({children}) => {
+const FollowerListLayout = ({children}) => {
 
   return (
     <>
@@ -15,4 +14,4 @@ const UploadLayout = ({children}) => {
 
 };
 
-export default UploadLayout;
+export default FollowerListLayout;
