@@ -1,15 +1,9 @@
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { useFormik, getIn } from "formik";
 import * as Yup from 'yup';
 import { useState, useRef, useEffect } from "react";
-import { callAPI } from "../helpers/network";
-import { getJwt, getUser } from "../helpers/auth";
-import { useRouter } from "next/router";
 import { Icon } from '@iconify/react';
 import { HeartIcon, ChatIcon, LinkIcon, ArrowCircleLeftIcon, UsersIcon, ClipboardCheckIcon, CameraIcon} from '@heroicons/react/outline';
 import { Button3, ButtonFollow, Button, ButtonPost} from '../components/button';
@@ -17,6 +11,7 @@ import { useCreatePostDispatcher } from "../redux/reducers/post";
 
 const validationSchema = Yup.object({
     post: Yup.string().required(),
+    files: Yup.array().max(10, "File maksimal 10")
 });
 
 const initialValues = {
