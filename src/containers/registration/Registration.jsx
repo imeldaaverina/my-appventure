@@ -13,8 +13,8 @@ import { CameraIcon } from '@heroicons/react/outline';
 const validationSchema = Yup.object({  
     username: Yup.string().required("diperlukan username").min(3, "username gunakan 3-15 karakter").max(15, "username gunakan 3-15 karakter"),
     email: Yup.string().required("diperlukan email").email("email tidak valid"),  
-    password: Yup.string().required("diperlukan kata sandi").min(6, "gunakan 6-10 karakter, tanpa spasi").max(10, "Kata sandi gunakan 6-10 karakter, tanpa spasi").matches(/^\S+$/, "Kata sandi gunakan 6-10 karakter, tanpa spasi"),  
-    files: Yup.mixed().required("diperlukan foto profil"),
+    password: Yup.string().required("diperlukan kata sandi").min(6, "gunakan 6-10 karakter, tanpa spasi").max(10, "gunakan 6-10 karakter, tanpa spasi").matches(/^\S+$/, "gunakan 6-10 karakter, tanpa spasi"),  
+    // files: Yup.mixed().required("diperlukan foto profil"),
 });  
   
 const initialValues = { 

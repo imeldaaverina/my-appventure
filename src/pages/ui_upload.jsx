@@ -14,17 +14,17 @@ import { useFormik, getIn } from "formik";
 import * as Yup from 'yup';
 
 import { useState, useRef, useEffect } from "react";
-import { callAPI } from "../../helpers/network";
-import { getJwt, getUser } from "../../helpers/auth";
+import { callAPI } from "../helpers/network";
+import { getJwt, getUser } from "../helpers/auth";
 import { useRouter } from "next/router";
 import { Icon } from '@iconify/react';
 
 import { HeartIcon, ChatIcon, LinkIcon, ArrowCircleLeftIcon, UsersIcon, ClipboardCheckIcon, CameraIcon, ExclamationCircleIcon} from '@heroicons/react/outline';
-import { Button3, ButtonFollow, Button, ButtonPost} from '../../components/button';
+import { Button3, ButtonFollow, Button, ButtonPost} from '../components/button';
 
 
 // import { useCreatePostDispatcher } from "../redux/reducers/create-post";
-import { useCreatePostDispatcher } from "../../redux/reducers/post";
+import { useCreatePostDispatcher } from "../redux/reducers/post";
 
 const validationSchema = Yup.object({
     post: Yup.string().required(),
@@ -167,9 +167,7 @@ const CreatePost = () => {
 <div className="max-w-lg">
 <div className='flex flex-col mt-5 w-96 justify-center items-center'>
       <div className='flex justify-center'> 
-        <a href='./home'>
         <ArrowCircleLeftIcon className='w-10 h-10 '/>
-        </a>
         <div className='font-medium text-2xl flex justify-center items-center ml-1 mr-4 w-72'>Buat Postingan Baru</div>
       </div>
     <div className='mt-14 border rounded-lg border-[#35BBBA] w-96 px-4 py-3 flex flex-col'>

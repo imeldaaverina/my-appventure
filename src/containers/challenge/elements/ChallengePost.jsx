@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useHomeProvider } from '../HomeProvider';
-import PostItem from './PostItem';
-import PostItem2 from './PostItem2';
-const Posts = () => {
+import ChallengePostItem from './ChallengePostItem';
+// import PostItem2 from './PostItem2';
+const ChallengePost = () => {
   const { posts, loadPosts } = useHomeProvider();
   useEffect(() => {
     loadPosts();
   }, []);
   return <section>{posts && posts.length > 0 && posts.map((post) => <PostItem key={post.id} data={post.attributes} id={post.id} />)}</section>;
 };
-export default Posts;
+export default ChallengePost;
