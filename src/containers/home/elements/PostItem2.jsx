@@ -3,6 +3,7 @@
 import { HeartIcon, ChatIcon, LinkIcon} from '@heroicons/react/outline';
 // import { ButtonFollow } from '../components/button';
 import Image from 'next/image';
+import Link from 'next/link'
 import ReadMoreReact from 'read-more-react';
 
 const PostItem = ({ id, data }) => {
@@ -18,7 +19,7 @@ const PostItem = ({ id, data }) => {
         <div className='flex justify-between'>
           <div className='flex w-full'>
             
-            <img src="blur_bg.png" className='rounded-full w-10 h-10' alt='' />
+            <Image src="blur_bg.png" className='rounded-full w-10 h-10' alt='' />
             <div className='pr-3 w-96 flex justify-between'>
             <div className='flex flex-col ml-2'>
               <div className='font-medium text-sm mt-1'>
