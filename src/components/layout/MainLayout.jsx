@@ -17,7 +17,7 @@ const MainLayout = () => {
         <main className="min-h-screen max-w-md mx-auto">
           <NavbarPost/>
           <Link href="/upload" className="flex justify-end sticky top-24 right-10 mr-10 mt-10">
-            <img src="./postIcon.svg" className="w-16" alt=""/>
+            <Image src="./postIcon.svg" className="w-16" alt=""/>
           </Link>
           {/* <HomeProvider>
             <Posts />

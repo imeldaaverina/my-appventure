@@ -81,7 +81,7 @@ const textareaRef = useRef(null);
         <div className='flex justify-between'>
           <div className='flex w-full'>
             
-            <img src="blur_bg.png" className='rounded-full w-10 h-10' alt='' />
+            <Image src="blur_bg.png" className='rounded-full w-10 h-10' alt='' />
             <div className='pr-3 w-96 flex justify-between'>
             <div className='flex flex-col ml-2'>
               <div className='font-medium text-sm mt-1'>
@@ -114,7 +114,7 @@ const textareaRef = useRef(null);
     <div className=' pt-3  px-3 flex'>
       <div className='flex flex-col '>
       <div className='flex'>
-      <img src="blur_bg.png" className='rounded-full w-10 h-10 ' alt='' />
+      <Image src="blur_bg.png" className='rounded-full w-10 h-10 ' alt='' />
         <div className='pr-3 flex '>
           <div className='flex flex-col ml-2 items-center justify-center'>
             <div className='font-semibold text-white flex flex-col'>
@@ -246,7 +246,7 @@ const textareaRef = useRef(null);
       </div>
     <div className='mt-14 border rounded-lg border-[#35BBBA] w-96 px-4 py-3 flex flex-col'>
     <div className='flex'>
-    <img src="blur_bg.png" className='rounded-full w-10 h-10 ' alt='' />
+    <Image src="blur_bg.png" className='rounded-full w-10 h-10 ' alt='' />
         <div className='pr-3 flex '>
           <div className='flex flex-col ml-2 items-center justify-center'>
             <div className='font-semibold flex flex-col'>
@@ -282,7 +282,7 @@ const textareaRef = useRef(null);
                         <label htmlFor="files" className=" w-full h-full cursor-pointer flex justify-center items-center ">
                             {
                                 preview ? (
-                                    <img className="h-full w-full object-cover" src={preview} />
+                                    <Image className="h-full w-full object-cover" src={preview} />
                                 ) : <CameraIcon className="h-8 w-8" />
                             }
                             <input
