@@ -1,6 +1,6 @@
 export const getJwt = () => {
   if (typeof window !== 'undefined') {
-    return localStorage.getItem('jwt');
+    return localStorage.getItem('access_token');
   }
   return null;
 };

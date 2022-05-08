@@ -43,7 +43,7 @@ const Edit = () => {
       const formData = new FormData();
       formData.append('files', formValues.files);
       const upload = await callAPI({
-        url: '/upload',
+        url: '/post/v1/upload',
         method: 'post',
         data: formData,
         headers: {

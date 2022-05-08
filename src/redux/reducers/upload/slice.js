@@ -32,7 +32,7 @@ export const useUploadDispatcher = () => {
   const makePost = async (postId) => {
     dispatch(toggleLoading(true));
     const response = await callAPI({
-      url: `/posts/${postId}`,
+      url: `v1/showFile/${fileName}`,
       method: 'get',
       headers: {
         Authorization: `Bearer ${getJwt()}`,

@@ -5,7 +5,7 @@ const useAccount = () => {
   const [profile, setProfile] = useState(); 
  
   const loadProfile = () => { 
-    const _profile = localStorage.getItem('user'); 
+    const _profile = localStorage.getItem('access_token'); 
     setProfile(JSON.parse(_profile)); 
   }; 
  

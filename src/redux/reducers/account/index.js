@@ -3,18 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { callAPI } from '../../../helpers/network';
 const initialState = {
   loading: false,
-  error: ""
 };
 const slices = createSlice({
   initialState,
-  name: 'login',
+  name: 'account',
   reducers: {
-    setError (state, action) {
-      Object.assign(state, {
-        ...state,
-        error: action.payload,
-      });
-    },
     toggleLoading(state, action) {
       Object.assign(state, {
         ...state,
@@ -23,26 +16,26 @@ const slices = createSlice({
     },
   },
 });
-const { toggleLoading, setError } = slices.actions;
-export const useLoginDispatcher = () => {
-  const { login } = useSelector((state) => state);
+const { toggleLoading } = slices.actions;
+export const useAccountDispatcher = () => {
+  const { account } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const doLogin = async (values) => {
+  const doAccount = async (values) => {
     dispatch(toggleLoading(true));
-    const response = await callAPI({   
-      url: '/user-login/login',
+    const response = await callAPI({
+      url: '/user/daftar',
       method: 'POST',
       data: values,
     });
     const { data } = response;
-    console.log(data)
+    // console.log(data)
     localStorage.setItem('access_token', data.access_token);
     // localStorage.setItem('user', JSON.stringify(data.user));
     dispatch(toggleLoading(false));
   };
   return {
-    login,
-    doLogin,
+    account,
+    doAccount,
   };
 };
 export default slices.reducer;

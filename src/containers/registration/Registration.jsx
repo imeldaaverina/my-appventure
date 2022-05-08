@@ -13,7 +13,7 @@ import { CameraIcon } from '@heroicons/react/outline';
 const validationSchema = Yup.object({  
     username: Yup.string().required("diperlukan username").min(3, "username gunakan 3-15 karakter").max(15, "username gunakan 3-15 karakter"),
     email: Yup.string().required("diperlukan email").email("email tidak valid"),  
-    password: Yup.string().required("diperlukan kata sandi").min(6, "Kata sandi gunakan 6-10 karakter, tanpa spasi").max(10, "Kata sandi gunakan 6-10 karakter, tanpa spasi").matches(/^\S+$/, "Kata sandi gunakan 6-10 karakter, tanpa spasi"),  
+    password: Yup.string().required("diperlukan kata sandi").min(6, "gunakan 6-10 karakter, tanpa spasi").max(10, "Kata sandi gunakan 6-10 karakter, tanpa spasi").matches(/^\S+$/, "Kata sandi gunakan 6-10 karakter, tanpa spasi"),  
     files: Yup.mixed().required("diperlukan foto profil"),
 });  
   
@@ -56,6 +56,7 @@ const RegistrationContainer = () => {
           Authorization: `Bearer ${getJwt()}`,
         },
       });
+
       const fileUrl = upload.data[0].url;
       const payload = {
         data: {
@@ -64,6 +65,7 @@ const RegistrationContainer = () => {
           postedBy: `${getUser().username}`,
         },
       };
+
       const submitRegistration = await callAPI({
         url: '/user/daftar',
         method: 'post',
@@ -72,6 +74,7 @@ const RegistrationContainer = () => {
           Authorization: `Bearer ${getJwt()}`,
         },
       });
+      
       if (submitRegistration.status === 200) {
         setLoading(false);
         alert('Create posts success!');
@@ -91,6 +94,7 @@ const RegistrationContainer = () => {
         validationSchema,  
         onSubmit  
     });  
+    
     const [preview, setPreview] = useState();
     const handleChangeFile = (e) => {
       const files = e.target.files;

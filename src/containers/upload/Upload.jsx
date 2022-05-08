@@ -28,13 +28,13 @@ const Upload = () => {
 
     const onSubmit = async (formValues) => {
         setLoading(true);
-        // first upload
 
+        // first upload
         const formData = new FormData();
         formData.append("files", formValues.files);
 
         const upload = await callAPI({
-            url: "/upload",
+            url: "/post/v1/upload",
             method: "post",
             data: formData,
             headers: {
@@ -56,7 +56,7 @@ const Upload = () => {
         }
 
         const submitPost = await callAPI({
-            url: "/posts",
+            url: "/post/addpost",
             method: "post",
             data: payload,
             headers: {
@@ -95,7 +95,7 @@ const Upload = () => {
     return (
         <AuthProvider>
             <UploadLayout>
-                <form onSubmit={handleSubmit}>
+                {/* <form onSubmit={handleSubmit}>
                     <div className="h-60 bg-gray-100 ">
                         <label htmlFor="files" className=" w-full h-full cursor-pointer flex justify-center items-center ">
                             {
@@ -162,7 +162,8 @@ const Upload = () => {
                     <div className="p-3">
                         <Button type="submit" label={loading ? 'Please wait...' : 'Create post'} />
                     </div>
-                </form>
+                </form> */}
+                halo
             </UploadLayout>
         </AuthProvider>
     )
