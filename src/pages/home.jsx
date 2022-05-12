@@ -8,8 +8,8 @@ const HomeContainer = () => {
     <AuthProvider>
       <MainLayout>
         <HomeProvider>
-          <Posts />
-          <PostItem/>
+          {/* <Posts />
+          <PostItem/> */}
         </HomeProvider>
       </MainLayout>
     </AuthProvider>

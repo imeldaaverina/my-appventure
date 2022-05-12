@@ -15,9 +15,11 @@ const FollowingLayout = () => {
         <Jumbotron />
         <main className="min-h-screen max-w-md mx-auto">
           <NavbarFollowing/>
-          <Link href="./upload" className="flex justify-end sticky top-24 right-10 mr-10 mt-10">
+          {/* <Link href="./upload" className="flex justify-end sticky top-24 right-10 mr-10 mt-10">
+          <a>
             <Image src="./postIcon.svg" className="w-16" alt=""/>
-          </Link>
+            </a>
+          </Link> */}
           {/* <HomeProvider>
             <Posts />
           </HomeProvider> */}

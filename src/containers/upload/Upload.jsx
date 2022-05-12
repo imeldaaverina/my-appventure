@@ -47,50 +47,7 @@ const CreatePost = () => {
         await doSubmit(values);
       };
 
-    // const onSubmit = async (formValues) => {
-    //     setLoading(true);
-        // first upload
-
-        // const formData = new FormData();
-        // formData.append("files", formValues.files);
-
-        // const upload = await callAPI({
-        //     url: "/upload",
-        //     method: "post",
-        //     data: formData,
-        //     headers: {
-        //         Authorization: `Bearer ${getJwt()}`
-        //     }
-        // });
-
-        // const fileUrl = upload.data[0].url;
-        // const { title, caption } = formValues;
-
-        // const payload = {
-        //     data: {
-        //     title,
-        //     caption,
-        //     photo: `${fileUrl}`,
-        //     isPublish: true,
-        //     postedBy: `${getUser().username}`
-        //     }
-        // }
-
-        // const submitPost = await callAPI({
-        //     url: "/posts",
-        //     method: "post",
-        //     data: payload,
-        //     headers: {
-        //     Authorization: `Bearer ${getJwt()}`
-        //     }
-        // });
-
-        // if (submitPost.status === 200) {
-        //     setLoading(false);
-        //     alert('Create posts success!');
-        //     push("/");
-        // }
-    // };
+  
 
     const {
         handleBlur,
@@ -168,13 +125,15 @@ const CreatePost = () => {
 <div className='flex flex-col mt-5 w-96 justify-center items-center'>
       <div className='flex justify-center'> 
         <Link href='./home'>
+          <a>
         <ArrowCircleLeftIcon className='w-10 h-10 '/>
+        </a>
         </Link>
         <div className='font-medium text-2xl flex justify-center items-center ml-1 mr-4 w-72'>Buat Postingan Baru</div>
       </div>
     <div className='mt-14 border rounded-lg border-[#35BBBA] w-96 px-4 py-3 flex flex-col'>
     <div className='flex'>
-    <Image src="blur_bg.png" className='rounded-full w-10 h-10 ' alt='' />
+    <Image src="/blur_bg.png" className='rounded-full w-10 h-10' width={40} height={40} alt='' />
         <div className='pr-3 flex '>
           <div className='flex flex-col ml-2 items-center justify-center'>
             <div className='font-semibold flex flex-col'>

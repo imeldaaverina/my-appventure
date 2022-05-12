@@ -6,9 +6,9 @@ const FollowingContainer = () => {
   return (
     <AuthProvider>
       <FollowingLayout>
-        {/* <HomeProvider>
+        <HomeProvider>
           <Posts />
-        </HomeProvider> */}
+        </HomeProvider>
       </FollowingLayout>
     </AuthProvider>
   );

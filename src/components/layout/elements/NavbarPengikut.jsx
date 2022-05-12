@@ -8,19 +8,23 @@ const NavbarPengikut = () => {
             <div className="max-w-md h-full flex justify-between mx-3">
 
                 <Link href="/follower-list" passHref>
+                  <a>
                     <button type="button" className="flex h-full justify-center items-center flex-col border-b-4 border-[#186F79] text-[#186F79]">
                         <span className="text-lg font-medium pl-1">
                             Pengikut
                         </span>
                     </button>
+                    </a>
                 </Link>
 
         <Link href="/challenge" passHref>
+          <a>
           <button type="button" className="flex h-full justify-center items-center flex-col border-b-4 border-black text-black">
             <span className="text-lg font-medium">
               Mengikuti
             </span>
           </button>
+          </a>
         </Link>
       </div>
       </nav>
