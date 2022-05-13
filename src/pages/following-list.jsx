@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import FollowingListContainer from '../containers/Following-list';
+import FollowingListContainer from '../containers/following-list/Following-list';
 const FollowingListPage = () => {
   return (
     <>

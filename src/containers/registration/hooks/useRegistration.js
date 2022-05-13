@@ -12,8 +12,10 @@ const useRegistration = () => {
          
         const { data } = response; 
          
-        localStorage.setItem('jwt', data.jwt); 
-        localStorage.setItem('user', JSON.stringify(data.user)); 
+        // localStorage.setItem('jwt', data.jwt); 
+        // localStorage.setItem('user', JSON.stringify(data.user)); 
+        localStorage.setItem('access_token', data.access_token);
+    
         window.location.href = '/'; 
     }; 
      

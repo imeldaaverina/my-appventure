@@ -3,8 +3,6 @@ import usePostItem from '../hooks/usePostItem';
 import { HeartIcon, ChatIcon, LinkIcon} from '@heroicons/react/outline';
 import { ButtonFollow} from "../../../components/button";
 import Image from 'next/image'
-import Link from 'next/link'
-// import ReadMoreReact from 'read-more-react';
 
 const PostItem = ({ id, data }) => {
   const { handleRemove, handleEdit } = usePostItem();
@@ -19,12 +17,12 @@ const PostItem = ({ id, data }) => {
   return (
     <main className='m-auto flex justify-center font-Poppins'>
     <div className=" rounded-2xl flex justify-center items-center flex-col w-96 shadow-xl">
-      <Image src="blur_bg.png" className='w-full h-full rounded-t-2xl' alt=''/>
+      <Image src="blur_bg.png" className='w-full h-full rounded-t-2xl' width={40} height={40} alt=''/>
       <div className=' p-4 flex flex-col w-full rounded-2xl'>
         <div className='flex justify-between'>
           <div className='flex w-full'>
             
-            <Image src="blur_bg.png" className='rounded-full w-10 h-10' alt='' />
+            <Image src="blur_bg.png" className='rounded-full w-10 h-10'  width={40} height={40}alt='' />
             <div className='pr-3 w-96 flex justify-between'>
             <div className='flex flex-col ml-2'>
               <div className='font-medium text-sm mt-1'>

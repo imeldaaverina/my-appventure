@@ -55,10 +55,11 @@ export const useCreatePostDispatcher = () => {
         url: "post/addpost",
         method: "post",
         data: formData,
-        headers: {
-          Authorization: `Bearer jwt-token-disini`,
-        },
+        // headers: {
+        //   Authorization: `Bearer jwt-token-disini`,
+        // },
       });
+      localStorage.setItem('access_token', data.access_token);
     } catch (error) {
       console.log("error > ", error);
     }

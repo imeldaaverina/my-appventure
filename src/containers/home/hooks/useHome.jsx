@@ -8,9 +8,9 @@ const useHome = () => {
         const response = await callAPI({
             url: "/post/addpost",
             method: "get",
-            params: {
-                [`sort[createdAt]`]: 'desc'
-            },
+            // params: {
+            //     [`sort[createdAt]`]: 'desc'
+            // },
             
         });
         const { data } = response;
