@@ -14,12 +14,12 @@ const PostItem = ({ id, data }) => {
   return (
     <main className='m-auto flex justify-center font-Poppins'>
     <div className=" rounded-2xl flex justify-center items-center flex-col w-96 shadow-xl">
-      <img src="blur_bg.png" className='w-full h-full rounded-t-2xl' alt=''/>
+      {/* <Image src="/blur_bg.png" className='w-full h-full rounded-t-2xl' width={500} height={100} alt=''/> */}
       <div className=' p-4 flex flex-col w-full rounded-2xl'>
         <div className='flex justify-between'>
           <div className='flex w-full'>
             
-            <img src="blur_bg.png" className='rounded-full w-10 h-10' alt='' />
+            <Image src="/blur_bg.png" className='rounded-full w-10 h-10' width={50} height={10} alt='' />
             <div className='pr-3 w-96 flex justify-between'>
             <div className='flex flex-col ml-2'>
               <div className='font-medium text-sm mt-1'>

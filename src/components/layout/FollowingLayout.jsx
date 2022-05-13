@@ -1,15 +1,15 @@
-import Navbar from "./elements/Navbar";
 import Footer from "./elements/Footer";
 import Jumbotron from "./elements/Jumbotron";
 import NavbarFollowing from "./elements/NavbarFollowing";
 import Posts from '../../containers/home/elements/Posts';
 import HomeProvider from '../../containers/home/HomeProvider';
+import Navbarlogin from "./elements/Navbarlogin";
 
 const FollowingLayout = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbarlogin />
         <Jumbotron />
         <main className="min-h-screen max-w-md mx-auto">
           <NavbarFollowing/>

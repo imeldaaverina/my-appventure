@@ -1,14 +1,13 @@
 import {XIcon} from "@heroicons/react/outline";
 import Link from "next/link";
 
-
 const ButtonExit = ({ 
     type, 
     label, 
 }) => { 
     return ( 
-    
-    <Link href="/home" passHref>
+        
+    <Link href="/home-not-login" passHref>
     <button 
        type={type} 
        className="flex justify-center bg-[#FF8181] w-10 h-10 rounded-tr-xl rounded-bl-xl font-bold py-2">  

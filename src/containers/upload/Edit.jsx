@@ -1,6 +1,6 @@
 import NoAuthProvider from '../../providers/auth/NoAuthProvider';
 import UploadLayout from '../../components/layout/UploadLayout';
-import Button from '../../components/button';
+import { Button } from '../../components/button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { CameraIcon } from '@heroicons/react/outline';

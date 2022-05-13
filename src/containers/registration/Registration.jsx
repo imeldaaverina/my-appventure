@@ -1,7 +1,7 @@
 import {Input, Input2} from "../../components/input";
 import { useRouter }  from "next/router";
 import { useState } from 'react';
-import { Button, Button2, ButtonExit } from "../../components/button";  
+import { Button, ButtonExit } from "../../components/button";  
 import { Title, SubTitle, TitleForm } from "../../components/typography";  
 import { NoAuthProvider } from "../../providers/auth";  
 import { useFormik, getIn } from "formik";  

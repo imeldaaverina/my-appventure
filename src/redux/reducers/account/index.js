@@ -28,9 +28,7 @@ export const useAccountDispatcher = () => {
       data: values,
     });
     const { data } = response;
-    // console.log(data)
     localStorage.setItem('access_token', data.access_token);
-    // localStorage.setItem('user', JSON.stringify(data.user));
     dispatch(toggleLoading(false));
   };
   return {

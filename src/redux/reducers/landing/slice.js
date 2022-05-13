@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { callAPI } from '../../../helpers/network';
+import { useRouter }  from "next/router";
+
 const initialState = {
   loading: false,
 };
@@ -20,16 +22,22 @@ const { toggleLoading } = slices.actions;
 export const useLandingDispatcher = () => {
   const { landing } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const doLanding = async (values) => {
+
+  const {push} = useRouter();
+
+  const doLanding = async (payload) => {
     dispatch(toggleLoading(true));
     const response = await callAPI({
-      // url: '/auth/local',
-      method: 'POST',
-      data: values,
+      url: '/subscribe/email/{user-email}',
+      method: 'GET',
+      data: payload,
     });
     const { data } = response;
-    localStorage.setItem('access_token', data.access_token);
+    // localStorage.setItem('access_token', data.access_token);
     // localStorage.setItem('user', JSON.stringify(data.user));
+    localStorage.setItem('subscribe', data.data);
+    
+    push('/success_landing');
     dispatch(toggleLoading(false));
   };
   return {

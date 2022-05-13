@@ -1,5 +1,6 @@
 import { getUser } from '../helpers/auth';
-import usePostItem from '../containers/challenge/hooks/usePostItem';
+// import usePostItem from '../containers/challenge/hooks/usePostItem';
+import usePostItem from '../containers/home/hooks/usePostItem';
 import { HeartIcon, ChatIcon, LinkIcon} from '@heroicons/react/outline';
 import { ButtonFollow } from '../components/button';
 import Image from 'next/image';

@@ -1,12 +1,12 @@
 import {Input, Input2} from "../../components/input"; 
-import { Button, Button2, ButtonExit} from "../../components/button"; 
+import { Button, ButtonExit} from "../../components/button"; 
 import { Title, SubTitle,TitleForm } from "../../components/typography"; 
 import { NoAuthProvider } from "../../providers/auth"; 
 import { useFormik, getIn } from "formik"; 
 import * as Yup from 'yup'; 
 import { useRouter }  from "next/router";
 import { useLoginDispatcher } from '../../redux/reducers/login'; 
-import { ExclamationCircleIcon, EyeIcon } from "@heroicons/react/outline";
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
  
 const validationSchema = Yup.object({ 
     email: Yup.string().required("diperlukan email").email("email tidak valid"), 
@@ -18,32 +18,11 @@ const initialValues = {
     email: "", 
     password: "" 
 }; 
-
-// const ErrorHandling = () => {
-//     const { login: { loading, datauser, errMessage }, getDatauser } = useLoginDispatcher();
-
-//     const handleClickHitMeButton = async () => {
-//         await getProducts();
-    
-// }  
-// }
-
-//     return(
-//         <div className="flex items-center justify-center text-xs font-semibold text-[#FF8181] pb-4" data-testid="error-password"> 
-//             <ExclamationCircleIcon className="w-9 h-9 " />
-//             <p className="px-1 leading-5">Alamat email atau kata sandi yang <br></br> anda masukan tidak valid</p>
-//         </div> 
-//     )
-// }
  
 const LoginContainer = () => { 
     const { login: { loading, errMessage }, doLogin } = useLoginDispatcher(); 
 
     const {push} = useRouter();
-
-    // const handleOnSubmit = async (values) => {
-    //     await doLogin(values);
-    //   };
 
     const onSubmit = async (values) => { 
  
@@ -53,18 +32,7 @@ const LoginContainer = () => {
                 password: values.password, 
             }; 
             await doLogin(payload); 
-            // if (payload === "") {
-                
-            //     dispatch(toggleLoading(false));
-            //     dispatch(
-            //       setErrMessage({
-            //         title: "Oops... terjadi kesalahan",
-            //         content: data.message,
-            //       })
-            //     );
-            //     return;
-            //   } push('/success_login');
-            
+
         } catch (error) { 
             alert(error);
           
@@ -107,7 +75,6 @@ const LoginContainer = () => {
                         <TitleForm text="Masuk ke akun Anda" />   
                         </div>
 
-                        {/* {getIn(touched, "password") && getIn(errors, "password") && getIn(touched, "email") && getIn(errors, "email")&& (  */}
                         {
                             errMessage.title && errMessage.content &&(
                         <div className="flex items-center justify-center text-xs font-semibold text-[#FF8181] pb-4" data-testid="error-password"> 
@@ -115,7 +82,6 @@ const LoginContainer = () => {
                            <p className="px-1 leading-5">Alamat email atau kata sandi yang <br></br> anda masukan tidak valid</p>
                         </div> 
                             )}
-                        {/* )}  */}
 
                     <div className="font-normal text-sm mb-1 flex justify-between">
                         Email

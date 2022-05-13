@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-
-
+import Link from 'next/link'
+import Image from 'next/image'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 // import AuthProvider from "../../providers/auth/AuthProvider";
@@ -28,7 +28,7 @@ import { useCreatePostDispatcher } from "../../redux/reducers/post";
 
 const validationSchema = Yup.object({
     post: Yup.string().required(),
-    files: Yup.array().max(10, "File maksimal 10")
+    files: Yup.array().max(10, "File maksimal 10").nullable()
 });
 
 const initialValues = {
@@ -47,50 +47,7 @@ const CreatePost = () => {
         await doSubmit(values);
       };
 
-    // const onSubmit = async (formValues) => {
-    //     setLoading(true);
-        // first upload
-
-        // const formData = new FormData();
-        // formData.append("files", formValues.files);
-
-        // const upload = await callAPI({
-        //     url: "/upload",
-        //     method: "post",
-        //     data: formData,
-        //     headers: {
-        //         Authorization: `Bearer ${getJwt()}`
-        //     }
-        // });
-
-        // const fileUrl = upload.data[0].url;
-        // const { title, caption } = formValues;
-
-        // const payload = {
-        //     data: {
-        //     title,
-        //     caption,
-        //     photo: `${fileUrl}`,
-        //     isPublish: true,
-        //     postedBy: `${getUser().username}`
-        //     }
-        // }
-
-        // const submitPost = await callAPI({
-        //     url: "/posts",
-        //     method: "post",
-        //     data: payload,
-        //     headers: {
-        //     Authorization: `Bearer ${getJwt()}`
-        //     }
-        // });
-
-        // if (submitPost.status === 200) {
-        //     setLoading(false);
-        //     alert('Create posts success!');
-        //     push("/");
-        // }
-    // };
+  
 
     const {
         handleBlur,
@@ -139,7 +96,7 @@ const CreatePost = () => {
                 className="object-cover h-full w-full rounded-lg"
               /> */}
               {item.type.includes("image") ?
-              (<img
+              (<Image
                 src={URL.createObjectURL(item)}
                 className="object-cover h-full w-full rounded-lg"
               /> )
@@ -167,14 +124,16 @@ const CreatePost = () => {
 <div className="max-w-lg">
 <div className='flex flex-col mt-5 w-96 justify-center items-center'>
       <div className='flex justify-center'> 
-        <a href='./home'>
+        <Link href='./home'>
+          <a>
         <ArrowCircleLeftIcon className='w-10 h-10 '/>
         </a>
+        </Link>
         <div className='font-medium text-2xl flex justify-center items-center ml-1 mr-4 w-72'>Buat Postingan Baru</div>
       </div>
     <div className='mt-14 border rounded-lg border-[#35BBBA] w-96 px-4 py-3 flex flex-col'>
     <div className='flex'>
-    <img src="blur_bg.png" className='rounded-full w-10 h-10 ' alt='' />
+    <Image src="/blur_bg.png" className='rounded-full w-10 h-10' width={40} height={40} alt='' />
         <div className='pr-3 flex '>
           <div className='flex flex-col ml-2 items-center justify-center'>
             <div className='font-semibold flex flex-col'>

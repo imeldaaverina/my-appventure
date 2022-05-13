@@ -5,8 +5,8 @@ const useLanding = () => {
     const [loading, setLoading] = useState(); 
     const submit = async (values) => { 
         const response = await callAPI({ 
-            url: '/auth/local', 
-            method: 'POST', 
+            url: '/subscribe/email/{user-email}', 
+            method: 'GET', 
             data: values, 
         }); 
          

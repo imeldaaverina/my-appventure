@@ -43,7 +43,6 @@ export const useHomeDispatcher = () => {
     });
     const { data } = response;
     localStorage.setItem('access_token', data.access_token);
-    // localStorage.setItem('user', JSON.stringify(data.user));
     dispatch(toggleLoading(false));
   };
   return {

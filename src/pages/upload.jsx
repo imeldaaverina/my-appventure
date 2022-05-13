@@ -4,7 +4,7 @@ const UploadPage = () => {
   return (
     <>
       <Head>
-        <title>BinarGram - Upload</title>
+        <title>Upload - My Appventure</title>
       </Head>
       <UploadContainer />
     </>

@@ -1,15 +1,14 @@
-import {Input, Input2} from "../../components/input"; 
-import { Button, Button2, ButtonExit} from "../../components/button";
-import { Title, SubTitle,TitleForm, TitleFormBold } from "../../components/typography"; 
+import { Input } from "../../components/input"; 
+import { Button, ButtonExit} from "../../components/button";
+import { TitleFormBold } from "../../components/typography"; 
 import { NoAuthProvider } from "../../providers/auth"; 
 import { useFormik, getIn } from "formik"; 
 import * as Yup from 'yup'; 
 import { useLandingDispatcher } from '../../redux/reducers/landing'; 
-import { ExclamationCircleIcon, EyeIcon } from "@heroicons/react/outline";
-// import Link from "next/link"
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
  
 const validationSchema = Yup.object({ 
-    email: Yup.string().required().email(), 
+    email: Yup.string().required("diperlukan email").email("email tidak valid"), 
 }); 
  
 const initialValues = { 
@@ -23,8 +22,7 @@ const LandingContainer = () => {
  
         try { 
             const payload = { 
-                identifier: values.email, 
-                // password: values.password, 
+               email: values.email, 
             }; 
             await doLanding(payload); 
             window.location.href = "/success_landing"; 
@@ -55,7 +53,7 @@ const LandingContainer = () => {
                         <div className="px-5 pt-5">
                             <TitleFormBold text="Bergabung bersama Komunitas Pecinta Alam dengan mudah hanya di My Appventure" /> 
                         </div>
-                        <a href="../home">
+                        <a href="../home-not-login">
                             <ButtonExit/>
                         </a>
                     </div> 
@@ -65,7 +63,7 @@ const LandingContainer = () => {
                       <img src="/Summer camp.svg" className="w-52 h-52"></img>
                     </div>
                     <form 
-                      className="w-full px-5 p-2 pt-7 pb-4 bg-[#457275]" 
+                      className="w-full px-5 p-2 pt-5 pb-4 bg-[#457275]" 
                       onSubmit={handleSubmit}>
                         <div className="pb-6">
                         <p className='font-medium text-base'>Ayo bergabung dengan My Appventure untuk mengetahui berita dan update terbaru</p> 
@@ -90,7 +88,7 @@ const LandingContainer = () => {
                   dataTestId="input-email" 
                 /> 
                         
-                        <Button type="submit" disabled={!handleChange} label={loading ? 'Please wait...' : 'Berlangganan'} />
+                        <Button type="submit" label={loading ? 'Silahkan Tunggu...' : 'Berlangganan'} />
                 </form> 
             </div> 
              

@@ -6,15 +6,15 @@ const useHome = () => {
     const [posts, setPosts] = useState();
     const loadPosts = async () => {
         const response = await callAPI({
-            url: "/posts",
+            url: "/post/addpost",
             method: "get",
             params: {
                 [`sort[createdAt]`]: 'desc'
             },
-            headers: {
-                Authorization: `Bearer ${getJwt()}`
-            }
+            
         });
+        const { data } = response;
+        localStorage.setItem('access_token', data.access_token);
         setPosts(response.data.data);
     }
     

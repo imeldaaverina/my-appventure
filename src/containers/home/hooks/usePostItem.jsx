@@ -12,7 +12,7 @@ const usePostItem = () => {
     const confirmed = confirm('Are you sure want to delete?');
     if (confirmed) {
       await callAPI({
-        url: `/posts/${postId}`,
+        url: `/post/addpost`,
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${getJwt()}`

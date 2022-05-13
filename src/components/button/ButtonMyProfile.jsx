@@ -6,6 +6,7 @@ const ButtonMyProfile = ({
     icon,
 }) => { 
     return ( 
+
     <button 
        type={type} 
        className="bg-white text-[#329D9C] border-[#329D9C] border-2 text-xl font-semibold w-full h-full rounded-xl py-3 px-3 flex justify-between items-center">  
@@ -14,6 +15,7 @@ const ButtonMyProfile = ({
        {label}</div>
        <Icon icon="ep:arrow-right-bold" className='flex justify-self-end'/>
     </button> 
+    
     ) 
 } 
  

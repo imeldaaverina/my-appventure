@@ -1,11 +1,13 @@
+import { HomeIcon, UploadIcon, UserIcon } from "@heroicons/react/outline";
 import { Icon } from '@iconify/react';
 import Link from "next/link";
+import Image from 'next/image'
 
-const NavbarPost = () => {
+const NavbarPostNotLogin = () => {
     return (
       <nav className="font-Poppins bg-white h-16 sticky top-0 left-0 w-full z-50">
     <div className="max-w-md h-full flex justify-between">
-        <Link href="/home" passHref>
+        <Link href="/home-not-login" passHref>
           <a>
           <button type="button" className="flex h-full justify-center items-center px-12 flex-col border-b-4 border-[#186F79] text-[#186F79]">
             <div className="flex justify-center">
@@ -18,7 +20,7 @@ const NavbarPost = () => {
           </a>
         </Link>
 
-        <Link href="/following" passHref>
+        <Link href="/following-not-login" passHref>
           <a>
           <button type="button" className="flex h-full justify-center items-center px-16 flex-col border-b-4 border-[#C6C6C6] text-[#C6C6C6]">
             <div className="flex justify-center">
@@ -31,8 +33,8 @@ const NavbarPost = () => {
           </a>
         </Link>
       </div>
-      </nav>
-    )
-  }
+    </nav>
+  )
+}
   
-export default NavbarPost;
+export default NavbarPostNotLogin;

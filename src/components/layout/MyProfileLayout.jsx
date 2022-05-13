@@ -1,12 +1,11 @@
-import Navbar from "./elements/Navbar";
 import Footer from "./elements/Footer";
-import JumbotronProfile from "./elements/JumbotronProfile";
+import Navbarmyprofile from "./elements/Navbarmyprofile";
 
 const MyProfileLayout = ({children}) => {
 
   return (
     <>
-      <Navbar />
+      <Navbarmyprofile />
         {children}
       <Footer />
     </>

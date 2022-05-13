@@ -4,7 +4,7 @@ const FollowerListPage = () => {
   return (
     <>
       <Head>
-        <title>Halo, Selamat Datang di My Appventure</title>
+        <title>Follower List - My Appventure</title>
       </Head>
       <FollowerListContainer />
     </>

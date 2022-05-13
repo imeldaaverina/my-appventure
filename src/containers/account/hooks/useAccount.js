@@ -4,10 +4,10 @@ const useAccount = () => {
  
   const [profile, setProfile] = useState(); 
  
-  const loadProfile = () => { 
-    const _profile = localStorage.getItem('access_token'); 
-    setProfile(JSON.parse(_profile)); 
-  }; 
+  const loadProfile = () => {
+    const _profile = localStorage.getItem('username');
+    setProfile(_profile);
+  };
  
   useEffect(() => { 
     loadProfile(); 

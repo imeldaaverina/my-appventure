@@ -1,26 +1,26 @@
 import Head from 'next/head';
-import AuthProvider from '../providers/auth/AuthProvider';
-import MainLayout from '../components/layout/MainLayout';
+import NoAuthProvider from '../providers/auth/NoAuthProvider';
 import Posts from '../containers/home/elements/Posts';
 import HomeProvider from '../containers/home';
 import PostItem from '../containers/home/elements/PostItem'
+import { HomeNotLoginLayout } from '../components/layout';
 
-const HomeContainer = () => {
+const HomeNotLoginContainer = () => {
   return (
     <>
       <Head>
-        <title>Home - My Appventure</title>
+        <title>Home not login - My Appventure</title>
       </Head>
 
-    <AuthProvider>
-      <MainLayout>
+    <NoAuthProvider>
+      <HomeNotLoginLayout>
         {/* <HomeProvider>
           <Posts />
           <PostItem/>
         </HomeProvider> */}
-      </MainLayout>
-    </AuthProvider>
+      </HomeNotLoginLayout>
+    </NoAuthProvider>
     </>
   );
 };
-export default HomeContainer;
+export default HomeNotLoginContainer;

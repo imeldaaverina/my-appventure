@@ -75,13 +75,24 @@ const textareaRef = useRef(null);
   
   return (
     <main className='m-auto flex flex-col justify-center font-Poppins items-center'>
+
+      <div className='mb-20'>
+        <div className='bg-blue-300 flex flex-col mt-20 w-96'>
+      
+      <div className='flex'> 
+        <ArrowCircleLeftIcon className='w-10 h-10 '/>
+        <div className='font-medium text-2xl flex justify-center items-center ml-5 w-72'>Buat Komunitas Baru</div>
+      </div>
+      </div>
+      </div>
+
     <div className='bg-[#457275] rounded-t-3xl'>
     <div className=" rounded flex bg-white justify-center items-center flex-col w-96 shadow-xl">
       <div className=' p-4 flex flex-col w-full rounded'>
         <div className='flex justify-between'>
           <div className='flex w-full'>
             
-            <img src="blur_bg.png" className='rounded-full w-10 h-10' alt='' />
+            <Image src="/blur_bg.png" className='rounded-full' width={50} height={10} alt='' />
             <div className='pr-3 w-96 flex justify-between'>
             <div className='flex flex-col ml-2'>
               <div className='font-medium text-sm mt-1'>
@@ -98,8 +109,22 @@ const textareaRef = useRef(null);
           
         </div>
         <div className='text-sm mt-4'>
-        My happy place!!! Here is to more solo adventure around labuan bajo in 2022
-        </div>
+        <div className='w-72 font-light text-sm'>
+                {isReadMore ? postData.slice(0, 90): postData }
+                {postData.length > 90 &&
+                  <span onClick={toggleReadMore} className='font-semibold'>
+                  {isReadMore ? '...Baca lebih lanjut' : ' ...Tampilkan lebih sedikit'}
+                  </span>
+                }
+              {/* <ReadMoreReact 
+                className='font-bold'
+                text={postData}
+                min={0}
+                ideal={100}
+                max={120}
+                readMoreText="... Baca lebih lanjut"/> */}
+              {/* Saya Pernah! Seruu sekali loh!, Saya merekomendasikan patai lainnya yang mirip seperti gambar di atas, ada pa.... */}
+              </div>        </div>
 
         <div className='bg-white flex justify-start mt-1'>
         <div className="flex justify-center items-center -mx-1 my-3">
@@ -114,7 +139,7 @@ const textareaRef = useRef(null);
     <div className=' pt-3  px-3 flex'>
       <div className='flex flex-col '>
       <div className='flex'>
-      <img src="blur_bg.png" className='rounded-full w-10 h-10 ' alt='' />
+      <Image src="/blur_bg.png" className='rounded-full' width={50} height={1} alt='' />
         <div className='pr-3 flex '>
           <div className='flex flex-col ml-2 items-center justify-center'>
             <div className='font-semibold text-white flex flex-col'>
@@ -246,7 +271,7 @@ const textareaRef = useRef(null);
       </div>
     <div className='mt-14 border rounded-lg border-[#35BBBA] w-96 px-4 py-3 flex flex-col'>
     <div className='flex'>
-    <img src="blur_bg.png" className='rounded-full w-10 h-10 ' alt='' />
+    <Image src="/blur_bg.png" className='rounded-full w-10 h-10 ' width={40} height={40} alt='' />
         <div className='pr-3 flex '>
           <div className='flex flex-col ml-2 items-center justify-center'>
             <div className='font-semibold flex flex-col'>
@@ -282,7 +307,7 @@ const textareaRef = useRef(null);
                         <label htmlFor="files" className=" w-full h-full cursor-pointer flex justify-center items-center ">
                             {
                                 preview ? (
-                                    <img className="h-full w-full object-cover" src={preview} />
+                                    <Image className="h-full w-full object-cover" src={preview} />
                                 ) : <CameraIcon className="h-8 w-8" />
                             }
                             <input
