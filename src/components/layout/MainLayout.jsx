@@ -15,13 +15,15 @@ const MainLayout = () => {
       <Navbar />
         <Jumbotron />
         <main className="min-h-screen max-w-md mx-auto">
-          {/* <NavbarPost/> */}
-          {/* <Link href="/upload" className="flex justify-end sticky top-24 right-10 mr-10 mt-10" passHref>
-            <Image src="/postIcon.svg" className="w-16" width={10} height={10} alt=""/>
-          </Link> */}
-          {/* <HomeProvider>
-            <Posts />
-          </HomeProvider> */}
+          <NavbarPost/>
+          <Link href="/upload" className="flex justify-end sticky top-24 right-10 mr-10 mt-10" passHref>
+            <a>
+            <Image src="/postIcon.svg" className="w-16" width={50} height={50} alt=""/>
+            </a>
+          </Link>
+          <HomeProvider>
+            {/* <Posts /> */}
+          </HomeProvider>
         </main>
       <Footer />
     </>
