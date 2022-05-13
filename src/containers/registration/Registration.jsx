@@ -193,7 +193,7 @@ const RegistrationContainer = () => {
                 />
                
               <div className="mt-8">
-                <Button type="submit" label={loading ? 'Please wait...' : 'Daftar sekarang'}/>  
+                <Button type="submit" label={loading ? 'Silahkan Tunggu...' : 'Daftar sekarang'}/>  
                 <div className="text-sm flex justify-center mt-2 pb-3">
                   <p className="text-white font-light text-xs">
                     Sudah punya akun? <a className="font-semibold underline text-[#FEC868]" href="../login">Masuk</a>
