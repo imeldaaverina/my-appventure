@@ -16,6 +16,7 @@ const initialValues = {
 
 const AccountContainer = () => {
   const { profile } = useAccount();
+  const { picture } = useAccount();
   const handleLogout = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('data');
@@ -115,10 +116,11 @@ const AccountContainer = () => {
                 </a>         
               </div>
               <div className="">
+                <img src={picture}  />
                 <label
                   htmlFor="files"
                   className="w-40 h-40 m-auto flex justify-center items-center rounded-full cursor-pointer bg-white">
-                  {preview ? <img className="h-full w-full object-cover rounded-full bg-white" src={preview} /> : <CameraIcon className="h-12 w-12 text-gray-600" />}
+                  {preview ? <img className="h-full w-full object-cover rounded-full bg-black" src={preview} /> : <CameraIcon className="h-12 w-12 text-gray-600" />}
                   <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   />
                 </label>
               </div>

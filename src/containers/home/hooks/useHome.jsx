@@ -14,7 +14,7 @@ const useHome = () => {
             
         });
         const { data } = response;
-        localStorage.setItem('access_token', data.access_token);
+        localStorage.getItem('access_token', data.access_token);
         setPosts(response.data.data);
     }
     

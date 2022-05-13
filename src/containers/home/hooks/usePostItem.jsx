@@ -5,6 +5,21 @@ import { callAPI } from "../../../helpers/network";
 import { useHomeProvider } from "../HomeProvider";
 
 const usePostItem = () => {
+
+  const [post, setPost] = useState(); 
+  
+ 
+  const loadPost = () => {
+    const _post = localStorage.getItem('post');
+    setPost(_post);
+  };
+
+  
+  useEffect(() => { 
+    loadPost();
+  }, []) 
+
+
   const { push } = useRouter();
   const { loadPosts } = useHomeProvider();
 
@@ -27,6 +42,7 @@ const usePostItem = () => {
   return {
     handleRemove,
     handleEdit,
+    post
   }
 };
 

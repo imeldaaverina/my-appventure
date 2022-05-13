@@ -1,4 +1,6 @@
-import useAccount from "../account/hooks/useAccount"
+import useAccount from "../account/hooks/useAccount";
+// import useUpload from "./hooks/useUpload";
+// import MainLayout from "../../components/layout/MainLayout";
 import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
@@ -7,23 +9,20 @@ import Image from 'next/image'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import styled from "styled-components";
 import AuthProvider from "../../providers/auth/AuthProvider";
-// import UploadLayout from "../../components/layout/UploadLayout";
-
+import UploadLayout from "../../components/layout/UploadLayout";
 import { useFormik, getIn } from "formik";
 import * as Yup from 'yup';
-
 import React, { useState, useRef, useEffect } from "react";
 import { callAPI } from "../../helpers/network";
 import { getJwt, getUser } from "../../helpers/auth";
 import { useRouter } from "next/router";
 import { Icon } from '@iconify/react';
-
 import { HeartIcon, ChatIcon, LinkIcon, ArrowCircleLeftIcon, UsersIcon, ClipboardCheckIcon, CameraIcon, ExclamationCircleIcon} from '@heroicons/react/outline';
 import { Button3, ButtonFollow, Button, ButtonPost} from '../../components/button';
 
 
 // import { useCreatePostDispatcher } from "../redux/reducers/create-post";
-import { useCreatePostDispatcher } from "../../redux/reducers/post";
+// import { useUploadtDispatcher } from "../../redux/reducers/upload";
 
 const validationSchema = Yup.object({
     post: Yup.string().required(),
@@ -40,21 +39,59 @@ const TextAreaInput = styled.textarea`
 
 const CreatePost = (props) => {
   const { profile } = useAccount();
-
-    // const [loading, setLoading] = useState();
+ 
+    const [loading, setLoading] = useState();
     const [previews, setPreviews] = useState();
-    const {
-        createPost: { loading },
-        doSubmit,
-      } = useCreatePostDispatcher();
+    const { push } = useRouter();
+    // const {
+    //     makeLoading: { loading },
+    //     makePost,
+    //   } = useUploadDispatcher();
 
       // const {push} = useRouter();
 
-      const onSubmit = async (values) => {
-        await doSubmit(values);
+      // const onSubmit = async (values) => {
+      //   await doSubmit(values);
+      // };
+      const onSubmit = async (formValues) => {
+        setLoading(true);
+        // first upload
+        const formData = new FormData();
+        formData.append('files', formValues.files);
+        const upload = await callAPI({
+          url: '/v1/upload',
+          method: 'post',
+          data: formData,
+          // headers: {
+          //   Authorization: `Bearer ${getJwt()}`,
+          // },
+        });
+        const fileUrl = upload.data[0].url;
+        
+        const { post, files } = formValues;
+        const payload = {
+          data: {
+            post,
+            // files:`${file1}`,
+            files: `${fileUrl}`,
+            isPublish: true,
+            // postedBy: `${getUser().username}`,
+          },
+        };
+        const submitPost = await callAPI({
+          url: '/post/addpost',
+          method: 'post',
+          data: payload,
+          // headers: {
+          //   Authorization: `Bearer ${getJwt()}`,
+          // },
+        });
+        if (submitPost.status === 200) {
+          setLoading(false);
+          alert('Create posts success!');
+          push('/');
+        }
       };
-
-  
 
     const {
         handleBlur,
@@ -143,7 +180,8 @@ const CreatePost = (props) => {
 //   const postData = 'besok minggu saya akan pergi berkemah dengan teman - teman saya. Saya berkemah di gunung bromo! Saya sangat tidak sabar!';
   
   return (
-    <AuthProvider> 
+    <AuthProvider>
+      <UploadLayout>
 <div className="min-h-screen font-Poppins flex justify-center ">
 <div className="max-w-lg">
 <div className='flex flex-col mt-5 w-96 justify-center items-center'>
@@ -227,6 +265,7 @@ const CreatePost = (props) => {
 </div>
 </div>
 </div>
+</UploadLayout> 
 </AuthProvider> 
   );
 

@@ -60,6 +60,7 @@ export const useCreatePostDispatcher = () => {
         // },
       });
       localStorage.setItem('access_token', data.access_token);
+      localStorage.setItem("post", data.text)
     } catch (error) {
       console.log("error > ", error);
     }
