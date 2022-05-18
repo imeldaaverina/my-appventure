@@ -8,7 +8,7 @@ const initialState = {
 };
 const slices = createSlice({
   initialState,
-  name: 'landing',
+  name: 'ListCommunity',
   reducers: {
     toggleLoading(state, action) {
       Object.assign(state, {
@@ -19,30 +19,27 @@ const slices = createSlice({
   },
 });
 const { toggleLoading } = slices.actions;
-export const useLandingDispatcher = () => {
-  const { landing } = useSelector((state) => state);
+export const useListCommunityDispatcher = () => {
+  const { listCommunity } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const {push} = useRouter();
-
-  const doLanding = async (values) => {
+  const doListCommunity = async (payload) => {
     dispatch(toggleLoading(true));
     const response = await callAPI({
-      url: 'https://myappventure-api.herokuapp.com/api/subscribe/email/dstnrth15@gmail.com',
+      url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
       method: 'GET',
-      data: values,
+      data: payload,
     });
     // const { data } = response;
     // localStorage.setItem('access_token', data.access_token);
     // localStorage.setItem('user', JSON.stringify(data.user));
     // localStorage.setItem('subscribe', data.data);
     
-    push('/success-landing');
     dispatch(toggleLoading(false));
   };
   return {
-    landing,
-    doLanding,
+    listCommunity,
+    doListCommunity,
   };
 };
 export default slices.reducer;

@@ -25,7 +25,7 @@ const LandingContainer = () => {
                email: values.email, 
             }; 
             await doLanding(payload); 
-            window.location.href = "/success_landing"; 
+            window.location.href = "/success-landing"; 
         } catch (error) { 
             alert(error); 
         } 

@@ -51,6 +51,7 @@ export const useLoginDispatcher = () => {
     localStorage.setItem("data", JSON.stringify(data.data));
     localStorage.setItem("username", data.data.username);
     localStorage.setItem("foto", data.data.filename);
+    localStorage.setItem("email", data.data.email);
 
     if (data.status === "404") {
         console.log(`error > ${data.message}`);
@@ -64,7 +65,7 @@ export const useLoginDispatcher = () => {
         return;
       }
     
-      push('/success_login');
+      push('/success-login');
       dispatch(toggleLoading(false));
       
     } catch (error) {

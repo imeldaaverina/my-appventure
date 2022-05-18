@@ -7,3 +7,5 @@ export { default as UploadLayout } from './UploadLayout';
 export { default as MyProfileLayout } from './MyProfileLayout';
 export { default as FollowerListLayout } from './FollowerListLayout';
 export { default as FollowingListLayout } from './FollowingListLayout';
+export { default as AccountLayout } from './AccountLayout';
+export { default as MyCommunityLayout } from './MyCommunityLayout';

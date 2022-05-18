@@ -1,5 +1,5 @@
 import AuthProvider from "../../providers/auth/AuthProvider"; 
-import MyProfileLayout from "../../components/layout/MyProfileLayout"; 
+import AccountLayout from "../../components/layout/AccountLayout"; 
 import { Icon } from '@iconify/react';
 import { ButtonMyProfile, ButtonMyProfileSandi, Button } from "../../components/button";
 import { useAccountDispatcher } from '../../redux/reducers/account';  
@@ -31,14 +31,10 @@ const AccountContainer = () => {
   const onSubmit = async (values) => {
     try {  
       const payload = {  
-          // username: values.username,
-          // email: values.email,  
-          // password: values.password,  
-          filename: values.fileName,
+          filename: values.filename,
       };  
       await doAccount(payload);  
       push('/success_registration');
-      // window.location.href = "/";  
   } catch (error) {  
       alert(error);  
   }  
@@ -105,7 +101,7 @@ const AccountContainer = () => {
 
   return (
     <AuthProvider> 
-      <MyProfileLayout>
+      <AccountLayout>
         <section> 
           <div className="font-Poppins min-h bg-cover bg-[url('../../public/homepage-bg.jpg')] w-full mx-auto">
             <div className="max-w-md mx-auto h-full pt-40 px-2">
@@ -118,6 +114,7 @@ const AccountContainer = () => {
                 <label
                   htmlFor="files"
                   className="w-40 h-40 m-auto flex justify-center items-center rounded-full cursor-pointer bg-white">
+                  
                   {preview ? <img className="h-full w-full object-cover rounded-full bg-white" src={preview} /> : <CameraIcon className="h-12 w-12 text-gray-600" />}
                   <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   />
                 </label>
@@ -128,12 +125,12 @@ const AccountContainer = () => {
               <div className="flex justify-center text-white py-4">
                 <div className="px-2">
                   <a href="./following-list">
-                  800 Mengikuti
+                  0 Mengikuti
                   </a>
                 </div>
                 <div className="px-2">
                   <a href="./follower-list">
-                  1.000 Pengikut 
+                  0 Pengikut 
                   </a>
                 </div>
               </div>
@@ -142,19 +139,23 @@ const AccountContainer = () => {
               
           <div className="py-10 min-h-screen max-w-md mx-auto">
             <div className="pt-4">
+              <a href="./my-profile">
               <ButtonMyProfile type="" label="Profil Saya" icon={<Icon icon="akar-icons:person" width="25" height="25"/>}/>
+              </a>
             </div>
             <div className="pt-3">
               <ButtonMyProfile type="" label="Unggahan Saya" icon={<Icon icon="clarity:copy-line" width="26" height="26" />}/>
             </div>
             <div className="pt-3">
+              <a href="./my-community">
               <ButtonMyProfile type="" label="Komunitas Saya" icon={<Icon icon="ic:round-groups" width="28" height="28" />}/>
+              </a>
             </div>
             <div className="pt-3">
-              <ButtonMyProfile type="" label="Transaksi Saya" icon={<Icon icon="cil:wallet" width="26" height="26"/>}/>
+              <ButtonMyProfile type="" label="Tentang Kami" icon={<Icon icon="cil:wallet" width="26" height="26"/>}/>
             </div>
             <div className="pt-14">
-              <ButtonMyProfileSandi type="" label="About Us"/>
+              <ButtonMyProfileSandi type="" label="Undang Teman"/>
             </div>
             <div className="pt-3">
               <button onClick={() => handleLogout()} type="button" 
@@ -163,7 +164,7 @@ const AccountContainer = () => {
 
           </div>
         </section> 
-      </MyProfileLayout> 
+      </AccountLayout> 
     </AuthProvider>  )
   }
 

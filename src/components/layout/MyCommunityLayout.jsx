@@ -1,6 +1,6 @@
 import Footer from "./elements/Footer";
 
-const MyProfileLayout = ({children}) => {
+const MyCommunityLayout = ({children}) => {
 
   return (
     <>
@@ -13,4 +13,4 @@ const MyProfileLayout = ({children}) => {
 
 };
 
-export default MyProfileLayout;
+export default MyCommunityLayout;

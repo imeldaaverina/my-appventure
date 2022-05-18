@@ -5,7 +5,7 @@ const LandingPage = () => {
   return (
     <>
       <Head>
-        <title>Halo, Selamat Datang di My Appventure</title>
+        <title>Selamat Datang di My Appventure</title>
       </Head>
       <LandingContainer />
     </>
