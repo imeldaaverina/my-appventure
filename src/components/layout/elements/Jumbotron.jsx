@@ -4,7 +4,7 @@ import { Searchbar } from "../../searchbar";
 
 const Jumbotron = () => {
     return (  
-    <main className="font-Poppins min-h bg-cover bg-[url('../../public/homepage-bg.jpg')] w-full mx-auto">
+    <main className="font-Poppins min-h bg-cover bg-[url('/homepage-bg.jpg')] w-full mx-auto">
       <div className="max-w-md mx-auto h-full pt-40 px-2">
         <div className="font-bold text-4xl text-white pb-5 pt-11"> 
           <div className="flex justify-center text-center text-shadow-xl">

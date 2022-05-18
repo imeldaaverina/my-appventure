@@ -16,6 +16,7 @@ const initialValues = {
 
 const AccountContainer = () => {
   const { profile } = useAccount();
+  const { picture } = useAccount();
   const handleLogout = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('data');
@@ -111,6 +112,7 @@ const AccountContainer = () => {
                 </a>         
               </div>
               <div className="">
+                {/* <img src={picture}  /> */}
                 <label
                   htmlFor="files"
                   className="w-40 h-40 m-auto flex justify-center items-center rounded-full cursor-pointer bg-white">

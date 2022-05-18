@@ -7,7 +7,7 @@ const Inputcommunity = ({ label, name, type, onChange, onBlur, placeholder, data
       <input 
       type={type} 
       name={name} 
-      className="py-2 focus:ring-0 focus:outline-none border-[#2A8180] border-[1.5px] text-black text-sm w-full p-4 mb-2 rounded-lg" 
+      className="py-2 focus:ring-0 focus:outline-none border-[#2A8180] border-[1.5px] text-black text-xs w-full p-4 mb-2 rounded-lg" 
       placeholder={placeholder} 
       onChange={onChange} 
       onBlur={onBlur} 

@@ -32,7 +32,7 @@ export const useUploadDispatcher = () => {
   const makePost = async (postId) => {
     dispatch(toggleLoading(true));
     const response = await callAPI({
-      url: `v1/showFile/${fileName}`,
+      url: `/post/${postId}`,
       method: 'get',
       headers: {
         Authorization: `Bearer ${getJwt()}`,
@@ -41,6 +41,7 @@ export const useUploadDispatcher = () => {
     const {
       data: { attributes },
     } = response.data;
+    localStorage.setItem('text');
     dispatch(setPost(attributes));
     dispatch(toggleLoading(false));
   };
