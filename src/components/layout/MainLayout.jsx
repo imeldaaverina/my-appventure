@@ -6,6 +6,7 @@ import HomeProvider from '../../containers/home/HomeProvider';
 import Image from 'next/image'
 import Navbarlogin from "./elements/Navbarlogin";
 import Link from 'next/link'
+import PostItem from '../../containers/home/elements/PostItem';
 
 const MainLayout = () => {
 
@@ -23,7 +24,8 @@ const MainLayout = () => {
                 </Link>
               </div>
             <HomeProvider>
-              {/* <Posts /> */}
+              <Posts />
+              <PostItem/>
             </HomeProvider>
           </main>
       <Footer />

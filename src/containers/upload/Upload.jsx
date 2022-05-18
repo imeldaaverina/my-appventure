@@ -21,7 +21,7 @@ import { HeartIcon, ChatIcon, LinkIcon, ArrowCircleLeftIcon, UsersIcon, Clipboar
 import { Button3, ButtonFollow, Button, ButtonPost} from '../../components/button';
 
 
-// import { useCreatePostDispatcher } from "../redux/reducers/create-post";
+// import { useUploadDispatcher } from "../redux/reducers/create-post";
 // import { useUploadtDispatcher } from "../../redux/reducers/upload";
 
 const validationSchema = Yup.object({
@@ -37,7 +37,7 @@ const initialValues = {
 const TextAreaInput = styled.textarea`
     height: ${props => props.idealHeight || "160px"};`;
 
-const CreatePost = (props) => {
+const Upload = (props) => {
   const { profile } = useAccount();
  
     const [loading, setLoading] = useState();
@@ -59,32 +59,33 @@ const CreatePost = (props) => {
         const formData = new FormData();
         formData.append('files', formValues.files);
         const upload = await callAPI({
-          url: '/v1/upload',
+          url: '/post/addpost',
           method: 'post',
           data: formData,
-          // headers: {
-          //   Authorization: `Bearer ${getJwt()}`,
-          // },
+          headers: {
+            Authorization: `Bearer ${getJwt()}`,
+          },
         });
+
         const fileUrl = upload.data[0].url;
-        
-        const { post, files } = formValues;
+        const { post } = formValues;
         const payload = {
           data: {
             post,
             // files:`${file1}`,
-            files: `${fileUrl}`,
+            // files: `${fileUrl}`,
+            photo: `${fileUrl}`,
             isPublish: true,
-            // postedBy: `${getUser().username}`,
+            postedBy: `${getUser().username}`,
           },
         };
         const submitPost = await callAPI({
           url: '/post/addpost',
           method: 'post',
           data: payload,
-          // headers: {
-          //   Authorization: `Bearer ${getJwt()}`,
-          // },
+          headers: {
+            Authorization: `Bearer ${getJwt()}`,
+          },
         });
         if (submitPost.status === 200) {
           setLoading(false);
@@ -182,9 +183,9 @@ const CreatePost = (props) => {
   return (
     <AuthProvider>
       <UploadLayout>
-<div className="min-h-screen font-Poppins flex justify-center ">
-<div className="max-w-lg">
-<div className='flex flex-col mt-5 w-96 justify-center items-center'>
+       <div className="min-h-screen font-Poppins flex justify-center ">
+          <div className="max-w-lg">
+          <div className='flex flex-col mt-5 w-96 justify-center items-center'>
       <div className='flex justify-center'> 
         <Link href='./home'>
           <a>
@@ -270,4 +271,4 @@ const CreatePost = (props) => {
   );
 
 };
-export default CreatePost;
+export default Upload;

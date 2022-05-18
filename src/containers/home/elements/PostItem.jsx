@@ -1,9 +1,11 @@
 // import { getUser } from '../../../helpers/auth';
-import useAccount from "../../account/hooks/useAccount"
+import useAccount from "../../account/hooks/useAccount";
 import usePostItem from '../hooks/usePostItem';
 import { HeartIcon, ChatIcon, LinkIcon} from '@heroicons/react/outline';
 import { ButtonFollow} from "../../../components/button";
-import Image from 'next/image'
+import Image from 'next/image';
+import { useState, useEffect } from "react";
+import { useListPostDispatcher } from "../../../redux/reducers/listPost";
 
 const PostItem = () => {
   const { profile, picture } = useAccount();
@@ -15,7 +17,31 @@ const PostItem = () => {
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {setIsReadMore(!isReadMore)};
   
-  
+  const {
+    listPost: { posts },
+    loadPosts,
+  } = useListPostDispatcher();
+
+  useEffect(() => {
+    loadPosts();
+  }, []);
+
+  // const renderPostItems = () => {
+  //   return (
+  //     posts &&
+  //     posts.length > 0 &&
+  //     posts.map((postItem) => (
+  //       <div className="border p-3">
+  //         <div className="flex justify-between w-full">
+  //           <div className="font-bold">{postItem.attributes.title}</div>
+  //           <div className="">
+  //             <button type="button">edit</button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     ))
+  //   );
+  // };
 
   return (
     <main className='m-auto flex justify-center font-Poppins'>
@@ -42,8 +68,9 @@ const PostItem = () => {
         </div>
         <div className='text-sm mt-4'>
         <div className='w-72 font-light text-sm'>
-                {isReadMore ? post.slice(0, 90): post }
-                {post.length > 90 &&
+        {/* {renderPostItems()} */}
+                {isReadMore ? post.slice(0, 278): post }
+                {post.length > 278 &&
                   <span onClick={toggleReadMore} className='font-semibold'>
                   {isReadMore ? '...Baca lebih lanjut' : ' ...Tampilkan lebih sedikit'}
                   </span>

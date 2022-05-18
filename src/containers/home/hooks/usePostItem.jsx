@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { getJwt } from "../../../helpers/auth";
 import { callAPI } from "../../../helpers/network";
 import { useHomeProvider } from "../HomeProvider";
+import { useState, useEffect } from "react";
 
 const usePostItem = () => {
 
@@ -10,7 +11,7 @@ const usePostItem = () => {
   
  
   const loadPost = () => {
-    const _post = localStorage.getItem('post');
+    const _post = localStorage.getItem('text');
     setPost(_post);
   };
 

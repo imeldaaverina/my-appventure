@@ -5,7 +5,7 @@ import landing from './reducers/landing';
 import login from './reducers/login';
 import registration from './reducers/registration';
 import account from './reducers/account';
-
+import createCommunity from './reducers/createCom';
 import createPost from './reducers/registration';
 // rootReducer
 const rootReducer = combineReducers({
@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
   registration,
   account,
   createPost,
+  createCommunity,
 });
 // store (main storage)
 const store = configureStore({

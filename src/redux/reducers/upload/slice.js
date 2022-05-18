@@ -32,15 +32,16 @@ export const useUploadDispatcher = () => {
   const makePost = async (postId) => {
     dispatch(toggleLoading(true));
     const response = await callAPI({
-      url: `/post/addpost`,
+      url: `/post/${postId}`,
       method: 'get',
-      // headers: {
-      //   Authorization: `Bearer ${getJwt()}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${getJwt()}`,
+      },
     });
     const {
       data: { attributes },
     } = response.data;
+    localStorage.setItem('text');
     dispatch(setPost(attributes));
     dispatch(toggleLoading(false));
   };

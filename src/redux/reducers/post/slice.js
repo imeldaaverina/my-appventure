@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const initialState = {
   loading: false,
+  posts: [],
 };
 // const slices = createSlice({
 //   initialState,
@@ -27,10 +28,16 @@ const slices = createSlice({
         loading: action.payload,
       });
     },
+    setPosts(state, action) {
+      Object.assign(state, {
+        ...state,
+        posts: action.payload,
+      });
+    },
   },
 });
 
-const { toggleLoading } = slices.actions;
+const { toggleLoading, setPosts } = slices.actions;
 
 // export const { decrease, increase } = slices.actions;
 // export const useHomeDispatch = () => {
