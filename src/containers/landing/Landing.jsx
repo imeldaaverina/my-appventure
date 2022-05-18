@@ -6,6 +6,7 @@ import { useFormik, getIn } from "formik";
 import * as Yup from 'yup'; 
 import { useLandingDispatcher } from '../../redux/reducers/landing'; 
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
+import Image from "next/dist/client/image";
  
 const validationSchema = Yup.object({ 
     email: Yup.string().required("diperlukan email").email("email tidak valid"), 
@@ -60,7 +61,7 @@ const LandingContainer = () => {
                        
                 </div> 
                     <div className="flex justify-center items-center">
-                      <img src="/Summer camp.svg" className="w-52 h-52"></img>
+                      <Image src="/Summer camp.svg" width={205} height={205} />
                     </div>
                     <form 
                       className="w-full px-5 p-2 pt-5 pb-4 bg-[#457275]" 

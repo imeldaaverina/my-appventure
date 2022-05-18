@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 import { ExclamationCircleIcon, EyeIcon } from "@heroicons/react/outline";
 import { HeartIcon, ChatIcon, LinkIcon, ArrowCircleLeftIcon, UsersIcon, ClipboardCheckIcon, CameraIcon} from '@heroicons/react/outline';
 import { useCommunityDispatcher } from '../../redux/reducers/createCom';  
-
+import Image from "next/dist/client/image";
  
 const validationSchema = Yup.object({  
     nama: Yup.string().required("nama dan deskripsi wajib diisi"),
@@ -126,7 +126,7 @@ const CommunityContainer = () => {
                   <label
                     htmlFor="files"
                     className="w-20 h-20 m-auto flex justify-center items-center border rounded-full cursor-pointer bg-white">
-                      {preview ? <img className="h-full w-full object-cover rounded-full bg-white" src={preview} /> : <CameraIcon className="h-8 w-8 text-gray-600" />}
+                      {preview ? <Image className="h-full w-full object-cover rounded-full bg-white" src={preview} /> : <CameraIcon className="h-8 w-8 text-gray-600" />}
                     {/* <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   /> */}
                   </label>
                   </div>

@@ -9,6 +9,7 @@ import { CameraIcon } from '@heroicons/react/outline';
 import { useRouter }  from "next/router";
 import useAccount from "./hooks/useAccount"
 import { data } from "autoprefixer";
+import Image from "next/dist/client/image";
 
 const initialValues = { 
   files: null,  
@@ -117,7 +118,7 @@ const AccountContainer = () => {
                   htmlFor="files"
                   className="w-40 h-40 m-auto flex justify-center items-center rounded-full cursor-pointer bg-white">
                   
-                  {preview ? <img className="h-full w-full object-cover rounded-full bg-white" src={preview} /> : <CameraIcon className="h-12 w-12 text-gray-600" />}
+                  {preview ? <Image className="h-full w-full object-cover rounded-full bg-white" src={preview} /> : <CameraIcon className="h-12 w-12 text-gray-600" />}
                   <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   />
                 </label>
               </div>
