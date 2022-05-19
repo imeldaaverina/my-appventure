@@ -2,7 +2,7 @@ import Navbar from "./elements/Navbar";
 import Footer from "./elements/Footer";
 import Jumbotron from "./elements/Jumbotron";
 import NavbarFollowingNotLogin from "./elements/NavbarFollowingNotLogin";
-
+import Image from "next/image";
 
 const FollowingNotLoginLayout = () => {
 
