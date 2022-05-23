@@ -38,14 +38,16 @@ import {
 // import { useUploadtDispatcher } from "../../redux/reducers/upload";
 
 const validationSchema = Yup.object({
-  post: Yup.string().required(),
+  text: Yup.string().required(),
   files: Yup.array().max(10, "File maksimal 10").nullable(),
 });
 
 const initialValues = {
-  post: "",
+  text: "",
   files: null,
 };
+
+// const user = JSON.parse(localStorage.getItem("data"));
 
 const TextAreaInput = styled.textarea`
   height: ${(props) => props.idealHeight || "160px"};
@@ -73,30 +75,80 @@ const Upload = (props) => {
     const user = JSON.parse(localStorage.getItem("data"));
     console.log({ user });
 
-    try {
-      const formData = new FormData();
-      formData.append("file", formValues.files[0]);
-      formData.append("idUser", user.id);
-      formData.append("text", formValues.post);
+    const formData = new FormData();
 
-      const response = await callAPI({
-        url: "/post/addpost",
-        method: "post",
-        data: formData,
-        headers: {
-          Authorization: `Bearer ${user.access_token}`,
-        },
-      });
 
-      if (response.status == 200) {
-        push('/home');
+    if (formValues.files && formValues.files.length > 0) {
+      for (let i = 0; i < formValues.files.length; i++) {
+        formData.append(`file${i + 1}`, formValues.files[i]);
       }
-    } catch (error) {
-      alert(error);
-      console.log({ error });
-    } finally {
-      setLoading(false);
+      try {
+        const formData = new FormData();
+
+        if (formValues.files && formValues.files.length > 0) {
+          formData.append("file1", formValues.files[0]);
+          formData.append("idUser", user.id);
+          formData.append("text", formValues.post);
+        } else {
+
+          formData.append("idUser", user.id);
+          formData.append("text", formValues.post);
+        }
+
+
+        const response = await callAPI({
+          url: "/post/save",
+          method: "post",
+          data: formData,
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+          },
+        });
+
+        if (response.status == 200) {
+          push('/home');
+        }
+      } catch (error) {
+        alert(error);
+        console.log({ error });
+      } finally {
+        setLoading(false);
+      }
+
     }
+
+    // try {
+    //   const formData = new FormData();
+
+    //   if (formValues.files && formValues.files.length > 0) {
+    //     formData.append("file1", formValues.files[0]);
+    //     formData.append("idUser", user.id);
+    //     formData.append("text", formValues.post);
+    //   } else {
+
+    //     formData.append("idUser", user.id);
+    //     formData.append("text", formValues.post);
+    //   }
+
+
+    //   const response = await callAPI({
+    //     url: "/post/addpost",
+    //     method: "post",
+    //     data: formData,
+    //     headers: {
+    //       Authorization: `Bearer ${user.access_token}`,
+    //     },
+    //   });
+
+    //   if (response.status == 200) {
+    //     push('/home');
+    //   }
+    // } catch (error) {
+    //   alert(error);
+    //   console.log({ error });
+    // } finally {
+    //   setLoading(false);
+    // }
 
     // first upload
 
@@ -247,14 +299,43 @@ const Upload = (props) => {
                   </div>
                 </div>
                 <form
-                  onSubmit={(e) => {
+                  onSubmit={ async (e)  => {
                     e.preventDefault();
-                    handleSubmit();
+                    // handleSubmit();
+                    const user = JSON.parse(localStorage.getItem("data"));
+    // console.log( user.id );
+
+                    const formData = new FormData(e.target)
+                    formData.append("idUser", user.id)
+                    // console.log(formData.get("text"))
+                    
+                    const response = await callAPI({
+                      url: "/post/save",
+                      method: "post",
+                      // data: {
+                      //   text:formData.get("text"),
+                      //   idUser:user.id
+                      // },
+                      data:formData,
+                      headers: {
+                        Authorization: `Bearer ${user.access_token}`,
+                        // "Content-Type":"application/json",
+                        // Accept:"application/json"
+                      },
+
+                    });
+                    console.log (response)
+                    if (response.status == 200) {
+                      push('/home');
+                    }
+                    // onSubmit(formData)
+                    console.log ("test")
                   }}
                   className="mt-1"
                 >
                   <div className="rounded-lg flex flex-col justify-start items-start">
                     <label className="block w-full mb-3">
+                      {/* <input type="hidden" name="idUser" value={user.id} /> */}
                       <TextAreaInput
                         // rows={10}
                         // className="w-full rounded-lg outline-none  scrol"
@@ -262,7 +343,7 @@ const Upload = (props) => {
                         // name="post"
                         // onChange={handleChange}
                         // onBlur={handleBlur}
-                        name="caption"
+                        name="text"
                         type="text"
                         className="pt-3 pb-4 focus:ring-0 focus:outline-none font-light w-full resize-none overflow-hidden text-sm"
                         placeholder="Tulis Postingan..."

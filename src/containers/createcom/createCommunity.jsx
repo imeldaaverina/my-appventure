@@ -3,7 +3,7 @@ import { useRouter }  from "next/router";
 import { useState } from 'react';
 import { Button, Button2, ButtonExit, ButtonMyProfileSandi } from "../../components/button";  
 import { Title, SubTitle, TitleForm } from "../../components/typography";  
-import { NoAuthProvider } from "../../providers/auth";  
+import { AuthProvider } from "../../providers/auth";  
 import { useFormik, getIn } from "formik";  
 import * as Yup from 'yup';  
 // import { useCommunityDispatcher } from '../redux/reducers/Community';  
@@ -106,7 +106,8 @@ const CommunityContainer = () => {
     };
  
   return ( 
-    <NoAuthProvider>  
+    <AuthProvider>
+        
       <main className="font-Poppins min-h-screen bg-cover flex flex-col justify-center items-center bg-center">
       <div className='flex flex-col w-96'>
       
@@ -201,7 +202,7 @@ const CommunityContainer = () => {
       </div>
     {/* </div>  */}
     </main>
-    </NoAuthProvider>  
+    </AuthProvider>  
   ); 
 }; 
  

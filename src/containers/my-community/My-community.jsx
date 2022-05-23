@@ -9,6 +9,7 @@ const MyCommunityContainer = () => {
     const [data, setData] = useState();
 
     const fetchData = async () => {
+        
         try {
             const response = await axios({
                 url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
@@ -42,19 +43,22 @@ const MyCommunityContainer = () => {
                         </div>
 
                         <div className="pt-5">
+                        <div className="grid grid-cols-3 gap-3">
                             {console.log(data)}
                             {data && data.map((item) => {
                                 return (
-                                    <>
-                                        <div className="grid grid-cols-3 gap-3">
+                                   
+                                        
+                                          
                                             <div className="flex flex-col justify-center items-center my-2 mx-2 bg-blue-400">
+                                                
                                                 <img src={item.urlFileName} />
                                                 <h1 className="">{item.namaKomunitas}</h1>
                                             </div>
-                                        </div>
-                                    </>
+                                   
                                 )
                             })}
+                             </div>
                         </div>
                     </div>
                 </section>

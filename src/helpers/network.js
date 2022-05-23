@@ -8,5 +8,6 @@ export const callAPI = async (payload) => {
     return response;
   } catch (error) {
     Promise.reject(error);
+    console.log(error);
   }
 };
