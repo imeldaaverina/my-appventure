@@ -86,7 +86,10 @@ const Upload = (props) => {
         const formData = new FormData();
 
         if (formValues.files && formValues.files.length > 0) {
-          formData.append("file1", formValues.files[0]);
+          // formData.append("file1", formValues.files[0]);
+          for (let i = 0; i < formValues.files.length; i++) {
+            formData.append(`file${i + 1}`, formValues.files[i]);
+          }
           formData.append("idUser", user.id);
           formData.append("text", formValues.post);
         } else {
@@ -97,7 +100,7 @@ const Upload = (props) => {
 
 
         const response = await callAPI({
-          url: "/post/save",
+          url: "/post/postingan/save",
           method: "post",
           data: formData,
           headers: {
@@ -268,6 +271,7 @@ const Upload = (props) => {
   return (
     <AuthProvider>
       <UploadLayout>
+        {console.log (previews)}
         <div className="min-h-screen font-Poppins flex justify-center ">
           <div className="max-w-lg">
             <div className="flex flex-col mt-5 w-96 justify-center items-center">
@@ -310,7 +314,7 @@ const Upload = (props) => {
                     // console.log(formData.get("text"))
                     
                     const response = await callAPI({
-                      url: "/post/save",
+                      url: "/post/postingan/save",
                       method: "post",
                       // data: {
                       //   text:formData.get("text"),

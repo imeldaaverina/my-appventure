@@ -1,136 +1,40 @@
-// import { getUser } from '../../../helpers/auth';
-import useAccount from "../../account/hooks/useAccount";
-import usePostItem from "../hooks/usePostItem";
-import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
-import { ButtonFollow } from "../../../components/button";
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import { useListPostDispatcher } from "../../../redux/reducers/listPost";
-import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
-const PostItem = ({ data, id }) => {
-  console.log({ data });
-  const { profile, picture } = useAccount();
-  // const { post } = usePostItem();
-  // const { handleRemove, handleEdit } = usePostItem();
+/*
+created_date: "2022-05-24T20:22:27.166+0700"
+deleted_date: null
+filePosts: []
+id: 76
+jumlahKomentar: 0
+jumlahLike: 0
+postIn: null
+text: "coba gambar"
+updated_date: "2022-05-24T20:22:27.166+0700"
+urlFileName1: "http://localhost:9091/api/showFile/[]"
 
-  // const postData = "test";
+user:
+authorities: (3) [{…}, {…}, {…}]
+fileName: "1952022121610dampakmie.jpg"
+id: 73
+nama: "aqua@gmail.com"
+otp: "1342"
+otpExpiredDate: "2022-04-09T13:05:37.694+00:00"
+roles: (3) [{…}, {…}, {…}]
+urlFileName: "https://myappventure.s3.amazonaws.com/1952022121610dampakmie.jpg"
+username: "aqua@gmail.com"
+*/
 
-  const [isReadMore, setIsReadMore] = useState(true);
-  const toggleReadMore = () => {
-    setIsReadMore(!isReadMore);
-  };
+const PostItem2 = ({data})=>{
+  return(
+   <div className="border mb-2 p-3 rounded-lg shadow-md">
+    <div className="grid grid-cols-2 gap-3 ">
+      <div className="font-normal text-sm">{data.created_date}</div>
+      <div className="font-bold">{data.text}</div>
+    </div>
+    <div>
+      <img src={data.user.urlFileName} alt="gambar-postingan" />
+    </div>
+   </div>
+  )
+}
 
-  // const {
-  //   listPost: { posts },
-  //   loadPosts,
-  // } = useListPostDispatcher();
-
-  // useEffect(() => {
-  //   loadPosts();
-  // }, []);
-
-  // const renderPostItems = () => {
-  //   return (
-  //     posts &&
-  //     posts.length > 0 &&
-  //     posts.map((postItem) => (
-  //       <div className="border p-3">
-  //         <div className="flex justify-between w-full">
-  //           <div className="font-bold">{postItem.attributes.title}</div>
-  //           <div className="">
-  //             <button type="button">edit</button>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     ))
-  //   );
-  // };
-
-  return (
-    <main className="m-auto flex justify-center font-Poppins">
-      <div className=" rounded-2xl flex justify-center items-center flex-col w-96 shadow-xl">
-        {/* <Image
-          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${picture}`}
-          className="w-full h-full rounded-t-2xl"
-          width={40}
-          height={40}
-          alt=""
-        /> */}
-     
-        <Carousel>
-        <div className='flex justify-around'>
-          <Image
-          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${picture}`}
-          className="w-full h-full rounded-t-2xl"
-          width={500}
-          height={320}
-          alt=""
-        />      
-        </div>
-        <div className='flex justify-around'>
-        <Image src="/blur_bg.png" className='w-full h-full rounded-t-2xl' width={500} height={320} alt=''/>
-        </div>
-        <div className='flex justify-around'>
-        <Image src="/blur_bg.png" className='w-full h-full rounded-t-2xl' width={500} height={320} alt=''/>
-        </div>
-        <div className='flex justify-around'>
-        <Image src="/blur_bg.png" className='w-full h-full rounded-t-2xl' width={500} height={320} alt=''/>
-        </div>
-        </Carousel>
-     
-        <div className=" p-4 flex flex-col w-full rounded-2xl">
-          <div className="flex justify-between">
-            <div className="flex w-full">
-              {/* <Image
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${picture}`}
-                className="rounded-full w-10 h-10"
-                width={40}
-                height={40}
-                alt=""
-              /> */}
-              
-              <div className="pr-3 w-96 flex justify-between">
-                <div className="flex flex-col ml-2">
-                  <div className="font-medium text-sm mt-1">{profile}</div>
-                  <div className="font-normal text-xs">1 menit</div>
-                </div>
-                <div className="flex justify-center items-center">
-                  <ButtonFollow />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="text-sm mt-4">
-            <div className="w-72 font-light text-sm">
-              {/* {renderPostItems()} */}
-              {isReadMore ? data?.text.slice(0, 278) : data?.text}
-              {data.text.length > 278 && (
-                <span onClick={toggleReadMore} className="font-semibold">
-                  {isReadMore
-                    ? "...Baca lebih lanjut"
-                    : " ...Tampilkan lebih sedikit"}
-                </span>
-              )}
-            </div>
-          </div>
-
-          <div className="bg-white flex justify-start mt-1">
-            <div className="flex justify-center items-center -mx-1 my-3">
-              <HeartIcon className="text-red-500 w-6 h-6" />
-              {/* <span className="text-2xl block w-full">
-            {home.counter}
-          </span>
-          </div> */}
-              <ChatIcon className="w-6 h-6" />
-              <LinkIcon className="w-6 h-6" />
-            </div>
-            <div></div>
-          </div>
-        </div>
-      </div>
-    </main>
-  );
-};
-export default PostItem;
+export default PostItem2
