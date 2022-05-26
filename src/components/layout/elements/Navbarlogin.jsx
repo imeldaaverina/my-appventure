@@ -32,7 +32,7 @@ const Navbarlogin = () => {
       {/* </Menu> */}
      
       <div onClick={() => setIsOpen(!isOpen)}><MenuIcon className="text-white bg-transparent" width={35} height={35}/></div>
-      
+      <div className="fixed left-0">
       <Burger className="fixed left-0" isOpen={isOpen} onClose={() => setIsOpen(false)}>
        
         <SubMenu  className="flex fixed left-0"  title={ <MenuIcon className="text-white bg-transparent" width={35} height={35}/> }>
@@ -41,7 +41,7 @@ const Navbarlogin = () => {
           <Item itemKey={'entry'} text={'Entry information'}></Item>
         </SubMenu>
       </Burger>
-     
+      </div>
     
           {/* </a> */}
         </div>

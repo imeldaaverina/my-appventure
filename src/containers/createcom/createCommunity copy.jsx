@@ -48,8 +48,8 @@ const CommunityContainer = () => {
 
       //upload profil picture
       const formData = new FormData();
-      formData.append('file', formValues.file);
-      const upload = await callAPI({
+    formData.append('file', formValues.files);
+    const upload = await callAPI({
         url: '/komunitas/create',
         method: 'post',
         data: formData,
@@ -128,7 +128,7 @@ const CommunityContainer = () => {
                     htmlFor="file"
                     className="w-20 h-20 m-auto flex justify-center items-center border rounded-full cursor-pointer bg-white">
                       {preview ? <Image className="h-full w-full object-cover rounded-full bg-white" src={preview} /> : <CameraIcon className="h-8 w-8 text-gray-600" />}
-                    {/* <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   /> */}
+                    <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   />
                   </label>
                   </div>
               </div>

@@ -29,15 +29,16 @@ const CommunityContainer = () => {
   const { createCommunity: { loading }, doCommunity } = useCommunityDispatcher();
   const { push } = useRouter();
   const onSubmit = async (values) => {
-
+  
     try {
       const payload = {
+        file: values.files,
         namaKomunitas: values.namaKomunitas,
         linkKomunitas: values.linkKomunitas,
         deskripsi: values.deskripsi,
       };
       await doCommunity(payload);
-
+      
     } catch (error) {
       alert(error);
     }
@@ -45,7 +46,7 @@ const CommunityContainer = () => {
 
     //upload profil picture
     const formData = new FormData();
-    formData.append('file', formValues.file);
+    formData.append('file', formValues.files);
     const upload = await callAPI({
       url: '/komunitas/create',
       method: 'post',
@@ -99,6 +100,7 @@ const CommunityContainer = () => {
       setFieldValue('files', files[0]);
     }
   };
+ 
   return (
     <AuthProvider>
       <main className="font-Poppins min-h-screen bg-cover flex flex-col justify-center items-center bg-center">
@@ -113,12 +115,13 @@ const CommunityContainer = () => {
           <form className="w-full rounded-xl pr-5 pl-1 p-2 pt-7 pb-4" onSubmit={handleSubmit}>
             <div className="text-center flex-col justify-center items-center">
               <div className="pt-2">
-                <label
+                {/* <label
                   htmlFor="file"
                   className="w-20 h-20 m-auto flex justify-center items-center border rounded-full cursor-pointer bg-white">
                   {preview ? <Image className="h-full w-full object-cover rounded-full bg-white" src={preview} /> : <CameraIcon className="h-8 w-8 text-gray-600" />}
-                  {/* <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   /> */}
-                </label>
+                  <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   />
+                </label> */}
+                 <input id="files" type="file" name="files"  accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   />
               </div>
             </div>
             <div className="font-normal text-sm mb-1 flex justify-between">
