@@ -11,9 +11,6 @@ const ChallengeContainer = () => {
       </Head>
     <AuthProvider>
       <ChallengeLayout>
-        {/* <HomeProvider>
-          <Posts />
-        </HomeProvider> */}
       </ChallengeLayout>
     </AuthProvider>
     </>

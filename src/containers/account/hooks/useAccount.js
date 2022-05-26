@@ -12,7 +12,7 @@ const useAccount = () => {
   };
 
   const loadPicture = () => {
-    const _picture = localStorage.getItem('foto');
+    const _picture = localStorage.getItem('picture');
     setPicture(_picture);
   };
  

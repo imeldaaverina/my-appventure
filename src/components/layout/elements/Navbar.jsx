@@ -7,18 +7,18 @@ const Navbar = () => {
       <div className="max-w-md mx-auto px-3 h-full flex justify-between items-center">
         <div>
           <a href="./account">
-            <MenuIcon className="w-8 h-8 text-white"/>
+            <MenuIcon className="w-8 h-8 text-white" />
           </a>
         </div>
         <div className="flex justify-start">
           <div className="text-white px-4 font-medium">
-          <a href="./registration">
-            Daftar
-          </a>
+            <a href="./registration">
+              Daftar
+            </a>
           </div>
           <div>
             <a href="./login">
-              <ButtonNav type="" label="Masuk"/>
+              <ButtonNav type="" label="Masuk" />
             </a>
           </div>
         </div>

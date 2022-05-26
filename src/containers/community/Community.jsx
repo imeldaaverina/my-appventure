@@ -1,0 +1,74 @@
+import AuthProvider from "../../providers/auth/AuthProvider";
+import { Icon } from '@iconify/react';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { CommunityLayout } from "../../components/layout";
+import Image from "next/image"
+import { useListCommunityDispatcher } from "../../redux/reducers/listCommunity/slice";
+
+const CommunityContainer = () => {
+    const [data, setData] = useState();
+
+    const fetchData = async () => {
+        try {
+            const response = await axios({
+                url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
+                method: 'get',
+                params:{
+                    page: 4,
+                    size: 10,
+                }
+            });
+            console.log("response > ", response.data);
+            setData(response.data.data.content);
+        } catch (error) {
+            console.log("error > ", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    return (
+        <AuthProvider>
+            <CommunityLayout>
+                <section>
+                    <div className="max-w-md mx-auto h-full px-2 font-Poppins">
+                        <div className="pt-10">
+                            <a href="./create-community">
+                                <button
+                                    className="bg-white text-[#329D9C] border-[#329D9C] border-2 text-xl w-full h-full rounded-xl py-3 px-3 flex justify-center items-center">
+                                    <div className='flex '>
+                                        <div className='pr-3'>
+                                            <Icon icon="akar-icons:plus" width={30} />
+                                        </div>
+                                        Buat Komunitas Baru</div>
+                                </button>
+                            </a>
+                        </div>
+
+                        <div className="pt-10">
+                            <div className="grid grid-cols-3">
+                                {console.log(data)}
+                                {data && data.map((item) => {
+                                    return (
+                                        <>
+                                            <a href={`./detail-community?id=${item.id}`}>
+                                                <div className="flex flex-col justify-center items-center mb-10">
+                                                    <img src={item.urlFileName} className='rounded-full' width={90} height={90} alt='' />
+                                                    <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1>
+                                                </div>
+                                            </a>
+                                        </>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </CommunityLayout>
+        </AuthProvider>
+    );
+};
+export default CommunityContainer;
