@@ -178,7 +178,7 @@ const AccountContainer = () => {
     <AuthProvider>
       <AccountLayout>
         <section>
-          <div className="font-Poppins min-h bg-cover bg-[url('../../public/homepage-bg.jpg')] w-full mx-auto">
+          <div className="font-Poppins min-h bg-cover bg-[url('/homepage-bg.jpg')] w-full mx-auto">
             <div className="max-w-md mx-auto h-full pt-40 px-2">
               <div className="text-white">
                 <a href="./home">
