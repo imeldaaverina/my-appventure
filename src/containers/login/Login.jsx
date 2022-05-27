@@ -1,39 +1,35 @@
-import {Input, Input2} from "../../components/input"; 
-import { Button, ButtonExit} from "../../components/button"; 
-import { Title, SubTitle,TitleForm } from "../../components/typography"; 
-import { NoAuthProvider } from "../../providers/auth"; 
-import { useFormik, getIn } from "formik"; 
-import * as Yup from 'yup'; 
-import { useRouter }  from "next/router";
-import { useLoginDispatcher } from '../../redux/reducers/login'; 
+import { Input, Input2 } from "../../components/input";
+import { Button, ButtonExit } from "../../components/button";
+import { Title, SubTitle, TitleForm } from "../../components/typography";
+import { NoAuthProvider } from "../../providers/auth";
+import { useFormik, getIn } from "formik";
+import * as Yup from 'yup';
+import { useLoginDispatcher } from '../../redux/reducers/login';
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
- 
-const validationSchema = Yup.object({ 
-    username: Yup.string().required("diperlukan email").email("email tidak valid"), 
-    password: Yup.string().required("diperlukan kata sandi"),  
-}); 
 
- 
-const initialValues = { 
-    username: "", 
-    password: "" 
-}; 
- 
-const LoginContainer = () => { 
-    const { login: { loading, errMessage }, doLogin } = useLoginDispatcher(); 
+const validationSchema = Yup.object({
+    email: Yup.string().required("diperlukan email").email("email tidak valid"),
+    password: Yup.string().required("diperlukan kata sandi"),
+});
 
-    const {push} = useRouter();
+const initialValues = {
+    email: "",
+    password: ""
+};
 
-    const onSubmit = async (values) => { 
- 
-        try { 
-            const payload = { 
-                username: values.email, 
-                password: values.password, 
-            }; 
-            await doLogin(payload); 
+const LoginContainer = () => {
+    const { login: { loading, errMessage }, doLogin } = useLoginDispatcher();
 
-        } catch (error) { 
+    const onSubmit = async (values) => {
+
+        try {
+            const payload = {
+                username: values.email,
+                password: values.password,
+            };
+            await doLogin(payload);
+
+        } catch (error) {
             alert(error);
           
         } 

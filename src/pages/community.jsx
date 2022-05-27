@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import CommunityContainer from '../containers/createcom';
+import CommunityContainer from '../containers/community';
 const CommunityPage = () => {
+
   return (
     <>
       <Head>
-        <title>Create Community</title>
+        <title>Community</title>
       </Head>
-      
       <CommunityContainer />
     </>
   );

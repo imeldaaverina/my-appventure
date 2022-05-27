@@ -45,14 +45,19 @@ export const useLoginDispatcher = () => {
       method: 'POST',
       data: payload,
     });
+<<<<<<< HEAD
     // console.log(data)
+=======
+    
+>>>>>>> 9feaab80506b37710e8f8a3e568d1c53726bfcd4
     const { data } = response;
     // console.log(data)
     localStorage.setItem("access_token", data.data.access_token);
     localStorage.setItem("data", JSON.stringify(data.data));
     localStorage.setItem("username", data.data.username);
-    localStorage.setItem("foto", data.data.filename);
+    localStorage.setItem("picture", data.data.urlFilename);
     localStorage.setItem("email", data.data.email);
+    localStorage.setItem("id", data.data.id);
 
     if (data.status === "404") {
         console.log(`error > ${data.message}`);

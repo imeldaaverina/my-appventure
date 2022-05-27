@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { MyCommunityLayout } from "../../components/layout";
+import Image from "next/image"
 import { useListCommunityDispatcher } from "../../redux/reducers/listCommunity/slice";
 
 const MyCommunityContainer = () => {
@@ -15,7 +16,7 @@ const MyCommunityContainer = () => {
                 url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
                 method: 'get',
             });
-            //   console.log("response > ", response.data);
+            console.log("response > ", response.data);
             setData(response.data.data.content);
         } catch (error) {
             console.log("error > ", error);
@@ -42,23 +43,20 @@ const MyCommunityContainer = () => {
                             </div>
                         </div>
 
-                        <div className="pt-5">
-                        <div className="grid grid-cols-3 gap-3">
-                            {console.log(data)}
-                            {data && data.map((item) => {
-                                return (
-                                   
-                                        
-                                          
-                                            <div className="flex flex-col justify-center items-center my-2 mx-2 bg-blue-400">
-                                                
-                                                <img src={item.urlFileName} />
-                                                <h1 className="">{item.namaKomunitas}</h1>
+                        <div className="pt-10">
+                            <div className="grid grid-cols-3">
+                                {console.log(data)}
+                                {data && data.map((item) => {
+                                    return (
+                                        <>
+                                            <div className="flex flex-col justify-center items-center mb-10">
+                                                <img src={item.urlFileName} className='rounded-full w-20 h-20' width={90} height={90} alt='' />
+                                                <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1>
                                             </div>
-                                   
-                                )
-                            })}
-                             </div>
+                                        </>
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
                 </section>
