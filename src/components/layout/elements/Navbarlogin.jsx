@@ -3,7 +3,7 @@ import useAccount from "../../../containers/account/hooks/useAccount";
 import Dropdown from 'react-dropdown';
 import { slide as Menu } from 'react-burger-menu'
 
-import { slide as Burger, SubMenu, Item } from "burger-menu";
+import { slide as Burger, Item } from "burger-menu";
 import 'burger-menu/lib/index.css';
 import { useState } from "react";
 
