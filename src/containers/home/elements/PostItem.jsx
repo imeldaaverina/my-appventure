@@ -6,6 +6,7 @@ import { ButtonFollow } from "../../../components/button";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useListPostDispatcher } from "../../../redux/reducers/listPost";
+import { Carousel } from 'react-responsive-carousel';
 
 const PostItem = ({ data, id }) => {
   console.log({ data });

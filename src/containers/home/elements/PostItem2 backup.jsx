@@ -1,9 +1,11 @@
 // import { getUser } from '../../../helpers/auth';
-import useAccount from "../containers/account/hooks/useAccount";
+import useAccount from "../../account/hooks/useAccount";
+import usePostItem from "../hooks/usePostItem";
 import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
-import { ButtonFollow } from "../components/button";
+import { ButtonFollow } from "../../../components/button";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useListPostDispatcher } from "../../../redux/reducers/listPost";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
@@ -56,22 +58,36 @@ const PostItem = ({ data, id }) => {
           height={40}
           alt=""
         /> */}
-     
+{data && data.map((item) => {
+              return (
         <Carousel>
-        <div className='flex justify-around'>
-        <Image src="/blur_bg.png" className='w-full h-full rounded-t-2xl' width={500} height={320} alt=''/>
-        </div>
-        <div className='flex justify-around'>
-        <Image src="/blur_bg.png" className='w-full h-full rounded-t-2xl' width={500} height={320} alt=''/>
-        </div>
-        <div className='flex justify-around'>
-        <Image src="/blur_bg.png" className='w-full h-full rounded-t-2xl' width={500} height={320} alt=''/>
-        </div>
-        <div className='flex justify-around'>
-        <Image src="/blur_bg.png" className='w-full h-full rounded-t-2xl' width={500} height={320} alt=''/>
-        </div>
+          <div className='flex justify-around'>
+            <Image
+              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${picture}`}
+              className="w-full h-full rounded-t-2xl"
+              width={500}
+              height={320}
+              alt=""
+            />
+            </div>
+            
+
+          
+          <div className='flex justify-around'>
+            <h1>{item.user.urlFileName}</h1>
+            <Image src={item.user.fileName} className='w-full h-full rounded-t-2xl' width={500} height={320} alt='' />
+          </div>
+          <div className='flex justify-around'>
+            <Image src="/blur_bg.png" className='w-full h-full rounded-t-2xl' width={500} height={320} alt='' />
+          </div>
+          <div className='flex justify-around'>
+            <Image src="/blur_bg.png" className='w-full h-full rounded-t-2xl' width={500} height={320} alt='' />
+          </div>
         </Carousel>
-     
+        )
+      })}
+
+
         <div className=" p-4 flex flex-col w-full rounded-2xl">
           <div className="flex justify-between">
             <div className="flex w-full">
@@ -82,7 +98,7 @@ const PostItem = ({ data, id }) => {
                 height={40}
                 alt=""
               /> */}
-             
+
               <div className="pr-3 w-96 flex justify-between">
                 <div className="flex flex-col ml-2">
                   <div className="font-medium text-sm mt-1">{profile}</div>
@@ -97,14 +113,14 @@ const PostItem = ({ data, id }) => {
           <div className="text-sm mt-4">
             <div className="w-72 font-light text-sm">
               {/* {renderPostItems()} */}
-              {/* {isReadMore ? data?.text.slice(0, 278) : data?.text}
+              {isReadMore ? data?.text.slice(0, 278) : data?.text}
               {data.text.length > 278 && (
                 <span onClick={toggleReadMore} className="font-semibold">
                   {isReadMore
                     ? "...Baca lebih lanjut"
                     : " ...Tampilkan lebih sedikit"}
                 </span>
-              )} */}
+              )}
             </div>
           </div>
 

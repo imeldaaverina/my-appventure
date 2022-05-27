@@ -4,9 +4,6 @@ import DetailCommunityContainer from '../containers/detail-community/Detail-comm
 const DetailCommunityPage = () => {
 
 useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get('id');
-console.log(id)
 
 })
 

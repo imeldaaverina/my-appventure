@@ -23,7 +23,7 @@ export const useRegistrationDispatcher = () => {
   const doRegistration = async (values) => {
     dispatch(toggleLoading(true));
     const response = await callAPI({
-      url: '/user/daftar',
+      url: '/user/register',
       method: 'POST',
       data: values,
     });

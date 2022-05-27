@@ -22,13 +22,28 @@ export const useCommunityDispatcher = () => {
   const dispatch = useDispatch();
   const doCommunity = async (values) => {
     dispatch(toggleLoading(true));
+   values.idUser=3
+   console.log(values)
+
+   const formData = new FormData()
+   formData.append("file", values.file)
+   formData.append("namaKomunitas", values.namaKomunitas)
+   formData.append("linkKomunitas", values.linkKomunitas)
+   formData.append("deskripsi", values.deskripsi)
+   formData.append("idUser", values.idUser)
+
     const response = await callAPI({
       url: '/komunitas/create',
       method: 'POST',
-      data: values,
+      headers: {
+        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInVzZXJfbmFtZSI6ImFxdWFAZ21haWwuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTY1MzU2NTU3MSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9SRUFEIiwiUk9MRV9XUklURSJdLCJqdGkiOiIzODE2NWFhMy1jMmQyLTQ3ZTUtYjU2ZS0yZmU5ZmRmOGVhZjciLCJjbGllbnRfaWQiOiJteS1jbGllbnQtd2ViIn0.xHJA3o9JRzVDAezKUBQg-xDuWAeYBn2Vooxmj_dazIo"}`,
+      },
+
+      data: formData,
     });
     const { data } = response;
-    localStorage.setItem('access_token', data.data);
+    console.log(response)
+    localStorage.setItem('access_token', data);
     dispatch(toggleLoading(false));
   };
   return {

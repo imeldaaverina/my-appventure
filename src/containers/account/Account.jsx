@@ -185,15 +185,23 @@ const AccountContainer = () => {
                   <Icon icon="eva:arrow-circle-left-outline" width="40" />
                 </a>
               </div>
-              
+
               <div className="">
-                <label
+                {/* <label
                   htmlFor="files"
                   className="w-40 h-40 m-auto flex justify-center items-center rounded-full cursor-pointer bg-white">
 
                   {preview ? <img className="h-full w-full object-cover rounded-full bg-white" src={picture} width={30} heigt={30} layout="fill"/> : <CameraIcon className="h-12 w-12 text-gray-600" />}
                   <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files" />
+                </label> */}
+
+                <label
+                  htmlFor="files"
+                  className="w-40 h-40 m-auto flex justify-center items-center border rounded-full cursor-pointer bg-white">
+                  {preview ? <img className="h-full w-full object-cover rounded-full bg-white" src={preview} width={300} height={300} /> : <CameraIcon className="h-12 w-12 text-gray-600" />}
+                  <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files" />
                 </label>
+
               </div>
 
               <div className="text-white pt-8 font-medium text-2xl flex justify-center">

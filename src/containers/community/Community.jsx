@@ -14,9 +14,9 @@ const CommunityContainer = () => {
             const response = await axios({
                 url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
                 method: 'get',
-                params:{
-                    page: 4,
-                    size: 10,
+                params: {
+                    page: 1,
+                    size: 30,
                 }
             });
             console.log("response > ", response.data);
@@ -55,8 +55,10 @@ const CommunityContainer = () => {
                                     return (
                                         <>
                                             <a href={`./detail-community?id=${item.id}`}>
-                                                <div className="flex flex-col justify-center items-center mb-10">
-                                                    <img src={item.urlFileName} className='rounded-full' width={90} height={90} alt='' />
+                                                <div className="flex flex-col justify-center items-center mb-10 border-[#008C96] rounded-md border-2 mx-5">
+                                                    {/* <img src={item.urlFileName} className='rounded-full' width={90} height={90} alt='' />
+                                                    <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1> */}
+                                                    <img src={item.urlFilename} className='rounded-t-md w-28 h-28' alt='' />
                                                     <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1>
                                                 </div>
                                             </a>

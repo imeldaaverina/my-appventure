@@ -45,6 +45,7 @@ export const useLoginDispatcher = () => {
       method: 'POST',
       data: payload,
     });
+    
     const { data } = response;
     
     localStorage.setItem("access_token", data.data.access_token);

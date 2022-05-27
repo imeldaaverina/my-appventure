@@ -4,7 +4,6 @@ import { Title, SubTitle, TitleForm } from "../../components/typography";
 import { NoAuthProvider } from "../../providers/auth";
 import { useFormik, getIn } from "formik";
 import * as Yup from 'yup';
-import { useRouter } from "next/router";
 import { useLoginDispatcher } from '../../redux/reducers/login';
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
 
@@ -13,7 +12,6 @@ const validationSchema = Yup.object({
     password: Yup.string().required("diperlukan kata sandi"),
 });
 
-
 const initialValues = {
     email: "",
     password: ""
@@ -21,8 +19,6 @@ const initialValues = {
 
 const LoginContainer = () => {
     const { login: { loading, errMessage }, doLogin } = useLoginDispatcher();
-
-    const { push } = useRouter();
 
     const onSubmit = async (values) => {
 

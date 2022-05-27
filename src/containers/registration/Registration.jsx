@@ -49,7 +49,7 @@ const RegistrationContainer = () => {
     const formData = new FormData();
     formData.append('files', formValues.files);
     const upload = await callAPI({
-      url: '/user/upload',
+      url: '/v1/upload',
       method: 'post',
       data: formData,
       headers: {
@@ -67,7 +67,7 @@ const RegistrationContainer = () => {
     };
 
     const submitRegistration = await callAPI({
-      url: '/user/daftar',
+      url: '/user/register',
       method: 'post',
       data: payload,
       headers: {

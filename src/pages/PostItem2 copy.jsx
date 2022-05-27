@@ -76,11 +76,129 @@ const textareaRef = useRef(null);
   return (
     <main className='m-auto flex flex-col justify-center font-Poppins items-center'>
 
+      <div className='mb-20'>
+        <div className='bg-blue-300 flex flex-col mt-20 w-96'>
       
-    
+      <div className='flex'> 
+        <ArrowCircleLeftIcon className='w-10 h-10 '/>
+        <div className='font-medium text-2xl flex justify-center items-center ml-5 w-72'>Buat Komunitas Baru</div>
+      </div>
+      </div>
+      </div>
+
+    <div className='bg-[#457275] rounded-t-3xl'>
+    <div className=" rounded flex bg-white justify-center items-center flex-col w-96 shadow-xl">
+      <div className=' p-4 flex flex-col w-full rounded'>
+        <div className='flex justify-between'>
+          <div className='flex w-full'>
+            
+            <Image src="/blur_bg.png" className='rounded-full' width={50} height={10} alt='' />
+            <div className='pr-3 w-96 flex justify-between'>
+            <div className='flex flex-col ml-2'>
+              <div className='font-medium text-sm mt-1'>
+                 {/* {data.postedBy} */}
+                 nama
+              </div>
+              <div className='font-normal text-xs'>1 menit</div>
+            </div>
+            <div className='flex justify-center items-center'>
+            <ButtonFollow />
+            </div>
+            </div>
+          </div>
+          
+        </div>
+        <div className='text-sm mt-4'>
+        <div className='w-72 font-light text-sm'>
+                {isReadMore ? postData.slice(0, 90): postData }
+                {postData.length > 90 &&
+                  <span onClick={toggleReadMore} className='font-semibold'>
+                  {isReadMore ? '...Baca lebih lanjut' : ' ...Tampilkan lebih sedikit'}
+                  </span>
+                }
+              {/* <ReadMoreReact 
+                className='font-bold'
+                text={postData}
+                min={0}
+                ideal={100}
+                max={120}
+                readMoreText="... Baca lebih lanjut"/> */}
+              {/* Saya Pernah! Seruu sekali loh!, Saya merekomendasikan patai lainnya yang mirip seperti gambar di atas, ada pa.... */}
+              </div>        </div>
+
+        <div className='bg-white flex justify-start mt-1'>
+        <div className="flex justify-center items-center -mx-1 my-3">
+            <HeartIcon className='text-red-500 w-6 h-6'/>
+            <ChatIcon className='w-6 h-6'/>
+            <LinkIcon className='w-6 h-6'/>
+        </div>
+      </div>
+      </div>
+      
+    </div>
+    <div className=' pt-3  px-3 flex'>
+      <div className='flex flex-col '>
+      <div className='flex'>
+      <Image src="/blur_bg.png" className='rounded-full' width={50} height={1} alt='' />
+        <div className='pr-3 flex '>
+          <div className='flex flex-col ml-2 items-center justify-center'>
+            <div className='font-semibold text-white flex flex-col'>
+              nama
+              <div className='w-72 font-light text-sm'>
+                {isReadMore ? postData.slice(0, 90): postData }
+                {postData.length > 90 &&
+                  <span onClick={toggleReadMore} className='font-semibold'>
+                  {isReadMore ? '...Baca lebih lanjut' : ' ...Tampilkan lebih sedikit'}
+                  </span>
+                }
+              {/* <ReadMoreReact 
+                className='font-bold'
+                text={postData}
+                min={0}
+                ideal={100}
+                max={120}
+                readMoreText="... Baca lebih lanjut"/> */}
+              {/* Saya Pernah! Seruu sekali loh!, Saya merekomendasikan patai lainnya yang mirip seperti gambar di atas, ada pa.... */}
+              </div>
+              <div className='flex text-xs font-light mt-1 underline'>Balas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className='flex mt-9 w-full'>
+              <InputKomen
+              name="komentar" 
+              label="" 
+              type="text" 
+              placeholder="Tulis Komentar" 
+              onChange={handleChange} 
+              onBlur={handleBlur} 
+              />
+              <Icon icon="akar-icons:send" className='text-white w-6 h-6 ml-2 mt-1'/>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+    <div className='mt-10 w-96 flex flex-col'>
+    <div className='text-[#186F79] text-base font-bold justify-start flex items-start mb-4'>#Paling Populer</div>
+    <div className="w-full h-40 rounded-2xl">
+       <div className="bg-[url('/hiking_illust.png')] w-full h-full rounded-2xl p-3">
+           <p className='ml-2 font-bold text-base text-[#3D3D3D]'>Camping 5 Hari di Alam Liar</p>
+           <div className='bg-white bg-opacity-50 p-2 rounded-xl mt-16 flex justify-between items-center'>
+               <p>Telah ikut berpatisipasi .....</p>
+               <div className='w-28 h-5'>
+               <Button3 type="submit" label={'Lihat tantangan'}/>
+               </div>
+           </div>
+       </div>
+    </div>
+    </div>
     <div className='mt-8 w-96 flex flex-col'>
     <div className='text-[#186F79] text-base font-bold justify-start flex items-start mb-4'>#Penakluk Daratan</div>
-    {/* <div className='flex flex-col'> */}
+    <div className='flex flex-col'>
       <Carousel>
         <div className='flex justify-around'>
         <div className=''>
@@ -98,7 +216,7 @@ const textareaRef = useRef(null);
         </div>
        </div>
        </Carousel>
-    {/* </div> */}
+    </div>
     </div>
     <div className='mt-8 w-96 flex flex-col'>
     <div className='text-[#186F79] text-base font-bold justify-start flex items-start mb-4'>#Penguasa Air</div>
