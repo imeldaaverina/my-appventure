@@ -115,13 +115,13 @@ const CommunityContainer = () => {
           <form className="w-full rounded-xl pr-5 pl-1 p-2 pt-7 pb-4" onSubmit={handleSubmit}>
             <div className="text-center flex-col justify-center items-center">
               <div className="pt-2">
-                {/* <label
-                  htmlFor="file"
+                <label
+                  htmlFor="files"
                   className="w-20 h-20 m-auto flex justify-center items-center border rounded-full cursor-pointer bg-white">
-                  {preview ? <Image className="h-full w-full object-cover rounded-full bg-white" src={preview} /> : <CameraIcon className="h-8 w-8 text-gray-600" />}
+                  {preview ? <Image className="h-full w-full object-cover rounded-full bg-white" src={preview} width={80} height={80} /> : <CameraIcon className="h-8 w-8 text-gray-600" />}
                   <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   />
-                </label> */}
-                 <input id="files" type="file" name="files"  accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   />
+                </label>
+                 {/* <input id="files" type="file" name="files"  accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   /> */}
               </div>
             </div>
             <div className="font-normal text-sm mb-1 flex justify-between">
