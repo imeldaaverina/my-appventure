@@ -5,6 +5,7 @@ import axios from "axios";
 
 const useHome = () => {
   const [posts, setPosts] = useState();
+  const user = JSON.parse(localStorage.getItem("data"));
   const loadPosts = async () => {
     const accessToken = localStorage.getItem("access_token");
     const headers = {};
@@ -19,12 +20,14 @@ const useHome = () => {
       method: "get",
       params: {
         page: 0,
-        size: 20,
+        size: 1000,
       },
-      headers,
+      headers: {
+        // Authorization: `Bearer ${user.access_token}`,
+      }
+      
     });
-    // const response = await axios.get("https://myappventure-api.herokuapp.com/api/post/list")
-    // console.log(response)
+
     const { data } = response;
     localStorage.getItem("access_token", data.data.access_token);
     setPosts(response.data.data);

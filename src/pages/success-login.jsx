@@ -2,7 +2,7 @@ import { CheckCircleIcon } from '@heroicons/react/outline';
 import { NoAuthProvider } from "../providers/auth"; 
 import { ButtonExit } from "../components/button";  
 
-const RegistrationPage = () => {
+const SuccessLoginPage = () => {
     return (
       <>
         <NoAuthProvider>  
@@ -23,4 +23,4 @@ const RegistrationPage = () => {
       </>
     );
   };
-  export default RegistrationPage;
+  export default SuccessLoginPage;

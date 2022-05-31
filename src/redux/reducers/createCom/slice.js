@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { callAPI } from '../../../helpers/network';
+// import { useRouter }  from "next/router";
+
 const initialState = {
   loading: false,
 };
@@ -31,21 +33,26 @@ export const useCommunityDispatcher = () => {
    formData.append("linkKomunitas", values.linkKomunitas)
    formData.append("deskripsi", values.deskripsi)
    formData.append("idUser", values.idUser)
+   
+   const user = JSON.parse(localStorage.getItem('data'))
+
+  //  const {push} = useRouter();
 
     const response = await callAPI({
       url: '/komunitas/create',
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInVzZXJfbmFtZSI6ImFxdWFAZ21haWwuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTY1MzU2NTU3MSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9SRUFEIiwiUk9MRV9XUklURSJdLCJqdGkiOiIzODE2NWFhMy1jMmQyLTQ3ZTUtYjU2ZS0yZmU5ZmRmOGVhZjciLCJjbGllbnRfaWQiOiJteS1jbGllbnQtd2ViIn0.xHJA3o9JRzVDAezKUBQg-xDuWAeYBn2Vooxmj_dazIo"}`,
+        Authorization: `Bearer ${user.access_token}`      
       },
-
       data: formData,
     });
     const { data } = response;
     console.log(response)
     localStorage.setItem('access_token', data);
+    // push('/success-create-community');
     dispatch(toggleLoading(false));
   };
+
   return {
     createCommunity,
     doCommunity,

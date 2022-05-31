@@ -54,7 +54,7 @@ const LandingContainer = () => {
                             <div className="px-5 pt-5">
                                 <TitleFormBold text="Bergabung bersama Komunitas Pecinta Alam dengan mudah hanya di My Appventure" />
                             </div>
-                            <a href="../home-not-login">
+                            <a href="../for-you">
                                 <ButtonExit />
                             </a>
                         </div>

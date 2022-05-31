@@ -10,7 +10,7 @@ const SearchLayout = ({ children }) => {
             </main>
             <Footer />
         </>
-    );
+    )
 };
 
 export default SearchLayout;

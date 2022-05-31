@@ -1,6 +1,6 @@
 import Navbar from "./elements/Navbar";
 import Footer from "./elements/Footer";
-import Jumbotron from "./elements/Jumbotron";
+import Jumbotronn from "./elements/Jumbotronn";
 import NavbarFollowingNotLogin from "./elements/NavbarFollowingNotLogin";
 import Image from "next/image";
 
@@ -9,7 +9,7 @@ const FollowingNotLoginLayout = () => {
   return (
     <>
       <Navbar />
-      <Jumbotron />
+      <Jumbotronn />
       <main className="min-h-screen max-w-md mx-auto font-Poppins">
         <NavbarFollowingNotLogin />
         <div className="pt-20 text-center">

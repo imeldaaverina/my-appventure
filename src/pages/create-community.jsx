@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import CommunityContainer from '../containers/createcom';
-const CommunityPage = () => {
+const CreateCommunityPage = () => {
   return (
     <>
       <Head>
@@ -11,4 +11,4 @@ const CommunityPage = () => {
     </>
   );
 };
-export default CommunityPage;
+export default CreateCommunityPage;

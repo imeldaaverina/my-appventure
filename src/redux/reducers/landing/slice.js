@@ -25,12 +25,12 @@ export const useLandingDispatcher = () => {
 
   const {push} = useRouter();
 
-  const doLanding = async (values) => {
+  const doLanding = async (payload) => {
     dispatch(toggleLoading(true));
     const response = await callAPI({
-      url: 'https://myappventure-api.herokuapp.com/api/subscribe/email/dstnrth15@gmail.com',
+      url: `https://myappventure-api.herokuapp.com/api/subscribe/email/${data}`,
       method: 'GET',
-      data: values,
+      data: payload,
     });
     // const { data } = response;
     // localStorage.setItem('access_token', data.access_token);

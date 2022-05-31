@@ -10,11 +10,20 @@ const MyCommunityContainer = () => {
     const [data, setData] = useState();
 
     const fetchData = async () => {
-        
+        const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
+                // url: `https://myappventure-api.herokuapp.com/api/komunitas/komunitasuser/${user.id}`,
                 url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
                 method: 'get',
+                // params: {
+                //     idUser: user.id,
+                //     page: 0,
+                //     size: 30,
+                // },
+                headers: {
+                    Authorization: `Bearer ${user.access_token}`,
+                },
             });
             console.log("response > ", response.data);
             setData(response.data.data.content);

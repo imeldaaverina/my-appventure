@@ -49,7 +49,7 @@ const PostItem = ({ data, id }) => {
 
   return (
     <main className="m-auto flex justify-center font-Poppins">
-      <div className=" rounded-2xl flex justify-center items-center flex-col w-96 shadow-xl">
+      <div className=" rounded-2xl flex justify-center items-center flex-col w-96 shadow-xl my-3 border border-[#16737B]">
         {/* <Image
           src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${picture}`}
           className="w-full h-full rounded-t-2xl"
@@ -57,20 +57,23 @@ const PostItem = ({ data, id }) => {
           height={40}
           alt=""
         /> */}
+        <div>
+          <img src={data.filePosts.url} className="rounded-t-2xl" alt="gambar-postingan" />
+        </div>
         <div className=" p-4 flex flex-col w-full rounded-2xl">
           <div className="flex justify-between">
             <div className="flex w-full">
-              {/* <Image
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${picture}`}
+              <img
+                src={data.user.urlFileName}
                 className="rounded-full w-10 h-10"
-                width={40}
-                height={40}
+                width={50}
+                height={50}
                 alt=""
-              /> */}
+              />
               <div className="pr-3 w-96 flex justify-between">
                 <div className="flex flex-col ml-2">
-                  <div className="font-medium text-sm mt-1">{profile}</div>
-                  <div className="font-normal text-xs">1 menit</div>
+                  <div className="font-medium text-sm mt-1">{data.user.nama}</div>
+                  <div className="font-normal text-xs">{data.created_date}</div>
                 </div>
                 <div className="flex justify-center items-center">
                   <ButtonFollow />
@@ -94,15 +97,13 @@ const PostItem = ({ data, id }) => {
 
           <div className="bg-white flex justify-start mt-1">
             <div className="flex justify-center items-center -mx-1 my-3">
-              <HeartIcon className="text-red-500 w-6 h-6" />
+              <HeartIcon className="text-red-500 w-6 h-6" />{data.jumlahLike}
               {/* <span className="text-2xl block w-full">
             {home.counter}
           </span>
           </div> */}
-              <ChatIcon className="w-6 h-6" />
-              <LinkIcon className="w-6 h-6" />
+              <ChatIcon className="w-6 h-6 ml-3" />{data.jumlahKomentar}
             </div>
-            <div></div>
           </div>
         </div>
       </div>

@@ -8,8 +8,8 @@ const SearchPenggunaLayout = ({ children }) => {
             <NavbarSearch />
             <main className="min-h-screen max-w-md mx-auto">
                 <div className="pt-24">
-            <NavbarSearchPengguna />
-            </div>
+                    <NavbarSearchPengguna />
+                </div>
                 {children}
             </main>
             <Footer />

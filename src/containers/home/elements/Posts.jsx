@@ -15,8 +15,8 @@ const Posts = () => {
       {posts &&
         posts.content.length > 0 &&
         posts.content.map((post) => (
-          // <PostItem key={post.id} data={post} id={post.id} />,
-          <PostItem2 key={post.id} data={post} id={post.id} />
+          <PostItem key={post.id} data={post} id={post.id} />
+          // <PostItem2 key={post.id} data={post} id={post.id} />
         ))}
     </section>
   );

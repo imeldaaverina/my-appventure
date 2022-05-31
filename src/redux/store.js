@@ -9,6 +9,7 @@ import account from './reducers/account';
 import listCommunity from './reducers/listCommunity';
 import createCommunity from './reducers/createCom';
 import createPost from './reducers/registration';
+import search from './reducers/search user';
 
 // rootReducer
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   createPost,
   listCommunity,
   createCommunity,
+  search,
 });
 
 // store (main storage)
