@@ -10,7 +10,11 @@ const NavbarSearch = () => {
                         <Icon icon="eva:arrow-circle-left-outline" width="30" />
                     </a>
                 </div>
-                <Searchbar />
+                <Searchbar
+                    type="text"
+                    placeholder="search here..."
+                    onChange={(e) => setText(e.target.value)}
+                />
             </div>
         </nav>
     )

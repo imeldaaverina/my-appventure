@@ -32,10 +32,10 @@ export const useLandingDispatcher = () => {
       method: 'GET',
       data: payload,
     });
-    // const { data } = response;
-    // localStorage.setItem('access_token', data.access_token);
-    // localStorage.setItem('user', JSON.stringify(data.user));
-    // localStorage.setItem('subscribe', data.data);
+    const { data } = response;
+    localStorage.removeItem('access_token', data.access_token);
+    localStorage.removeItem('user', JSON.stringify(data.user));
+    localStorage.setItem('subscribe', data.data);
     
     push('/success-landing');
     dispatch(toggleLoading(false));

@@ -1,14 +1,14 @@
 import Head from 'next/head';
-import { SearchKomunitasLayout } from '../components/layout';
+import SearchKomunitasContainer from '../containers/search-komunitas/Search-komunitas';
 
-const SearchPage = () => {
+const SearchKomunitasPage = () => {
   return (
     <>
       <Head>
         <title>Search Community - My Appventure</title>
       </Head>
-      <SearchKomunitasLayout/>
+      <SearchKomunitasContainer/>
     </>
   );
 };
-export default SearchPage;
+export default SearchKomunitasPage;

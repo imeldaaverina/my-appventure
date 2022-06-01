@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { SearchPostinganLayout } from '../components/layout';
+import SearchPostinganContainer from '../containers/search-postingan/Search-postingan';
 
 const SearchPostinganPage = () => {
   return (
@@ -7,7 +7,7 @@ const SearchPostinganPage = () => {
       <Head>
         <title>Search Post - My Appventure</title>
       </Head>
-      <SearchPostinganLayout/>
+      <SearchPostinganContainer />
     </>
   );
 };

@@ -6,7 +6,9 @@ const SearchLayout = ({ children }) => {
         <>
             <NavbarSearch />
             <main className="min-h-screen max-w-md mx-auto">
-                {children}
+                <div className="pt-24">
+                    {children}
+                </div>
             </main>
             <Footer />
         </>

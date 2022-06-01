@@ -51,12 +51,15 @@ export const useSearchDispatcher = () => {
         url: "/user/detail/cariuser",
         method: "GET",
         params: {
-          fullname: query.toLowerCase(),
-        },
+          page: 0,
+          size: 300,
+          nama: ""
+},
       });
+      console.log("response > ", response.data.data.content);
 
-      if (response.data.data) {
-        dispatch(setDataUsers(response.data.data));
+      if (response.data) {
+        dispatch(setDataUsers(response.data.data.content));
       }
       dispatch(toggleLoading(false));
     } catch (error) {
