@@ -57,7 +57,7 @@ const FollowingListContainer = () => {
                             <div className="flex justify-between items-center pt-5 px-5 font-Poppins">
                                 <div className="flex justify-start items-center">
                                     <div>
-                                        <Image src="/blur_bg.png" className='rounded-full w-10 h-10' width={50} height={50} alt='' />
+                                        <img src={item.userFollower.urlFileName} className='rounded-full w-10 h-10' width={50} height={50} alt='' />
                                     </div>
                                     <div className="font-medium text-[#3D3D3D] text-lg pl-3">
                                         <p>{item.userFollower.nama}</p>

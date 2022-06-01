@@ -9,6 +9,7 @@ export { default as FollowerListLayout } from './FollowerListLayout';
 export { default as FollowingListLayout } from './FollowingListLayout';
 export { default as AccountLayout } from './AccountLayout';
 export { default as MyCommunityLayout } from './MyCommunityLayout';
+export { default as MyPostLayout } from './MyPostLayout';
 export { default as SearchLayout } from './SearchLayout';
 export { default as SearchKomunitasLayout } from './SearchKomunitasLayout';
 export { default as SearchPenggunaLayout } from './SearchPenggunaLayout';

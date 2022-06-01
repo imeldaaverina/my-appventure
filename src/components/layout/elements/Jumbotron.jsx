@@ -20,13 +20,13 @@ const Jumbotron = () => {
             unikmu sekarang!</p>
         </div>
 
-        <div className="max-w-md mx-auto px-3 h-full pt-8 items-center">
+        <div className="max-w-md mx-auto px-3 h-full pt-14 items-center pb-20">
           <a href="./search">
             <Searchbar />
           </a>
         </div>
 
-        <div className="flex justify-center gap-3 my-4">
+        {/* <div className="flex justify-center gap-3 my-4">
           <ButtonJmbtrn label="Pendaki" />
           <ButtonJmbtrn label="Pantai" />
           <ButtonJmbtrn label="Air Terjun" />
@@ -37,7 +37,7 @@ const Jumbotron = () => {
           <ButtonJmbtrn label="Arung Jeram" />
           <ButtonJmbtrn label="Hutan" />
           <ButtonJmbtrn label="Camping" />
-        </div>
+        </div> */}
 
       </div>
     </main>

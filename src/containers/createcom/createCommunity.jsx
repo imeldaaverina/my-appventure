@@ -1,21 +1,17 @@
-import { Input, Inputcommunity } from "../../components/input";
-import { useRouter } from "next/router";
+import { Inputcommunity } from "../../components/input";
 import { useState } from 'react';
-import { Button, Button2, ButtonExit, ButtonMyProfileSandi } from "../../components/button";
-// import { Title, SubTitle, TitleForm } from "../../components/typography";  
+import { Button2 } from "../../components/button";
 import AuthProvider from "../../providers/auth/AuthProvider";
 import { useFormik, getIn } from "formik";
 import * as Yup from 'yup';
-// // import { useCommunityDispatcher } from '../redux/reducers/Community';  
-import { HeartIcon, ChatIcon, ExclamationCircleIcon, EyeIcon, LinkIcon, ArrowCircleLeftIcon, UsersIcon, ClipboardCheckIcon, CameraIcon } from '@heroicons/react/outline';
+import { ExclamationCircleIcon, ArrowCircleLeftIcon, CameraIcon } from '@heroicons/react/outline';
 import { useCommunityDispatcher } from '../../redux/reducers/createCom';
 import Image from "next/image";
 
 const validationSchema = Yup.object({
   namaKomunitas: Yup.string().required("nama dan deskripsi wajib diisi"),
   linkKomunitas: Yup.string(),
-  deskripsi: Yup.string().required("isi nama deskripsi"),
-  // files: Yup.mixed().required("diperlukan foto profil"),
+  deskripsi: Yup.string().required("nama dan deskripsi wajib diisi"),
 });
 
 const initialValues = {
@@ -27,7 +23,7 @@ const initialValues = {
 
 const CommunityContainer = () => {
   const { createCommunity: { loading }, doCommunity } = useCommunityDispatcher();
-  const { push } = useRouter();
+
   const onSubmit = async (values) => {
 
     try {
@@ -38,7 +34,7 @@ const CommunityContainer = () => {
         deskripsi: values.deskripsi,
       };
       await doCommunity(payload);
-
+      window.location.href = "./success-create-community";
     } catch (error) {
       alert(error);
     }
@@ -74,11 +70,6 @@ const CommunityContainer = () => {
       },
     });
 
-    if (submitCommunity.status === 200) {
-      setLoading(false);
-      alert('Create community success!');
-      // push('/success_login');
-    }
   };
   const {
     handleChange,
@@ -103,7 +94,7 @@ const CommunityContainer = () => {
 
   return (
     <AuthProvider>
-      <main className="font-Poppins min-h-screen bg-cover flex flex-col justify-center items-center bg-center">
+      <main className="font-Poppins min-h-screen bg-cover flex flex-col justify-center items-center bg-center w-full">
         <div className='flex flex-col w-96'>
 
           <div className='flex'>
@@ -123,10 +114,9 @@ const CommunityContainer = () => {
                   {preview ? <Image className="h-full w-full object-cover rounded-full bg-white" src={preview} width={100} height={100} /> : <CameraIcon className="h-8 w-8 text-gray-600" />}
                   <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files" />
                 </label>
-                {/* <input id="files" type="file" name="files"  accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files"   /> */}
               </div>
             </div>
-            <div className="font-normal text-sm mb-1 flex justify-between">
+            <div className="font-normal text-sm mb-1 flex justify-between pt-10">
               Nama Komunitas
 
             </div>
@@ -144,7 +134,7 @@ const CommunityContainer = () => {
               Link Grup Komunitas
               {getIn(touched, "namaKomunitas") && getIn(errors, "namaKomunitas") && (
                 <div className="flex items-center justify-start text-xs text-white font-light" data-testid="error-namaKomunitas">
-                  <ExclamationCircleIcon className="w-5 h-5 text-[#FF8181] pr-1" />
+                  {/* <ExclamationCircleIcon className="w-5 h-5 text-[#FF8181] pr-1" /> */}
                   {getIn(errors, "namaKomunitas")}
                 </div>
               )}
@@ -184,10 +174,7 @@ const CommunityContainer = () => {
             )}
             </div>
             <div className="mt-8">
-              <ButtonMyProfileSandi type="submit" label={loading ? 'Please wait...' : 'Bikin Komunitas'} />
-
-              {/* <Button type="submit" label={loading ? 'Please wait...' : 'Daftar sekarang'}/>   */}
-
+              <Button2 type="submit" label={loading ? 'Tunggu Sebentar...' : 'Simpan'} />
             </div>
           </form>
 

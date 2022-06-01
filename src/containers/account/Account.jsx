@@ -23,6 +23,8 @@ const AccountContainer = () => {
   const handleLogout = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('data');
+    localStorage.removeItem('id');
+    localStorage.removeItem('email');
     localStorage.removeItem('username');
     window.location.reload();
   }
@@ -74,7 +76,6 @@ const AccountContainer = () => {
     if (submitAccount.status === 200) {
       setLoading(false);
       alert('Create posts success!');
-      push('/success_registration');
     }
 
   }
@@ -151,29 +152,6 @@ const AccountContainer = () => {
     fetchDatas();
   }, []);
 
-  // const [picture, setPicture] = useState();
-
-  // const fetchPicture = async () => {
-  //   try {
-  //     const response = await axios({
-  //       url: "",
-  //       method: "",
-  //       params: {
-  //       }
-  //     });
-  //     console.log("response > ", response.data);
-  //     setPicture(response.data.Data);
-  //   } catch (error) {
-  //     console.log("error > ", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchPicture();
-  // }, []);
-
-
-
   return (
     <AuthProvider>
       <AccountLayout>
@@ -187,20 +165,17 @@ const AccountContainer = () => {
               </div>
 
               <div className="">
+
+                <div className="w-40 h-40 m-auto flex justify-center items-center border rounded-full bg-white">
+                  <img src={picture} />
+                </div>
+
                 {/* <label
-                  htmlFor="files"
-                  className="w-40 h-40 m-auto flex justify-center items-center rounded-full cursor-pointer bg-white">
-
-                  {preview ? <img className="h-full w-full object-cover rounded-full bg-white" src={picture} width={30} heigt={30} layout="fill"/> : <CameraIcon className="h-12 w-12 text-gray-600" />}
-                  <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files" />
-                </label> */}
-
-                <label
                   htmlFor="files"
                   className="w-40 h-40 m-auto flex justify-center items-center border rounded-full cursor-pointer bg-white">
                   {preview ? <img className="h-full w-full object-cover rounded-full bg-white" src={preview} width={300} height={300} /> : <CameraIcon className="h-12 w-12 text-gray-600" />}
                   <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} dataTestId="input-files" />
-                </label>
+                </label> */}
 
               </div>
 
@@ -230,16 +205,20 @@ const AccountContainer = () => {
               </a>
             </div>
             <div className="pt-3">
-              <ButtonMyProfile type="" label="Unggahan Saya" icon={<Icon icon="clarity:copy-line" width="26" height="26" />} />
+              <a href="./my-post">
+                <ButtonMyProfile type="" label="Unggahan Saya" icon={<Icon icon="clarity:copy-line" width="26" height="26" />} />
+              </a>
             </div>
             <div className="pt-3">
               <a href="./my-community">
                 <ButtonMyProfile type="" label="Komunitas Saya" icon={<Icon icon="ic:round-groups" width="28" height="28" />} />
               </a>
             </div>
-            <div className="pt-3">
-              <ButtonMyProfile type="" label="Tentang Kami" icon={<Icon icon="cil:wallet" width="26" height="26" />} />
-            </div>
+            <a href="./about-us">
+              <div className="pt-3">
+                <ButtonMyProfile type="" label="Tentang Kami" icon={<Icon icon="icon-park-outline:oval-love-two" width="26" height="26" />} />
+              </div>
+            </a>
             <div className="pt-14">
               <ButtonMyProfileSandi type="" label="Undang Teman" />
             </div>
