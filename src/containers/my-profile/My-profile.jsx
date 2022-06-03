@@ -3,10 +3,12 @@ import { Icon } from '@iconify/react';
 import useAccount from "../account/hooks/useAccount"
 import { MyProfileLayout } from "../../components/layout";
 import useProfile from "./hooks/useProfile";
+import { useEffect, useState } from 'react';
 
 const MyProfileContainer = () => {
     const { profile } = useAccount();
     const { email } = useProfile();
+    const [text, setText] = useState('')
 
     return (
         <AuthProvider>
@@ -32,10 +34,18 @@ const MyProfileContainer = () => {
                                 <div className="text-[#329D9C] px-2 font-semibold text-lg pt-3">Email</div>
                                 <div className="py-3 px-3 border-[#329D9C] text-[#329D9C] text-lg bg-white border-y-2 border-x-2 w-full mb-2 rounded-lg">{email}</div>
                             </div>
-                            <div>
+                            {/* <div>
                                 <div className="text-[#329D9C] px-2 font-semibold text-lg pt-3">Kata Sandi</div>
                                 <div className="py-3 px-3 border-[#329D9C] text-[#329D9C] text-lg bg-white border-y-2 border-x-2 w-full mb-2 rounded-lg">{profile}</div>
                             </div>
+                            <input
+                                            
+                                            type="text"
+                                            value={profile}
+                                            onChange={(e) => {setText(e.target.value)}}
+                                            className="py-3 px-3 border-[#329D9C] text-[#329D9C] text-lg bg-white border-y-2 border-x-2 w-full mb-2 rounded-lg"
+                                        />
+ */}
                         </div>
                     </div>
                 </section>

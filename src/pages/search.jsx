@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { SearchLayout } from '../components/layout';
+import SearchContainer from '../containers/search/Search';
 
 const SearchPage = () => {
   return (
@@ -7,7 +7,7 @@ const SearchPage = () => {
       <Head>
         <title>Search - My Appventure</title>
       </Head>
-      <SearchLayout/>
+      <SearchContainer/>
     </>
   );
 };

@@ -5,7 +5,7 @@ const CommunityPage = () => {
   return (
     <>
       <Head>
-        <title>Community</title>
+        <title>Community - My Appventure</title>
       </Head>
       <CommunityContainer />
     </>

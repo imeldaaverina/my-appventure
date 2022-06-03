@@ -272,12 +272,12 @@ const Upload = (props) => {
   return (
     <AuthProvider>
       <UploadLayout>
-        {console.log (previews)}
+        {console.log(previews)}
         <div className="min-h-screen font-Poppins flex justify-center ">
           <div className="max-w-lg">
             <div className="flex flex-col mt-5 w-96 justify-center items-center">
               <div className="flex justify-center">
-                <Link href="./home">
+                <Link href="./community">
                   <a>
                     <ArrowCircleLeftIcon className="w-10 h-10 " />
                   </a>
@@ -304,16 +304,16 @@ const Upload = (props) => {
                   </div>
                 </div>
                 <form
-                  onSubmit={ async (e)  => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
                     // handleSubmit();
                     const user = JSON.parse(localStorage.getItem("data"));
-    // console.log( user.id );
+                    // console.log( user.id );
 
                     const formData = new FormData(e.target)
                     formData.append("idUser", user.id)
                     // console.log(formData.get("text"))
-                    
+
                     const response = await callAPI({
                       url: "/post/postingan/save",
                       method: "post",
@@ -321,7 +321,7 @@ const Upload = (props) => {
                       //   text:formData.get("text"),
                       //   idUser:user.id
                       // },
-                      data:formData,
+                      data: formData,
                       headers: {
                         Authorization: `Bearer ${user.access_token}`,
                         // "Content-Type":"application/json",
@@ -329,12 +329,12 @@ const Upload = (props) => {
                       },
 
                     });
-                    console.log (response)
+                    console.log(response)
                     if (response.status == 200) {
                       push('/home');
                     }
                     // onSubmit(formData)
-                    console.log ("test")
+                    console.log("test")
                   }}
                   className="mt-1"
                 >
