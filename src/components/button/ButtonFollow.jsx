@@ -40,7 +40,7 @@ const ButtonFollow = () => {
             method: "POST",
             params: {
                 idFollower: user.id,
-                idFollowing: data.content.id,
+                idFollowing: data.content[0].id,
             },
             headers: {
                 Authorization: `Bearer ${user.access_token}`,

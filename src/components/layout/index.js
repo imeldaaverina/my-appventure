@@ -16,5 +16,6 @@ export { default as SearchPenggunaLayout } from './SearchPenggunaLayout';
 export { default as SearchPostinganLayout } from './SearchPostinganLayout';
 export { default as CommunityLayout } from './CommunityLayout';
 export { default as DetailCommunityLayout } from './DetailCommunityLayout';
+export { default as DetailPostLayout } from './DetailPostLayout';
 export { default as ListDestinationLayout } from './ListDestinationLayout';
 

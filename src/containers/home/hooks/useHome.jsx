@@ -30,6 +30,7 @@ const useHome = () => {
 
     const { data } = response;
     localStorage.getItem("access_token", data.data.access_token);
+    console.log('jadi',response.data.data.content)
     setPosts(response.data.data);
   };
 

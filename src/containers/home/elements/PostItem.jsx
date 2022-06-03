@@ -7,9 +7,11 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useListPostDispatcher } from "../../../redux/reducers/listPost";
 import { Carousel } from 'react-responsive-carousel';
+import useHome from "../hooks/useHome";
 
 const PostItem = ({ data, id }) => {
   console.log({ data });
+  const {posts} = useHome();
   const { profile, picture } = useAccount();
   // const { post } = usePostItem();
   // const { handleRemove, handleEdit } = usePostItem();
@@ -48,6 +50,7 @@ const PostItem = ({ data, id }) => {
   // };
 
   return (
+    <a href={`./detail-post?id=${data.id}`}>
     <main className="m-auto flex justify-center font-Poppins">
       <div className=" rounded-2xl flex justify-center items-center flex-col w-96 shadow-xl my-3 border border-[#16737B]">
         {/* <Image
@@ -58,7 +61,7 @@ const PostItem = ({ data, id }) => {
           alt=""
         /> */}
         <div>
-          <img src={data.filePosts.url} className="rounded-t-2xl" alt="gambar-postingan" />
+          {/* <img src={data.filePosts} className="rounded-t-2xl" alt="gambar-postingan" /> */}
         </div>
         <div className=" p-4 flex flex-col w-full rounded-2xl">
           <div className="flex justify-between">
@@ -76,7 +79,7 @@ const PostItem = ({ data, id }) => {
                   <div className="font-normal text-xs">{data.created_date}</div>
                 </div>
                 <div className="flex justify-center items-center">
-                  <ButtonFollow />
+                  {/* <ButtonFollow /> */}
                 </div>
               </div>
             </div>
@@ -98,16 +101,14 @@ const PostItem = ({ data, id }) => {
           <div className="bg-white flex justify-start mt-1">
             <div className="flex justify-center items-center -mx-1 my-3">
               <HeartIcon className="text-red-500 w-6 h-6" />{data.jumlahLike}
-              {/* <span className="text-2xl block w-full">
-            {home.counter}
-          </span>
-          </div> */}
               <ChatIcon className="w-6 h-6 ml-3" />{data.jumlahKomentar}
             </div>
           </div>
         </div>
       </div>
     </main>
+    </a>
+
   );
 };
 export default PostItem;

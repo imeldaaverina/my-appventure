@@ -34,29 +34,10 @@ const ListDestinationContainer = () => {
             <ListDestinationLayout>
                 <section>
 
-                        <div className="pt-10">
-                            <div className="grid grid-cols-3">
-                                {console.log(data)}
-                                {data && data.map((item) => {
-                                    return (
-                                        <>
-                                            <a href={`./detail-community?id=${item.id}`}>
-                                                <div className="flex flex-col justify-center items-center mb-10 border-[#008C96] rounded-md border-2 mx-5">
-                                                    {/* <img src={item.urlFileName} className='rounded-full' width={90} height={90} alt='' />
-                                                    <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1> */}
-                                                    <img src={item.urlFileName} className='rounded-t-md w-28 h-28' width={90} height={90} alt='' />
-                                                    <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1>
-                                                </div>
-                                            </a>
-                                        </>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </ListDestinationLayout>
-        </AuthProvider>
+                    
+            </section>
+        </ListDestinationLayout>
+        </AuthProvider >
     );
 };
 export default ListDestinationContainer;
