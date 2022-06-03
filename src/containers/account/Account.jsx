@@ -11,6 +11,7 @@ import { data } from "autoprefixer";
 import Image from "next/dist/client/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useLoginDispatcher } from "../../redux/reducers/login/slice";
 
 const initialValues = {
   files: null,
@@ -19,6 +20,7 @@ const initialValues = {
 const AccountContainer = () => {
   const { profile } = useAccount();
   const { picture } = useAccount();
+  const user = JSON.parse(localStorage.getItem('data'))
 
   const handleLogout = () => {
     localStorage.removeItem('access_token');
@@ -31,7 +33,6 @@ const AccountContainer = () => {
 
   const { push } = useRouter();
   const { account: { loading }, doAccount } = useAccountDispatcher();
-
 
   const onSubmit = async (values) => {
     try {
@@ -105,7 +106,6 @@ const AccountContainer = () => {
   const [data, setData] = useState();
 
   const fetchData = async () => {
-    const user = JSON.parse(localStorage.getItem('data'))
     try {
       const response = await axios({
         url: `https://myappventure-api.herokuapp.com/api/follow/jumlahfollowing/${user.id}`,
@@ -130,7 +130,6 @@ const AccountContainer = () => {
   const [datas, setDatas] = useState();
 
   const fetchDatas = async () => {
-    const user = JSON.parse(localStorage.getItem('data'))
     try {
       const response = await axios({
         url: `https://myappventure-api.herokuapp.com/api/follow/jumlahfollower/${user.id}`,
@@ -152,6 +151,30 @@ const AccountContainer = () => {
     fetchDatas();
   }, []);
 
+  const [users, setUsers] = useState();
+  const fetchUsers = async () => {
+    try {
+      const response = await axios({
+        url: 'https://myappventure-api.herokuapp.com/api/user/detail/cariuser',
+        method: 'get',
+        params: {
+          page: 0,
+          size: 300,
+          nama: user.username
+        }
+      });
+      console.log("response > ", response.data.data.content);
+      setUsers(response.data.data.content);
+    } catch (error) {
+      console.log("error > ", error);
+    }
+
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   return (
     <AuthProvider>
       <AccountLayout>
@@ -167,7 +190,7 @@ const AccountContainer = () => {
               <div className="">
 
                 <div className="w-40 h-40 m-auto flex justify-center items-center border rounded-full bg-white">
-                  <img src={picture} />
+                  <img src={users.urlFileName} width={160} height={160} />
                 </div>
 
                 {/* <label

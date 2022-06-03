@@ -51,7 +51,7 @@ const FollowingContainer = () => {
 
                             <div className=" rounded-2xl flex justify-center items-center w-96 shadow-xl flex-col my-3 border border-[#16737B]">
                                 <div>
-                                    <img src={item.user.urlFileName1} className="rounded-t-2xl" alt="gambar-postingan" />
+                                    <img src={item.filePosts[0-10]} className="rounded-t-2xl" alt="gambar-postingan" />
                                 </div>
                                 <div className=" p-4 flex flex-col w-full rounded-2xl">
                                     <div className="flex justify-between">

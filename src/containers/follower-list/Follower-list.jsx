@@ -7,6 +7,8 @@ import Image from "next/image"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ButtonFollow } from "../../components/button";
+import { callAPI } from "../../helpers/network";
+import { Searchbar } from "../../components/searchbar";
 
 const FollowingListContainer = () => {
     const { profile } = useAccount();
@@ -36,6 +38,27 @@ const FollowingListContainer = () => {
         fetchData();
     }, []);
 
+    const [loading, setLoading] = useState(false);
+    const [follow, setFollow] = useState();
+
+    const handleOnFollow = async () => {
+        const user = JSON.parse(localStorage.getItem('data'))
+        await callAPI({
+            url: '/follow/',
+            method: "POST",
+            params: {
+                idFollower: user.id,
+                idFollowing: data[0].userFollower.id,
+            },
+            headers: {
+                Authorization: `Bearer ${user.access_token}`,
+            },
+
+        });
+
+        setFollow();
+        setLoading(false);
+    }
     return (
         <AuthProvider>
             <FollowerListLayout>
@@ -53,6 +76,15 @@ const FollowingListContainer = () => {
                         </div>
                         <NavbarPengikut />
 
+                        {data && data.length < 1 && <div className="flex flex-col justify-center text-center mt-12">
+                            <div className="flex justify-center">
+                                <Image src="/Feeling sorry-pana 1.svg" width={250} height={250} alt="" />
+                            </div>
+                            <div className="pt-5 text-lg">
+                                <p>Anda belum diikuti siapapun</p>
+                            </div>
+                        </div>}
+
                         {data && data.map(item => (
                             <div className="flex justify-between items-center pt-5 px-5 font-Poppins">
                                 <div className="flex justify-start items-center">
@@ -64,7 +96,13 @@ const FollowingListContainer = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <ButtonFollow />
+                                    <button
+                                        className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275] focus:bg-[#457275] focus:text-white"
+                                        onClick={handleOnFollow}
+                                    >
+                                        {data? "Ikuti" : "Mengikuti"} {loading && "..."}
+                                    </button>
+                                    {/* <ButtonFollow/> */}
                                 </div>
                             </div>
                         ))}
