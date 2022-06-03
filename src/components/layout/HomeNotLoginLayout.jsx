@@ -6,6 +6,7 @@ import HomeProvider from '../../containers/home/HomeProvider';
 import Image from 'next/image';
 import NavbarPostNotLogin from "./elements/NavbarPostNotLogin";
 import Link from 'next/link';
+import PostsNotLogin from "../../containers/home/elements/PostsNotLogin";
 
 const HomeNotLoginLayout = () => {
 
@@ -16,7 +17,7 @@ const HomeNotLoginLayout = () => {
         <main className="min-h-screen max-w-md mx-auto">
           <NavbarPostNotLogin/>
             <HomeProvider>
-              <Posts />
+              <PostsNotLogin />
             </HomeProvider>
         </main>
       <Footer />

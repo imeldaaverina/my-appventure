@@ -12,6 +12,7 @@ import Image from "next/dist/client/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLoginDispatcher } from "../../redux/reducers/login/slice";
+import { callAPI } from "../../helpers/network";
 
 const initialValues = {
   files: null,

@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
+import { callAPI } from '../../../helpers/network';
+
 const initialState = {
   data: [],
   loading: false,
@@ -140,16 +142,91 @@ export const useHomeDispatcher = () => {
       dispatch(toggleLoadingProfile(false));
     }
   };
+
+  const likeAction = async (idPost) => {
+   const user = JSON.parse(localStorage.getItem('data'))
+    try {
+      const formData = new FormData();
+      formData.append("idUser", user.id);
+      formData.append("idPost", idPost);
+      const response = await callAPI({
+        url : "/like/",
+        method: "POST",
+        data: formData,
+        headers: {
+          Authorization: `Bearer ${user.access_token}`      
+        },
+      });
+
+      if (response.data.status === "404") {
+        alert(`Failed to like post`);
+        return;
+      }
+      
+    } catch (error) {
+      console.log(error)
+      alert(`Failed to unlike post`);
+    }
+  };
+
+
+  const follow = async (idFollowing) => {
+    const user = JSON.parse(localStorage.getItem('data'))
+     try {
+       const formData = new FormData();
+       formData.append("idUser", user.id);
+       formData.append("idFollowing", idFollowing);
+       const response = await callAPI({
+         url : "/follow/",
+         method: "POST",
+         data: formData,
+         headers: {
+           Authorization: `Bearer ${user.access_token}`      
+         },
+       });
+ 
+       if (response.data.status === "404") {
+         alert(`Failed to follow post`);
+         return;
+       }
+       
+     } catch (error) {
+       console.log(error)
+       alert(`Failed to unfollow post`);
+     }
+   };
+
+  const deletePost = async ({ idPost }) => {
+    try {
+      const response = await callAPI({
+        url: `/post/delete/${postId}`,
+        method: "DELETE",
+      });
+
+      if (response.data.status === "404") {
+        // toast("Failed to delete post");
+        return;
+      }
+      refreshPosts();
+    } catch (error) {
+      // toast("Failed to delete post");
+    }
+  };
+
   return {
-    useHomeDispatcher,
+   
     // home,
     // makePosts,
     // makeLoading,
     // makeIncrement,
+    likeAction,
+    deletePost,
     home,
     // doHome,
     fetchPosts,
     fetchProfile,
+    follow,
+    // unfollow,
   };
 };
 export default slices.reducer;

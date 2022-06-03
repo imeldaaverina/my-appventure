@@ -41,6 +41,24 @@ const DetailPostContainer = () => {
         }
     };
 
+    const fetchListKomentar = async () => {
+        try {
+            const response = await axios({
+                url: 'https://myappventure-api.herokuapp.com/api/komentar/list',
+                method: 'get',
+                params: {
+                    idPost: id,
+                    page: 0,
+                    size: 100,
+                }
+            });
+            console.log("response > ", response.data.Data.content);
+            setlistKomentar(response.data.Data.content);
+        } catch (error) {
+            console.log("error > ", error);
+        }
+    };
+
     const doKomentar = async (payload) => {
         const user = JSON.parse(localStorage.getItem('data'))
         await callAPI({
@@ -61,31 +79,12 @@ const DetailPostContainer = () => {
                 textKomentar: values.textKomentar,
             };
             await doKomentar(payload);
+            await fetchListKomentar();
         } catch (error) {
             alert(error);
 
         }
     }
-
-    const fetchListKomentar = async () => {
-        try {
-
-            const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/komentar/list',
-                method: 'get',
-                params: {
-                    idPost: id,
-                    page: 0,
-                    size: 100,
-                }
-            });
-            console.log("response > ", response.data.Data.content);
-            setlistKomentar(response.data.Data.content);
-        } catch (error) {
-            console.log("error > ", error);
-        }
-    };
-
 
     useEffect(() => {
         if (id) {

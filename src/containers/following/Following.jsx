@@ -51,7 +51,7 @@ const FollowingContainer = () => {
 
                             <div className=" rounded-2xl flex justify-center items-center w-96 shadow-xl flex-col my-3 border border-[#16737B]">
                                 <div>
-                                    <img src={item.filePosts[0-10]} className="rounded-t-2xl" alt="gambar-postingan" />
+                                    <img src={item.filePosts[0 - 10]} className="rounded-t-2xl" alt="gambar-postingan" />
                                 </div>
                                 <div className=" p-4 flex flex-col w-full rounded-2xl">
                                     <div className="flex justify-between">
@@ -90,12 +90,12 @@ const FollowingContainer = () => {
                                     <div className="bg-white flex justify-start mt-1">
                                         <div className="flex justify-center items-center -mx-1 my-3">
                                             <HeartIcon className="text-red-500 w-6 h-6" />{item.jumlahLike}
-                                            {/* <span className="text-2xl block w-full">
-            {home.counter}
-          </span>
-          </div> */}
-                                            <ChatIcon className="w-6 h-6 ml-3" />{item.jumlahKomentar}
-                                        </div>
+                                            
+                                            <a href={`./detail-post?id=${data.id}`}>
+                                                <div className="flex flex-row">
+                                                    <ChatIcon className="w-6 h-6 ml-3" />{data.jumlahKomentar}
+                                                </div>
+                                            </a>                                        </div>
 
                                     </div>
                                 </div>
