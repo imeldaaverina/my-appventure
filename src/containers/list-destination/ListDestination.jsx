@@ -53,7 +53,7 @@ const ListDestinationContainer = () => {
                                 })}
                             </div>
                         </div>
-                    </div>
+                   
                 </section>
             </ListDestinationLayout>
         </AuthProvider>

@@ -7,7 +7,7 @@ import { useFormik, getIn } from "formik";
 import { CameraIcon } from '@heroicons/react/outline';
 import { useRouter } from "next/router";
 import useAccount from "./hooks/useAccount"
-// import { data } from "autoprefixer";
+import { data } from "autoprefixer";
 import Image from "next/dist/client/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -18,7 +18,7 @@ const initialValues = {
   files: null,
 };
 
-const AccountContainer = ({data}) => {
+const AccountContainer = () => {
   const { profile } = useAccount();
   const { picture } = useAccount();
   const user = JSON.parse(localStorage.getItem('data'))
