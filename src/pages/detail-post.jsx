@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
-import DetailpostContainer from '../containers/detail-post/Detail-post'
+import DetailPostContainer from '../containers/detail-post/Detail-post'
 const DetailPostPage = () => {
 
 useEffect(() => {
