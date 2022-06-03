@@ -1,17 +1,14 @@
 import { useState } from "react"; 
 
-const ButtonFollow = ({ 
+const ButtonFollowed = ({ 
     type, 
-    label,
-   
+    label, 
 }) => { 
-    // const [follow, setFollow] = useState(false);
     return ( 
     <button 
        type={type}
-      
-       className="flex justify-center  bg-transparent border-2 border-[#457275] text-[#457275] text-xs font-light rounded p-2 w-24 h-18 py-1">
-       {label} 
+       className="flex justify-center bg-[#457275]  py-1 h-18   border-2 border-[#457275] text-white p-2 text-xs font-light rounded w-24 h-18">
+      {label}
     </button> 
     
     ) 
@@ -35,4 +32,4 @@ const ButtonFollow = ({
 
 
  
-export default ButtonFollow;
+export default ButtonFollowed;

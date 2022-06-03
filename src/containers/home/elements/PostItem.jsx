@@ -2,25 +2,98 @@
 import useAccount from "../../account/hooks/useAccount";
 import usePostItem from "../hooks/usePostItem";
 import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
-import { ButtonFollow } from "../../../components/button";
+import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
+import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
+import { ButtonFollow, Like, ButtonFollowed } from "../../../components/button";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useListPostDispatcher } from "../../../redux/reducers/listPost";
 import { Carousel } from 'react-responsive-carousel';
+import {useHomeDispatcher} from "../../../redux/reducers/home";
+import { callAPI } from "../../../helpers/network";
+import { useHomeProvider } from "../HomeProvider";
+import { useFormik, getIn } from "formik";
 
-const PostItem = ({ data, id }) => {
+const PostItem = ({ data }) => {
   console.log({ data });
   const { profile, picture } = useAccount();
   // const { post } = usePostItem();
   // const { handleRemove, handleEdit } = usePostItem();
 
   // const postData = "test";
+  const  {likeAction, follow}  = useHomeDispatcher();
 
+  const { posts, loadPosts } = useHomeProvider();
+  const handleLikeButton = async (detailPost) =>{
+    console.log(detailPost)
+    try{
+      await likeAction(detailPost.id);
+      await loadPosts();
+    }catch(e){
+      
+    }
+    // alert("test")
+  }
+  const user = JSON.parse(localStorage.getItem('data'))
+  const handleUnlikeButton = async (detailPost) =>{
+    console.log(detailPost)
+    try{
+      await likeAction(detailPost.id);
+      await loadPosts();
+    }catch(e){
+      
+    }
+    // alert("test")
+  }
+  // const onSubmit = async () =>{
+  //   console.log("tescuy")
+
+    const handlefollow = async (idFollower) => {
+      
+      const user = JSON.parse(localStorage.getItem('data'))
+       try {
+         const formData = new FormData();
+         formData.append("idFollowing", 170);
+         formData.append("idFollower",  user.id);
+         const response = await callAPI({
+           url : `/follow/`,
+           method: "POST",
+           data: formData,
+           headers: {
+             Authorization: `Bearer ${user.access_token}`      
+           },
+         });
+   
+         if (response.data.status === "404") {
+           alert(`Failed to follow post`);
+           return;
+         }
+         
+       } catch (error) {
+         console.log(error)
+         alert(`Failed to unfollow post`);
+       }
+     };
+    // try{
+    //   await follow(followuser.id);
+    //   await loadPosts();
+    // }catch(e){
+      
+    // }
+    // alert("test")
+  // }
+
+  
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
-
+ 
+  // const filePosts = callAPI({
+  //   url: `/post/list/${data.content.filePosts}`,
+  //   method: "get"
+  // });
+ 
   // const {
   //   listPost: { posts },
   //   loadPosts,
@@ -46,19 +119,41 @@ const PostItem = ({ data, id }) => {
   //     ))
   //   );
   // };
-
+  // const {
+  //   handleChange,
+  //   handleBlur,
+  //   handleSubmit,
+  //   errors,
+  //   touched,
+  //   setFieldValue,
+  // } = useFormik({
+  //   // initialValues,
+  //   // validationSchema,
+  //   onSubmit}
+  // );
   return (
     <main className="m-auto flex justify-center font-Poppins">
       <div className=" rounded-2xl flex justify-center items-center flex-col w-96 shadow-xl my-3 border border-[#16737B]">
-        {/* <Image
-          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${picture}`}
-          className="w-full h-full rounded-t-2xl"
-          width={40}
-          height={40}
-          alt=""
-        /> */}
+      {/* <Carousel>
+          <div className='flex justify-around'>
+          {data && data.map((item) => {
+              return (
+            <img
+              src={`${data.filePosts}`}
+              className="w-full h-full rounded-t-2xl"
+              width={500}
+              height={320}
+              alt=""
+            />
+             )
+          })}  
+            </div>
+            </Carousel> */}
         <div>
-          <img src={data.filePosts.url} className="rounded-t-2xl" alt="gambar-postingan" />
+        
+          <img src={`${data.filePosts.url}`} className="rounded-t-2xl" alt="gambar-postingan" />
+          
+          {/* <img src={data.filePosts.url} className="rounded-t-2xl" alt="gambar" />  */}
         </div>
         <div className=" p-4 flex flex-col w-full rounded-2xl">
           <div className="flex justify-between">
@@ -76,7 +171,22 @@ const PostItem = ({ data, id }) => {
                   <div className="font-normal text-xs">{data.created_date}</div>
                 </div>
                 <div className="flex justify-center items-center">
-                  <ButtonFollow />
+{/*                   
+                  <ButtonFollow type="submit" label='Ikuti' />
+                  <ButtonFollowed type="submit" label='Mengikuti' /> */}
+                
+                  {/* {
+                data.followedBy.find((follow) => follow.user.id === user.id) 
+                data ? ( */}
+                  
+  
+                    <button  label='Ikuti' onClick={()=> handlefollow() }>Follow</button>
+                 
+                    
+              {/* //   ) : (
+              //     <ButtonFollowed type="submit" label='Mengikuti' onClick={()=> handlefollow} />
+              //   )
+              // } */}
                 </div>
               </div>
             </div>
@@ -97,7 +207,25 @@ const PostItem = ({ data, id }) => {
 
           <div className="bg-white flex justify-start mt-1">
             <div className="flex justify-center items-center -mx-1 my-3">
-              <HeartIcon className="text-red-500 w-6 h-6" />{data.jumlahLike}
+              {/* <HeartIcon className="text-red-500 w-6 h-6" /> */}
+              
+              {/* <Like/> */}
+
+              {
+                data.likedBy.find((like) => like.user.id === user.id) ? (
+               <LikeSolidIcon
+                    className="text-red-500 w-6 h-6"
+                    onClick={() => handleLikeButton(data)}
+                  />
+                ) : (
+                  <LikeOutlineIcon
+                  className="text-red-500 w-6 h-6"
+                  onClick={() => handleUnlikeButton(data)}
+                  />
+                )
+              }
+              
+              {data.jumlahLike}
               {/* <span className="text-2xl block w-full">
             {home.counter}
           </span>
