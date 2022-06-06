@@ -10,6 +10,12 @@ import { SearchIcon } from "@heroicons/react/outline";
 import { ButtonFollow } from "../../components/button";
 import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
 import { array } from "yup/lib/locale";
+import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
+import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
+
+import { useHomeDispatcher } from "../../redux/reducers/home";
+import { callAPI } from "../../helpers/network";
+import { useHomeProvider } from "../home/HomeProvider";
 
 const SearchPostinganContainer = () => {
     const [isReadMore, setIsReadMore] = useState(true);
@@ -46,6 +52,31 @@ const SearchPostinganContainer = () => {
 
         searchUser()
     }, [query]);
+    const { likeAction, follow } = useHomeDispatcher();
+    const { posts, loadPosts } = useHomeProvider();
+    const user = JSON.parse(localStorage.getItem('data'))
+
+    const handleLikeButton = async (detailPost) => {
+        console.log(detailPost)
+        try {
+            await likeAction(detailPost.id);
+            await loadPosts();
+        } catch (e) {
+
+        }
+        // alert("test")
+    }
+
+    const handleUnlikeButton = async (detailPost) => {
+        console.log(detailPost)
+        try {
+            await likeAction(detailPost.id);
+            await loadPosts();
+        } catch (e) {
+
+        }
+        // alert("test")
+    };
 
     return (
         <AuthProvider>
@@ -118,11 +149,19 @@ const SearchPostinganContainer = () => {
 
                                     <div className="bg-white flex justify-start mt-1">
                                         <div className="flex justify-center items-center -mx-1 my-3">
-                                            <HeartIcon className="text-red-500 w-6 h-6" />{search.jumlahLike}
-                                            {/* <span className="text-2xl block w-full">
-        {home.counter}
-      </span>
-      </div> */}
+                                            {
+                                                search.likedBy.find((like) => like.user.id === user.id) ? (
+                                                    <LikeSolidIcon
+                                                        className="text-red-500 w-6 h-6"
+                                                        onClick={() => handleLikeButton(search)}
+                                                    />
+                                                ) : (
+                                                    <LikeOutlineIcon
+                                                        className="text-red-500 w-6 h-6"
+                                                        onClick={() => handleUnlikeButton(search)}
+                                                    />
+                                                )
+                                            }{search.jumlahLike}
                                             <ChatIcon className="w-6 h-6 ml-3" />{search.jumlahKomentar}
                                         </div>
 

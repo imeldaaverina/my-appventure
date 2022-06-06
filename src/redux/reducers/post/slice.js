@@ -53,13 +53,13 @@ export const useCreatePostDispatcher = () => {
 
   const setLoading = (loading) => dispatch(toggleLoading(loading));
 
-  const doSubmit = async (values) => {
+  const doSubmit = async (formValues) => {
     try {
       const formData = new FormData();
-      formData.append("post", values.post);
-      formData.append("files[]", values.files);
+      formData.append("post", formValues.post);
+      formData.append("file", formValues.files);
       const { data } = await axios({
-        url: "post/addpost",
+        url: "/post/postingan/save",
         method: "post",
         data: formData,
         // headers: {

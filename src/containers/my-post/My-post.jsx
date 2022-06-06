@@ -6,13 +6,22 @@ import { MyPostLayout } from "../../components/layout";
 import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
 import Image from "next/image"
 import { useListCommunityDispatcher } from "../../redux/reducers/listCommunity/slice";
+import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
+import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
 
-const MyPostContainer = () => {
+import { useHomeDispatcher } from "../../redux/reducers/home";
+import { callAPI } from "../../helpers/network";
+import { useHomeProvider } from "../home/HomeProvider";
+
+
+const MyPostContainer =  () => {
+
     const [isReadMore, setIsReadMore] = useState(true);
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
     };
 
+   
     const [data, setData] = useState();
 
     const fetchData = async () => {
@@ -35,11 +44,40 @@ const MyPostContainer = () => {
         } catch (error) {
             console.log("error > ", error);
         }
+
+        
     };
 
     useEffect(() => {
         fetchData();
     }, []);
+
+    const { likeAction, follow } = useHomeDispatcher();
+    const { posts, loadPosts } = useHomeProvider();
+    const user = JSON.parse(localStorage.getItem('data'))
+
+    const handleLikeButton = async (detailPost) => {
+        console.log(detailPost)
+        try {
+            await likeAction(detailPost.id);
+            await loadPosts();
+        } catch (e) {
+
+        }
+        // alert("test")
+    }
+
+    const handleUnlikeButton = async (detailPost) => {
+        console.log(detailPost)
+        try {
+            await likeAction(detailPost.id);
+            await loadPosts();
+        } catch (e) {
+
+        }
+        // alert("test")
+    }
+
 
     return (
         <AuthProvider>
@@ -100,11 +138,21 @@ const MyPostContainer = () => {
 
                                                 <div className="bg-white flex justify-start mt-1">
                                                     <div className="flex justify-center items-center -mx-1 my-3">
-                                                        <HeartIcon className="text-red-500 w-6 h-6" />{item.jumlahLike}
-                                                        {/* <span className="text-2xl block w-full">
-            {home.counter}
-          </span>
-          </div> */}
+                                                        {
+                                                            item.likedBy.find((like) => like.user.id === user.id) ? (
+                                                                <LikeSolidIcon
+                                                                    className="text-red-500 w-6 h-6"
+                                                                    onClick={() => handleLikeButton(item)}
+                                                                />
+                                                            ) : (
+                                                                <LikeOutlineIcon
+                                                                    className="text-red-500 w-6 h-6"
+                                                                    onClick={() => handleUnlikeButton(item)}
+                                                                />
+                                                            )
+                                                        }
+
+                                                        {item.jumlahLike}
                                                         <ChatIcon className="w-6 h-6 ml-3" />{item.jumlahKomentar}
                                                     </div>
 

@@ -16,8 +16,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { callAPI } from "../../helpers/network";
 import { getJwt, getUser } from "../../helpers/auth";
 import { useRouter } from "next/router";
-import { useCreatePostDispatcher } from '../../redux/reducers/post';
-
 import { Icon } from "@iconify/react";
 import {
   HeartIcon,
@@ -55,13 +53,11 @@ const TextAreaInput = styled.textarea`
   height: ${(props) => props.idealHeight || "160px"};
 `;
 
-const Upload = () => {
-  const { createPost: { loading }, doPost } = useCreatePostDispatcher();
-
+const Upload = (props) => {
   const { profile } = useAccount();
   const { picture } = useAccount();
 
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [previews, setPreviews] = useState();
   const { push } = useRouter();
   // const {
@@ -80,32 +76,26 @@ const Upload = () => {
     const user = JSON.parse(localStorage.getItem("data"));
     console.log({ user });
 
-    try {
-      const payload = {
-        file: formValues.files,
-        text: formValues.text,
-      };
-      await doPost(payload);
-      window.location.href = "./home";
-    } catch (error) {
-      alert(error);
-    }
-    setLoading(true);
-
-    //upload profil picture
     const formData = new FormData();
-    if (formValues.files && formValues.files.length > 0) {
-      for (let i = 0; i < formValues.files.length; i++) {
+
+    
+  
+    if (formValues.file && formValues.file.length > 0) {
+      for (let i = 0; i < formValues.file.length; i++) {
         formData.append(`file${i + 1}`, formValues.files[i]);
       }
       try {
         const formData = new FormData();
 
+        const payload = {
+          file: formValues.files,
+          text: formValues.text,
+        };
 
-        if (formValues.files && formValues.files.length > 0) {
+        if (formValues.file && formValues.file.length > 0) {
           // formData.append("file1", formValues.files[0]);
-          for (let i = 0; i < formValues.files.length; i++) {
-            formData.append(`file${i + 1}`, formValues.files[i]);
+          for (let i = 0; i < formValues.file.length; i++) {
+            formData.append(`file${i + 1}`, formValues.file[i]);
           }
           formData.append("idUser", user.id);
           formData.append("text", formValues.post);
@@ -124,7 +114,7 @@ const Upload = () => {
             Authorization: `Bearer ${user.access_token}`,
           },
         });
-    
+        await doCommunity(payload);
         if (response.status == 200) {
           push('/home');
         }
@@ -137,7 +127,66 @@ const Upload = () => {
 
     }
 
-  
+    // try {
+    //   const formData = new FormData();
+
+    //   if (formValues.files && formValues.files.length > 0) {
+    //     formData.append("file1", formValues.files[0]);
+    //     formData.append("idUser", user.id);
+    //     formData.append("text", formValues.post);
+    //   } else {
+
+    //     formData.append("idUser", user.id);
+    //     formData.append("text", formValues.post);
+    //   }
+
+
+    //   const response = await callAPI({
+    //     url: "/post/addpost",
+    //     method: "post",
+    //     data: formData,
+    //     headers: {
+    //       Authorization: `Bearer ${user.access_token}`,
+    //     },
+    //   });
+
+    //   if (response.status == 200) {
+    //     push('/home');
+    //   }
+    // } catch (error) {
+    //   alert(error);
+    //   console.log({ error });
+    // } finally {
+    //   setLoading(false);
+    // }
+
+    // first upload
+
+    // const fileUrl = upload.data[0].url;
+    // const { post } = formValues;
+    // const payload = {
+    //   data: {
+    //     post,
+    //     // files:`${file1}`,
+    //     // files: `${fileUrl}`,
+    //     photo: `${fileUrl}`,
+    //     isPublish: true,
+    //     postedBy: `${getUser().username}`,
+    //   },
+    // };
+    // const submitPost = await callAPI({
+    //   url: "/post/addpost",
+    //   method: "post",
+    //   data: payload,
+    //   headers: {
+    //     Authorization: `Bearer ${getJwt()}`,
+    //   },
+    // });
+    // if (submitPost.status === 200) {
+    //   setLoading(false);
+    //   alert("Create posts success!");
+    //   push("/");
+    // }
   };
 
   const {
@@ -155,11 +204,11 @@ const Upload = () => {
   });
 
   const handleChangeFiles = (e) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
+    const file = e.target.file;
+    if (file && file.length > 0) {
       const filePreviews = [];
-      for (let i = 0; i < files.length; i++) {
-        filePreviews.push(files[i]);
+      for (let i = 0; i < file.length; i++) {
+        filePreviews.push(file[i]);
       }
 
       setPreviews(filePreviews);
