@@ -64,43 +64,19 @@ const Upload = () => {
   // const [loading, setLoading] = useState(false);
   const [previews, setPreviews] = useState();
   const { push } = useRouter();
-  // const {
-  //     makeLoading: { loading },
-  //     makePost,
-  //   } = useUploadDispatcher();
-
-  // const {push} = useRouter();
-
-  // const onSubmit = async (values) => {
-  //   await doSubmit(values);
-  // };
+  
   const onSubmit = async (formValues) => {
     setLoading(true);
-    console.log(formValues);
     const user = JSON.parse(localStorage.getItem("data"));
-    console.log({ user });
 
     try {
-      const payload = {
-        file: formValues.files,
-        text: formValues.text,
-      };
-      await doPost(payload);
-      window.location.href = "./home";
-    } catch (error) {
-      alert(error);
-    }
-    setLoading(true);
-
-    //upload profil picture
+       //upload profil picture
     const formData = new FormData();
     if (formValues.files && formValues.files.length > 0) {
       for (let i = 0; i < formValues.files.length; i++) {
         formData.append(`file${i + 1}`, formValues.files[i]);
       }
-      try {
-        const formData = new FormData();
-
+      
 
         if (formValues.files && formValues.files.length > 0) {
           // formData.append("file1", formValues.files[0]);
@@ -128,14 +104,18 @@ const Upload = () => {
         if (response.status == 200) {
           push('/home');
         }
-      } catch (error) {
-        alert(error);
-        console.log({ error });
-      } finally {
-        setLoading(false);
-      }
 
     }
+
+    } catch (error) {
+      alert(error);
+      setLoading(false);
+
+    }
+
+    
+
+   
 
   
   };
