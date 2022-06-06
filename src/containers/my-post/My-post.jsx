@@ -15,7 +15,7 @@ import { useHomeProvider } from "../home/HomeProvider";
 
 
 const MyPostContainer =  () => {
-
+    const user = localStorage.getItem('data')
     const [isReadMore, setIsReadMore] = useState(true);
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
@@ -25,7 +25,8 @@ const MyPostContainer =  () => {
     const [data, setData] = useState();
 
     const fetchData = async () => {
-        const user = JSON.parse(localStorage.getItem('data'))
+        const user = localStorage.getItem('data')
+    // const user = JSON.parse(datalocal)
         try {
             const response = await axios({
                 url: `https://myappventure-api.herokuapp.com/api/post/list`,
@@ -54,7 +55,8 @@ const MyPostContainer =  () => {
 
     const { likeAction, follow } = useHomeDispatcher();
     const { posts, loadPosts } = useHomeProvider();
-    const user = JSON.parse(localStorage.getItem('data'))
+   
+    // const user = JSON.parse(datalocal)
 
     const handleLikeButton = async (detailPost) => {
         console.log(detailPost)

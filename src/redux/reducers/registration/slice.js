@@ -22,13 +22,34 @@ export const useRegistrationDispatcher = () => {
   const dispatch = useDispatch();
   const doRegistration = async (values) => {
     dispatch(toggleLoading(true));
+    const formData = new FormData();
+    console.log(values)
+     if (values.file) {
+          // formData.append("file1", values.files[0]);
+          
+          formData.append('file', values.file);
+          
+          formData.append("username", values.username);
+          formData.append("email", values.email);
+          formData.append("password", values.password);
+        } else {
+          formData.append("username", values.username);
+          formData.append("email", values.email);
+          formData.append("password", values.password);
+        }
     const response = await callAPI({
       url: '/user/register',
       method: 'POST',
-      data: values,
+      data: formData,
     });
     const { data } = response;
-    localStorage.setItem('access_token', data.access_token);
+    console.log(data.data.data)
+    localStorage.setItem("access_token", data.data.access_token);
+    localStorage.setItem("data", JSON.stringify(data.data));
+    localStorage.setItem("username", data.data.data.nama);
+    localStorage.setItem("picture", data.data.data.urlFileName);
+    localStorage.setItem("email", data.data.data.username);
+    localStorage.setItem("id", data.data.data.id);
     dispatch(toggleLoading(false));
   };
   return {

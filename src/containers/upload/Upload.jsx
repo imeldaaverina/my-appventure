@@ -56,33 +56,35 @@ const TextAreaInput = styled.textarea`
 `;
 
 const Upload = () => {
-  const { createPost: { loading }, doPost } = useCreatePostDispatcher();
+  const [loading, setLoading] = useState(false);
+  
 
-  const { profile } = useAccount();
-  const { picture } = useAccount();
+  const { profile, picture } = useAccount();
+ 
 
   // const [loading, setLoading] = useState(false);
   const [previews, setPreviews] = useState();
   const { push } = useRouter();
   
   const onSubmit = async (formValues) => {
+    console.log(formValues)
     setLoading(true);
     const user = JSON.parse(localStorage.getItem("data"));
 
     try {
        //upload profil picture
     const formData = new FormData();
-     if (formValues.files && formValues.files.length > 0) {
+     if (formValues.file && formValues.file.length > 0) {
           // formData.append("file1", formValues.files[0]);
-          for (let i = 0; i < formValues.files.length; i++) {
-            formData.append(`file${i + 1}`, formValues.files[i]);
+          for (let i = 0; i < formValues.file.length; i++) {
+            formData.append(`file${i + 1}`, formValues.file[i]);
           }
           formData.append("idUser", user.id);
-          formData.append("text", formValues.post);
+          formData.append("text", formValues.text);
         } else {
 
           formData.append("idUser", user.id);
-          formData.append("text", formValues.post);
+          formData.append("text", formValues.text);
         }
 
 
@@ -94,21 +96,18 @@ const Upload = () => {
             Authorization: `Bearer ${user.access_token}`,
           },
         });
-    
-        if (response.status == 200) {
-          push('/home');
-        }
+    console.log(response)
+        //  if (response.status == 200) {
+        //    push('/home');
+        //  }
+   
 
     } catch (error) {
+      console.log("error > ", error);
       alert(error);
       setLoading(false);
 
     }
-
-    
-
-   
-
   
   };
 
@@ -123,7 +122,7 @@ const Upload = () => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit
   });
 
   const handleChangeFiles = (e) => {
@@ -201,7 +200,8 @@ const Upload = () => {
   return (
     <AuthProvider>
       <UploadLayout>
-        {console.log (previews)}
+        
+        {/* {console.log (previews)} */}
         <div className="min-h-screen font-Poppins flex justify-center ">
           <div className="max-w-lg">
             <div className="flex flex-col mt-5 w-96 justify-center items-center">
@@ -233,38 +233,7 @@ const Upload = () => {
                   </div>
                 </div>
                 <form
-                  onSubmit={ async (e)  => {
-                    e.preventDefault();
-                    // handleSubmit();
-                    const user = JSON.parse(localStorage.getItem("data"));
-    // console.log( user.id );
-
-                    const formData = new FormData(e.target)
-                    formData.append("idUser", user.id)
-                    // console.log(formData.get("text"))
-                    
-                    const response = await callAPI({
-                      url: "/post/postingan/save",
-                      method: "post",
-                      // data: {
-                      //   text:formData.get("text"),
-                      //   idUser:user.id
-                      // },
-                      data:formData,
-                      headers: {
-                        Authorization: `Bearer ${user.access_token}`,
-                        // "Content-Type":"application/json",
-                        // Accept:"application/json"
-                      },
-
-                    });
-                    console.log (response)
-                    if (response.status == 200) {
-                      push('/home');
-                    }
-                    // onSubmit(formData)
-                    console.log ("test")
-                  }}
+                onSubmit={handleSubmit}
                   className="mt-1"
                 >
                   <div className="rounded-lg flex flex-col justify-start items-start">
@@ -284,8 +253,8 @@ const Upload = () => {
                         onBlur={handleBlur}
                         data-testid={"input-caption"}
                         // ref={textareaRef}
-                        value={values.post}
-                        onChange={handleChange("post")}
+                        
+                        onChange={handleChange}
                         ref={textAreaRef}
                         idealHeight={idealHeight.current + "px"}
                       />
