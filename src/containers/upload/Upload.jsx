@@ -72,13 +72,7 @@ const Upload = () => {
     try {
        //upload profil picture
     const formData = new FormData();
-    if (formValues.files && formValues.files.length > 0) {
-      for (let i = 0; i < formValues.files.length; i++) {
-        formData.append(`file${i + 1}`, formValues.files[i]);
-      }
-      
-
-        if (formValues.files && formValues.files.length > 0) {
+     if (formValues.files && formValues.files.length > 0) {
           // formData.append("file1", formValues.files[0]);
           for (let i = 0; i < formValues.files.length; i++) {
             formData.append(`file${i + 1}`, formValues.files[i]);
@@ -104,8 +98,6 @@ const Upload = () => {
         if (response.status == 200) {
           push('/home');
         }
-
-    }
 
     } catch (error) {
       alert(error);
