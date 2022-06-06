@@ -19,9 +19,34 @@ const ListDestinationContainer = () => {
     const [data, setData] = useState();
 
     const fetchData = async () => {
+        const user = localStorage.getItem('data')
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
+                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list',
+                method: 'get',
+                params: {
+                    page: 0,
+                    size: 30,
+                    nama: '',
+                },
+                headers: {
+                    Authorization: `Bearer ${user.access_token}`,
+                },
+            });
+            console.log("response > ", response.data.data.content);
+            setData(response.data.data.content);
+        } catch (error) {
+            console.log("error > ", error);
+        }
+    };
+
+    const [bali, setBali] = useState();
+
+    const fetchBali = async () => {
+        const user = localStorage.getItem('data')
+        try {
+            const response = await axios({
+                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/bali',
                 method: 'get',
                 params: {
                     page: 1,
@@ -29,7 +54,7 @@ const ListDestinationContainer = () => {
                 }
             });
             console.log("response > ", response.data);
-            setData(response.data.data.content.reverse());
+            setData(response.data.data.content);
         } catch (error) {
             console.log("error > ", error);
         }
@@ -64,7 +89,7 @@ const ListDestinationContainer = () => {
 
                                                 <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2  h-16">
-                                                 <h1 className="text-[#3D3D3D] font-medium text-md">{item.namaKomunitas}</h1>
+                                                 <h1 className="text-[#3D3D3D] font-medium text-md">{item.nama}</h1>
                                                 </div>
                                                 
                                             </div>
