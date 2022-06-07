@@ -5,18 +5,31 @@ import axios from "axios";
 import { DetailPostLayout } from "../../components/layout";
 import { useRouter } from 'next/router';
 import { HeartIcon, ChatIcon } from "@heroicons/react/outline";
-import useAccount from "../account/hooks/useAccount";
 import { callAPI } from "../../helpers/network";
 import { Input } from "../../components/input";
 import { useFormik } from "formik";
+import * as Yup from 'yup';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
+dayjs.extend(relativeTime);
+
+const validationSchema = Yup.object({
+    textKomentar: Yup.string()
+});
 
 const initialValues = {
-    textKomentar: ''
+    textKomentar: "",
 };
 
 const DetailPostContainer = () => {
     const { query } = useRouter();
-    const { picture } = useAccount();
     const [data, setData] = useState();
     const [PostKomentar, setPostKomentar] = useState();
     const [listKomentar, setlistKomentar] = useState();
@@ -73,7 +86,6 @@ const DetailPostContainer = () => {
     };
 
     const onSubmit = async (values) => {
-
         try {
             const payload = {
                 textKomentar: values.textKomentar,
@@ -89,7 +101,6 @@ const DetailPostContainer = () => {
     useEffect(() => {
         if (id) {
             fetchData();
-            onSubmit();
             fetchListKomentar();
         }
     }, [id]);
@@ -98,9 +109,9 @@ const DetailPostContainer = () => {
         handleChange,
         handleBlur,
         handleSubmit,
-        touched,
     } = useFormik({
         initialValues,
+        validationSchema,
         onSubmit,
     });
 
@@ -116,65 +127,75 @@ const DetailPostContainer = () => {
                             </a>
                         </div>
 
-                        <div>
-                            {/* <img className="rounded-xl" src="./background.jpg"></img> */}
-                            <img className="rounded-xl" src={picture}></img>
+                        <Swiper
+                            modules={[Navigation, Pagination, Scrollbar, A11y]}
+                            spaceBetween={50}
+                            slidesPerView={1}
+                            scrollbar={{ draggable: true }}
+                            onSwiper={(swiper) => console.log(swiper)}
+                            onSlideChange={() => console.log('slide change')}
+                        >
 
-                        </div>
-                        <div>
-                            <div className=" p-4 flex flex-col w-full rounded-2xl">
-                                <div className="flex justify-between">
-                                    <div className="flex w-full">
-                                        <img
-                                            // src={data.user.urlFileName}
-                                            src='./rahmah.svg'
-                                            className="rounded-full w-14 h-14"
-                                            width={50}
-                                            height={50}
-                                            alt=""
-                                        />
-                                        <div className="pr-3 w-96 flex justify-between">
-                                            <div className="flex flex-col ml-4">
-                                                {/* <div className="font-medium text-sm mt-1">{data.user.nama}</div>
-                                                <div className="font-normal text-xs">{data.created_date}</div> */}
-                                                <div className="font-medium text-base mt-1">rahmahnr15</div>
-                                                <div className="font-normal text-sm">Baru Saja</div>
+                            {data && data.filePosts.map((fileItem) => {
+                                return (
+                                    <SwiperSlide className="mb-10 flex justify-center">
+                                        <img src={fileItem.url} className="rounded-xl w-96 h-72" alt="gambar-postingan" />
+                                    </SwiperSlide>
+                                )
+                            }
+                            )}
+                        </Swiper>
+
+                        {data && data.user && (
+                            <div>
+                                <div className=" p-4 flex flex-col w-full rounded-2xl">
+                                    <div className="flex justify-between">
+                                        <div className="flex w-full">
+                                            <img
+                                                src={data.user.urlFileName}
+                                                className="rounded-full w-14 h-14"
+                                                width={50}
+                                                height={50}
+                                                alt=""
+                                            />
+                                            <div className="pr-3 w-96 flex justify-between">
+                                                <div className="flex flex-col ml-4">
+                                                    <div className="font-medium text-base mt-1">{data.user.nama}</div>
+                                                    <div className="font-normal text-sm">{dayjs(data.created_date).fromNow()}{" "}</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="flex justify-center items-center mt-6">
-                                    <div className="flex flex-col justify-center items-center mx-12">
-                                        <div>
-                                            <HeartIcon className="text-red-500 w-6 h-6" />
+                                    <div className="flex justify-center items-center mt-6 border-y-2 w-full py-2">
+                                        <div className="flex flex-col justify-center items-center pl-12 mr-8">
+                                            <div>
+                                                <HeartIcon className="text-red-500 w-6 h-6" />
+                                            </div>
+                                            <p>{data.jumlahLike} Disukai</p>
                                         </div>
-                                        <p>15 Disukai</p>
-                                    </div>
-                                    <div className="flex flex-col justify-center items-center mx-12">
-                                        <div>
-                                            <ChatIcon className="w-6 h-6 ml-3" />
+                                        <div className="flex flex-col justify-center items-center mx-12 border-l pl-16">
+                                            <div>
+                                                <ChatIcon className="w-6 h-6 ml-3" />
+                                            </div>
+                                            <p>{data.jumlahKomentar} Komentar</p>
                                         </div>
-                                        <p>15 Komentar</p>
                                     </div>
-                                </div>
 
-                                <div className="mt-6">
-                                    <p>Potret kenangan keindahan alam Indonesia yang diabadikan lewat foto ini. Bukti bahwa Indonesiaku adalah bagian dari surga dunia yang harus kita jaga dan lestarikan, membuat saya bangga menjadi bagian dari bumi nusantara, Salam Lestari !!
-
-                                        #Nature #Healing #Indonesia</p>
+                                    <div className="mt-6">
+                                        <p>{data.text}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
 
                         <div className="bg-[#457275] p-3">
-                            {listKomentar && listKomentar.map(item => (
+                            {listKomentar && listKomentar.length > 0 && listKomentar.map(item => (
                                 <div>
                                     <div className="flex justify-between">
                                         <div className="flex w-full mb-4">
                                             <img
                                                 src={item.user.urlFileName}
-                                                // src='./rahmah.svg'
                                                 className="rounded-full w-10 h-10"
                                                 width={50}
                                                 height={50}
@@ -182,18 +203,16 @@ const DetailPostContainer = () => {
                                             />
                                             <div className="pr-3 w-96 flex justify-between text-white ">
                                                 <div className="flex flex-col ml-4">
-                                                    {/* <div className="font-medium text-sm mt-1">{data.user.nama}</div>
-                                                <div className="font-normal text-xs">{data.created_date}</div> */}
                                                     <div className="font-semibold text-sm mt-1">{item.user.nama}</div>
                                                     <div className="font-normal text-sm">{item.textKomentar}</div>
+                                                    <div className="font-normal text-xs">{dayjs(item.created_date).fromNow()}{" "}</div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
-
                                 </div>
                             ))}
+
                             <form onSubmit={handleSubmit}>
                                 <div className="flex justify-center items-center">
                                     <Input
@@ -205,7 +224,7 @@ const DetailPostContainer = () => {
                                         onChange={handleChange}
                                     />
                                     <div className="text-white ml-4 mr-1">
-                                        <button type="submit" ><Icon icon="akar-icons:send" width={20} height={20} /></button>
+                                        <button type="submit"><Icon icon="akar-icons:send" width={20} height={20} /></button>
                                     </div>
                                 </div>
                             </form>

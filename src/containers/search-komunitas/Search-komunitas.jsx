@@ -71,27 +71,30 @@ const SearchKomunitasContainer = () => {
                     {loading && <div className="flex justify-center font-Poppins font-semibold text-xl mt-5">Silahkan Tunggu...</div>}
                     {data && data.length < 1 && <div className="flex justify-center mt-12"><img src="/searchnotfound.svg" /></div>}
                     {data && data.map(search => (
-                        <div className="font-Poppins border-2 w-full border-[#329D9C] rounded-lg p-5 my-5">
-                            <div className="flex justify-start items-center mb-3">
-                                <div>
-                                    <img src={search.urlFileName} className='rounded-full w-16 h-16' width={50} height={50} alt='' />
-                                </div>
-                                <div className="flex flex-col">
-                                    <div className="font-medium text-[#3D3D3D] text-lg pl-3 mb-2">
-                                        <p>{search.namaKomunitas}</p>
+                        <a href={`./detail-community?id=${search.id}`}>
+
+                            <div className="font-Poppins border-2 w-full border-[#329D9C] rounded-lg p-5 my-5">
+                                <div className="flex justify-start items-center mb-3">
+                                    <div>
+                                        <img src={search.urlFileName} className='rounded-full w-16 h-16' width={50} height={50} alt='' />
                                     </div>
-                                    <div className="text-[#329D9C] text-base pl-3 flex">
-                                        <div className="mr-2">
-                                            <Icon icon="octicon:people-24" width="20" />
+                                    <div className="flex flex-col">
+                                        <div className="font-medium text-[#3D3D3D] text-lg pl-3 mb-2">
+                                            <p>{search.namaKomunitas}</p>
                                         </div>
-                                        <p>{search.jumlahAnggota} Anggota</p>
+                                        <div className="text-[#329D9C] text-base pl-3 flex">
+                                            <div className="mr-2">
+                                                <Icon icon="octicon:people-24" width="20" />
+                                            </div>
+                                            <p>{search.jumlahAnggota} Anggota</p>
+                                        </div>
                                     </div>
                                 </div>
+                                <div>
+                                    <p>{search.deskripsi}</p>
+                                </div>
                             </div>
-                            <div>
-                                <p>{search.deskripsi}</p>
-                            </div>
-                        </div>
+                        </a>
                     ))}
                     <div>
 

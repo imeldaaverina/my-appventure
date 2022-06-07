@@ -14,6 +14,10 @@ import { useHomeDispatcher } from "../../../redux/reducers/home";
 import { callAPI } from "../../../helpers/network";
 import { useHomeProvider } from "../HomeProvider";
 import { useFormik, getIn } from "formik";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 const PostItem = ({ data }) => {
   console.log({ data });
@@ -160,7 +164,7 @@ const PostItem = ({ data }) => {
               <div className="pr-3 w-96 flex justify-between">
                 <div className="flex flex-col ml-2">
                   <div className="font-medium text-sm mt-1">{data.user.nama}</div>
-                  <div className="font-normal text-xs">{data.created_date}</div>
+                  <div className="font-normal text-xs text-[#457275]">{dayjs(data.created_date).fromNow()}{" "}</div>
                 </div>
                 <div className="flex justify-center items-center">
                   {/* <ButtonFollow /> */}

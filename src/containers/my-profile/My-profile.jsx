@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 const MyProfileContainer = () => {
     const { profile } = useAccount();
+    const { picture } = useAccount();
     const { email } = useProfile();
     const [text, setText] = useState('')
 
@@ -21,11 +22,15 @@ const MyProfileContainer = () => {
                                     <Icon icon="eva:arrow-circle-left-outline" width="40" />
                                 </a>
                             </div>
-                            <div className="font-semibold flex items-center justify-center w-96 text-2xl ">
+                            <div className="font-semibold flex items-center justify-center w-96 text-2xl mb-10">
                                 <p>Profil Saya</p>
                             </div>
                         </div>
                         <div>
+                            <div className="w-40 h-40 m-auto flex justify-center items-center border rounded-full bg-white">
+                                <img className="rounded-full w-40 h-40" src={picture} width={100} height={100} />
+                            </div>
+
                             <div>
                                 <div className="text-[#329D9C] px-2 font-semibold text-lg pt-10">Username</div>
                                 <div className="py-3 px-3 border-[#329D9C] text-[#329D9C] text-lg bg-white border-y-2 border-x-2 w-full mb-2 rounded-lg">{profile}</div>

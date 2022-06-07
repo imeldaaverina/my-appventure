@@ -86,25 +86,27 @@ const FollowingListContainer = () => {
                         </div>}
 
                         {data && data.map(item => (
-                            <div className="flex justify-between items-center pt-5 px-5 font-Poppins">
-                                <div className="flex justify-start items-center">
+                            <a href={`./user-page?nama=${item.userFollower.nama}`}>
+                                <div className="flex justify-between items-center pt-5 px-5 font-Poppins">
+                                    <div className="flex justify-start items-center">
+                                        <div>
+                                            <img src={item.userFollower.urlFileName} className='rounded-full w-10 h-10' width={50} height={50} alt='' />
+                                        </div>
+                                        <div className="font-medium text-[#3D3D3D] text-lg pl-3">
+                                            <p>{item.userFollower.nama}</p>
+                                        </div>
+                                    </div>
                                     <div>
-                                        <img src={item.userFollower.urlFileName} className='rounded-full w-10 h-10' width={50} height={50} alt='' />
-                                    </div>
-                                    <div className="font-medium text-[#3D3D3D] text-lg pl-3">
-                                        <p>{item.userFollower.nama}</p>
+                                        <button
+                                            className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275] focus:bg-[#457275] focus:text-white"
+                                            onClick={handleOnFollow}
+                                        >
+                                            {data ? "Ikuti" : "Mengikuti"} {loading && "..."}
+                                        </button>
+                                        {/* <ButtonFollow/> */}
                                     </div>
                                 </div>
-                                <div>
-                                    <button
-                                        className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275] focus:bg-[#457275] focus:text-white"
-                                        onClick={handleOnFollow}
-                                    >
-                                        {data? "Ikuti" : "Mengikuti"} {loading && "..."}
-                                    </button>
-                                    {/* <ButtonFollow/> */}
-                                </div>
-                            </div>
+                            </a>
                         ))}
 
                     </div>

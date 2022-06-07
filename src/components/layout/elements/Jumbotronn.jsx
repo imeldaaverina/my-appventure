@@ -21,7 +21,7 @@ const Jumbotron = () => {
         </div>
 
         <div className="max-w-md mx-auto px-3 h-full pt-14 items-center pb-20">
-          <a href="">
+          <a href="./login">
             <Searchbar />
           </a>
         </div>

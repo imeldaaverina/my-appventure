@@ -90,12 +90,13 @@ const FollowingContainer = () => {
                                     <div className="bg-white flex justify-start mt-1">
                                         <div className="flex justify-center items-center -mx-1 my-3">
                                             <HeartIcon className="text-red-500 w-6 h-6" />{item.jumlahLike}
-                                            
+
                                             <a href={`./detail-post?id=${data.id}`}>
                                                 <div className="flex flex-row">
                                                     <ChatIcon className="w-6 h-6 ml-3" />{data.jumlahKomentar}
                                                 </div>
-                                            </a>                                        </div>
+                                            </a>
+                                        </div>
 
                                     </div>
                                 </div>

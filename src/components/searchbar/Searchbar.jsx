@@ -5,7 +5,7 @@ const Searchbar = ({ placeholder, type, onChange }) => {
     const [text, setText] = useState('')
 
     return (
-        <form className="w-full mr-3">
+        <form className="w-full mr-3 cursor-pointer">
             <div className="relative">
                 <button className="absolute top-0 left-0 h-full text-gray-500 font-bold inline-flex justify-center items-center px-3">
                     <SearchIcon className="w-5 h-5" />

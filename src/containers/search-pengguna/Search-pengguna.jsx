@@ -72,17 +72,21 @@ const SearchPenggunaContainer = () => {
                     {data && data.length < 1 && <div className="flex justify-center mt-12"><img src="/searchnotfound.svg" /></div>}
                     {data && data.map(search => (
                         <div className="flex justify-between items-center pt-5 px-5 font-Poppins">
-                            <div className="flex justify-start items-center">
-                                <div>
-                                    <img src={search.urlFileName} className='rounded-full w-14 h-14' width={50} height={50} alt='' />
+                            <a href={`./user-page?nama=${search.nama}`}>
+
+                                <div className="flex justify-start items-center">
+                                    <div>
+                                        <img src={search.urlFileName} className='rounded-full w-14 h-14' width={50} height={50} alt='' />
+                                    </div>
+                                    <div className="font-medium text-[#3D3D3D] text-lg pl-3">
+                                        <p>{search.nama}</p>
+                                    </div>
                                 </div>
-                                <div className="font-medium text-[#3D3D3D] text-lg pl-3">
-                                    <p>{search.nama}</p>
-                                </div>
-                            </div>
+                            </a>
                             <div>
                                 <ButtonFollow />
                             </div>
+
                         </div>
                     ))}
                     <div>

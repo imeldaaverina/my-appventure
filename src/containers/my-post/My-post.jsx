@@ -24,7 +24,7 @@ const MyPostContainer = () => {
                 params: {
                     idUser: user.id,
                     page: 0,
-                    size: 30,
+                    size: 300,
                 },
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
@@ -101,11 +101,13 @@ const MyPostContainer = () => {
                                                 <div className="bg-white flex justify-start mt-1">
                                                     <div className="flex justify-center items-center -mx-1 my-3">
                                                         <HeartIcon className="text-red-500 w-6 h-6" />{item.jumlahLike}
-                                                        {/* <span className="text-2xl block w-full">
-            {home.counter}
-          </span>
-          </div> */}
-                                                        <ChatIcon className="w-6 h-6 ml-3" />{item.jumlahKomentar}
+
+                                                        <a href={`./detail-post?id=${item.id}`}>
+                                                            <div className="flex flex-row">
+                                                                <ChatIcon className="w-6 h-6 ml-3" />{item.jumlahKomentar}
+                                                            </div>
+                                                        </a>
+
                                                     </div>
 
                                                 </div>

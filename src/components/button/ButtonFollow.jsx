@@ -18,7 +18,7 @@ const ButtonFollow = () => {
                 }
             });
             console.log("response > ", response.data.data.content);
-            setData(response.data.data);
+            setData(response.data.data.content);
         } catch (error) {
             console.log("error > ", error);
         }
@@ -40,7 +40,7 @@ const ButtonFollow = () => {
             method: "POST",
             params: {
                 idFollower: user.id,
-                idFollowing: data.content[0].id,
+                idFollowing: data[0].id,
             },
             headers: {
                 Authorization: `Bearer ${user.access_token}`,

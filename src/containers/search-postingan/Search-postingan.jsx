@@ -10,6 +10,11 @@ import { SearchIcon } from "@heroicons/react/outline";
 import { ButtonFollow } from "../../components/button";
 import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
 import { array } from "yup/lib/locale";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
+
 
 const SearchPostinganContainer = () => {
     const [isReadMore, setIsReadMore] = useState(true);
@@ -98,7 +103,7 @@ const SearchPostinganContainer = () => {
                                             <div className="pr-3 w-96 flex justify-between">
                                                 <div className="flex flex-col ml-2">
                                                     <div className="font-medium text-sm mt-1">{search.user.nama}</div>
-                                                    <div className="font-normal text-xs">{search.created_date}</div>
+                                                    <div className="font-normal text-xs">{dayjs(search.created_date).fromNow()}{" "}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -119,11 +124,12 @@ const SearchPostinganContainer = () => {
                                     <div className="bg-white flex justify-start mt-1">
                                         <div className="flex justify-center items-center -mx-1 my-3">
                                             <HeartIcon className="text-red-500 w-6 h-6" />{search.jumlahLike}
-                                            {/* <span className="text-2xl block w-full">
-        {home.counter}
-      </span>
-      </div> */}
-                                            <ChatIcon className="w-6 h-6 ml-3" />{search.jumlahKomentar}
+
+                                            <a href={`./detail-post?id=${search.id}`}>
+                                                <div className="flex flex-row">
+                                                    <ChatIcon className="w-6 h-6 ml-3" />{search.jumlahKomentar}
+                                                </div>
+                                            </a>
                                         </div>
 
                                     </div>

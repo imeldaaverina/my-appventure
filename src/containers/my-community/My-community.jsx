@@ -13,8 +13,7 @@ const MyCommunityContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: `https://myappventure-api.herokuapp.com/api/komunitas/komunitasuser/${user.id}`,
-                // url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
+                url: 'https://myappventure-api.herokuapp.com/api/komunitas/komunitasuser/',
                 method: 'get',
                 params: {
                     idUser: user.id,
@@ -25,8 +24,8 @@ const MyCommunityContainer = () => {
                     Authorization: `Bearer ${user.access_token}`,
                 },
             });
-            console.log("response > ", response.data);
-            setData(response.data.data.content);
+            console.log("response > ", response.data.Data.content);
+            setData(response.data.Data.content);
         } catch (error) {
             console.log("error > ", error);
         }
@@ -58,10 +57,12 @@ const MyCommunityContainer = () => {
                                 {data && data.map((item) => {
                                     return (
                                         <>
-                                            <div className="flex flex-col justify-center items-center mb-10">
-                                                <img src={item.urlFileName} className='rounded-full w-20 h-20' width={90} height={90} alt='' />
-                                                <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1>
-                                            </div>
+                                            <a href={`./detail-community?id=${item.id}`}>
+                                                <div className="flex flex-col justify-center items-center mb-10">
+                                                    <img src={item.komunitas.urlFileName} className='rounded-full w-20 h-20' width={90} height={90} alt='' />
+                                                    <h1 className="text-[#3D3D3D] mt-2">{item.komunitas.namaKomunitas}</h1>
+                                                </div>
+                                            </a>
                                         </>
                                     )
                                 })}

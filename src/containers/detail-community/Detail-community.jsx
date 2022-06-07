@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { DetailCommunityLayout } from "../../components/layout";
 import { useRouter } from 'next/router';
-import { ButtonFollow } from "../../components/button";
+import { ButtonFollow, ButtonBack } from "../../components/button";
 import { HeartIcon, ChatIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import Image from "next/image";
@@ -55,8 +55,8 @@ const DetailCommunityContainer = () => {
                 params: {
                     page: 0,
                     size: 30,
-                    idUser: '',
-                    idKomunitas: '',
+                    idUser: user.id,
+                    idKomunitas: id,
                 },
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
@@ -83,6 +83,7 @@ const DetailCommunityContainer = () => {
                                 <a href="./community">
                                     <Icon icon="eva:arrow-circle-left-outline" width="30" />
                                 </a>
+                                {/* <ButtonBack/> */}
                             </div>
                             <div className="font-normal flex items-center justify-center w-96 text-xl ">
                                 <p>Detail Komunitas</p>
