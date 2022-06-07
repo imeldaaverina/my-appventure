@@ -12,9 +12,19 @@ import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
 import { array } from "yup/lib/locale";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
+import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
+import { useHomeDispatcher } from "../../redux/reducers/home";
+import { callAPI } from "../../helpers/network";
+import { useHomeProvider } from "../home/HomeProvider";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 dayjs.extend(relativeTime);
-
 
 const SearchPostinganContainer = () => {
     const [isReadMore, setIsReadMore] = useState(true);
@@ -27,30 +37,54 @@ const SearchPostinganContainer = () => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState();
 
-    useEffect(() => {
-        async function searchUser() {
-            try {
-                setLoading(true);
-                const baseUrl = await axios({
-                    url: `https://myappventure-api.herokuapp.com/api/user/detail/caripost?q=${query}`,
-                    method: 'get',
-                    params: {
-                        page: 0,
-                        size: 300,
-                        nama: `${query}`
-                    }
-                });
-                console.log("response > ", baseUrl.data.data.content);
-                setData(baseUrl.data.data.content);
-                setLoading(false);
-            } catch (error) {
-                setLoading(false);
-                console.log("error > ", error);
-            }
-        };
+    async function searchUser() {
+        try {
+            setLoading(true);
+            const baseUrl = await axios({
+                url: `https://myappventure-api.herokuapp.com/api/user/detail/caripost?q=${query}`,
+                method: 'get',
+                params: {
+                    page: 0,
+                    size: 300,
+                    nama: `${query}`
+                }
+            });
+            console.log("response > ", baseUrl.data.data.content);
+            setData(baseUrl.data.data.content);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            console.log("error > ", error);
+        }
+    };
 
+    useEffect(() => {
         searchUser()
     }, [query]);
+
+    // const { likeAction, follow } = useHomeDispatcher();
+    // const { posts, loadPosts } = useHomeProvider();
+    // const user = JSON.parse(localStorage.getItem('data'))
+
+    // const handleLikeButton = async (detailPost) => {
+    //     console.log(detailPost)
+    //     try {
+    //         await likeAction(detailPost.id);
+    //         await loadPosts();
+    //     } catch (e) {
+
+    //     }
+    // }
+
+    // const handleUnlikeButton = async (detailPost) => {
+    //     console.log(detailPost)
+    //     try {
+    //         await likeAction(detailPost.id);
+    //         await loadPosts();
+    //     } catch (e) {
+
+    //     }
+    // };
 
     return (
         <AuthProvider>
@@ -87,8 +121,27 @@ const SearchPostinganContainer = () => {
                         <main className="m-auto flex justify-center font-Poppins">
 
                             <div className=" rounded-2xl flex justify-center items-center w-96 shadow-xl flex-col my-3 border border-[#16737B] mt-5">
-                                <div>
-                                    <img src={search.user.urlFileName1} className="rounded-t-2xl" alt="gambar-postingan" />
+                                <div className="w-96">
+                                    <Swiper
+                                        modules={[Navigation, Pagination, Scrollbar, A11y]}
+                                        spaceBetween={50}
+                                        slidesPerView={1}
+                                        scrollbar={{ draggable: true }}
+                                        onSwiper={(swiper) => console.log(swiper)}
+                                        onSlideChange={() => console.log('slide change')}
+                                    >
+
+                                        {search && search.filePosts.map((fileItem) => {
+                                            return (
+                                                <SwiperSlide className="mb-10">
+                                                    <img src={fileItem.url} className="rounded-t-2xl w-96 h-72" alt="gambar-postingan" />
+                                                </SwiperSlide>
+                                            )
+                                        }
+
+                                        )}
+
+                                    </Swiper>
                                 </div>
                                 <div className=" p-4 flex flex-col w-full rounded-2xl">
                                     <div className="flex justify-between">
@@ -131,7 +184,6 @@ const SearchPostinganContainer = () => {
                                                 </div>
                                             </a>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

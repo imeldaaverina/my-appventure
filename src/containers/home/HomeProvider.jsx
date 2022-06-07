@@ -3,16 +3,18 @@ import useHome from './hooks/useHome';
 const initialContext = {
   posts: [],
   loadPosts: () => {},
+  loading: []
 };
 const HomeContext = createContext(initialContext);
 export const useHomeProvider = () => useContext(HomeContext);
 const HomeProvider = ({ children }) => {
-  const { posts, loadPosts } = useHome();
+  const { posts, loadPosts, loading } = useHome();
   return (
     <HomeContext.Provider
       value={{
         posts,
         loadPosts,
+        loading,
       }}
     >
       {children}

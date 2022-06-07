@@ -51,10 +51,6 @@ const AccountContainer = () => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const [datas, setDatas] = useState();
   const fetchDatas = async () => {
     const user = JSON.parse(localStorage.getItem('data'))
@@ -76,6 +72,7 @@ const AccountContainer = () => {
   };
 
   useEffect(() => {
+    fetchData();
     fetchDatas();
   }, []);
 

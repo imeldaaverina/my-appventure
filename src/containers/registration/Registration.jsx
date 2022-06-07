@@ -11,14 +11,14 @@ import { ExclamationCircleIcon, EyeIcon } from "@heroicons/react/outline";
 import { CameraIcon } from '@heroicons/react/outline';
 
 const validationSchema = Yup.object({
-  nama: Yup.string().required("diperlukan username").min(3, "username gunakan 3-15 karakter").max(15, "username gunakan 3-15 karakter"),
-  username: Yup.string().required("diperlukan email").email("email tidak valid"),
+  username: Yup.string().required("diperlukan username").min(3, "username gunakan 3-15 karakter").max(15, "username gunakan 3-15 karakter"),
+  email: Yup.string().required("diperlukan email").email("email tidak valid"),
   password: Yup.string().required("diperlukan kata sandi").min(6, "gunakan 6-10 karakter, tanpa spasi").max(10, "gunakan 6-10 karakter, tanpa spasi").matches(/^\S+$/, "gunakan 6-10 karakter, tanpa spasi"),
   // files: Yup.mixed().required("diperlukan foto profil"),
 });
 
 const initialValues = {
-  nama: "",
+  email: "",
   username: "",
   password: "",
   file: null,
@@ -32,17 +32,19 @@ const RegistrationContainer = () => {
   const onSubmit = async (values) => {
 
     try {
+
       const payload = {
         file: values.files,
         username: values.username,
-        nama: values.nama,
+        email: values.email,
         password: values.password,
       };
+
       await doRegistration(payload);
-      push('/success_registration');
+      // push('/success-registration');
       // window.location.href = "/";  
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
     setLoading(true);
 
@@ -80,7 +82,7 @@ const RegistrationContainer = () => {
     if (submitRegistration.status === 200) {
       setLoading(false);
       alert('Create posts success!');
-      push('/success_registration');
+      push('/success-registration');
     }
   };
 
@@ -138,15 +140,15 @@ const RegistrationContainer = () => {
               </div>
               <div className="font-normal text-sm mb-1 flex justify-between">
                 Username
-                {getIn(touched, "nama") && getIn(errors, "nama") && (
+                {getIn(touched, "username") && getIn(errors, "username") && (
                   <div className="flex items-center justify-start text-xs text-white font-light">
                     <ExclamationCircleIcon className="w-5 h-5 text-[#FF8181] pr-1" />
-                    {getIn(errors, "nama")}
+                    {getIn(errors, "username")}
                   </div>
                 )}
               </div>
               <Input
-                name="nama"
+                name="username"
                 label=""
                 type="text"
                 placeholder="Ketik username anda disini"
@@ -157,15 +159,15 @@ const RegistrationContainer = () => {
               {/* <div className="flex justify-center"> */}
               <div className="font-normal text-sm mb-1 flex justify-between">
                 Email
-                {getIn(touched, "username") && getIn(errors, "username") && (
+                {getIn(touched, "email") && getIn(errors, "email") && (
                   <div className="flex items-center justify-start text-xs text-white font-light" >
                     <ExclamationCircleIcon className="w-5 h-5 text-[#FF8181] pr-1" />
-                    {getIn(errors, "username")}
+                    {getIn(errors, "email")}
                   </div>
                 )}
               </div>
               <Input
-                name="username"
+                name="email"
                 label=""
                 type="text"
                 placeholder="Ketik email anda disini"

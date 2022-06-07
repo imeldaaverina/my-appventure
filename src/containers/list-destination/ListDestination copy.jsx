@@ -2,11 +2,10 @@ import AuthProvider from "../../providers/auth/AuthProvider";
 import { Icon } from '@iconify/react';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { CommunityLayout } from "../../components/layout";
+import { ListDestinationLayout } from "../../components/layout";
 import Image from "next/image"
-import { useListCommunityDispatcher } from "../../redux/reducers/listCommunity/slice";
 
-const CommunityContainer = () => {
+const ListDestinationContainer = () => {
     const [data, setData] = useState();
 
     const fetchData = async () => {
@@ -15,8 +14,8 @@ const CommunityContainer = () => {
                 url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
                 method: 'get',
                 params: {
-                    page: 0,
-                    size: 100,
+                    page: 1,
+                    size: 30,
                 }
             });
             console.log("response > ", response.data);
@@ -32,21 +31,8 @@ const CommunityContainer = () => {
 
     return (
         <AuthProvider>
-            <CommunityLayout>
+            <ListDestinationLayout>
                 <section>
-                    <div className="max-w-md mx-auto h-full px-2 font-Poppins">
-                        <div className="pt-10">
-                            <a href="./create-community">
-                                <button
-                                    className="bg-white text-[#329D9C] border-[#329D9C] border-2 text-xl w-full h-full rounded-xl py-3 px-3 flex justify-center items-center">
-                                    <div className='flex '>
-                                        <div className='pr-3'>
-                                            <Icon icon="akar-icons:plus" width={30} />
-                                        </div>
-                                        Buat Komunitas Baru</div>
-                                </button>
-                            </a>
-                        </div>
 
                         <div className="pt-10">
                             <div className="grid grid-cols-3">
@@ -56,8 +42,6 @@ const CommunityContainer = () => {
                                         <>
                                             <a href={`./detail-community?id=${item.id}`}>
                                                 <div className="flex flex-col justify-center items-center mb-10 border-[#008C96] rounded-md border-2 mx-5">
-                                                    {/* <img src={item.urlFileName} className='rounded-full' width={90} height={90} alt='' />
-                                                    <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1> */}
                                                     <img src={item.urlFileName} className='rounded-t-md w-28 h-28' width={90} height={90} alt='' />
                                                     <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1>
                                                 </div>
@@ -67,10 +51,10 @@ const CommunityContainer = () => {
                                 })}
                             </div>
                         </div>
-                    </div>
+                   
                 </section>
-            </CommunityLayout>
+            </ListDestinationLayout>
         </AuthProvider>
     );
 };
-export default CommunityContainer;
+export default ListDestinationContainer;

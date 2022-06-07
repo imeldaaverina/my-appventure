@@ -4,15 +4,27 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { DetailCommunityLayout } from "../../components/layout";
 import { useRouter } from 'next/router';
-import { ButtonFollow, ButtonBack } from "../../components/button";
+import { ButtonFollow } from "../../components/button";
 import { HeartIcon, ChatIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import Image from "next/image";
+import { callAPI } from "../../helpers/network";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
+dayjs.extend(relativeTime);
 
 const DetailCommunityContainer = () => {
     const { query } = useRouter();
     const [data, setData] = useState();
-
+    const [datas, setDatas] = useState();
+    const [follow, setFollow] = useState();
 
     const id = query.id;
 
@@ -33,18 +45,10 @@ const DetailCommunityContainer = () => {
         }
     };
 
-    useEffect(() => {
-        if (id) {
-            fetchData();
-        }
-    }, [id]);
-
     const [isReadMore, setIsReadMore] = useState(true);
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
     };
-
-    const [datas, setDatas] = useState();
 
     const fetchDatas = async () => {
         const user = JSON.parse(localStorage.getItem('data'))
@@ -55,7 +59,6 @@ const DetailCommunityContainer = () => {
                 params: {
                     page: 0,
                     size: 30,
-                    idUser: user.id,
                     idKomunitas: id,
                 },
                 headers: {
@@ -69,9 +72,35 @@ const DetailCommunityContainer = () => {
         }
     };
 
+    const handleOnFollow = async () => {
+        const user = JSON.parse(localStorage.getItem('data'))
+        await callAPI({
+            url: '/komunitas/join/',
+            method: "POST",
+            params: {
+                idUser: user.id,
+                idKomunitas: data.data.id,
+            },
+            headers: {
+                Authorization: `Bearer ${user.access_token}`,
+            },
+        });
+        setFollow();
+    };
+
     useEffect(() => {
-        fetchDatas();
-    }, []);
+        if (id) {
+            fetchData();
+            fetchDatas();
+        }
+    }, [id]);
+
+    useEffect(() => {
+        if (data) {
+
+        }
+    }, [data]);
+
 
     return (
         <AuthProvider>
@@ -83,7 +112,6 @@ const DetailCommunityContainer = () => {
                                 <a href="./community">
                                     <Icon icon="eva:arrow-circle-left-outline" width="30" />
                                 </a>
-                                {/* <ButtonBack/> */}
                             </div>
                             <div className="font-normal flex items-center justify-center w-96 text-xl ">
                                 <p>Detail Komunitas</p>
@@ -97,32 +125,37 @@ const DetailCommunityContainer = () => {
                                     <div className="flex flex-col justify-center items-center mb-10">
                                         <img src={data.data.urlFileName} className='rounded-full h-28 w-28' width={100} height={100} alt='' />
                                         <h1 className="text-2xl py-5">{data.data.namaKomunitas}</h1>
-                                        <ButtonFollow />
+
+                                        <div>
+                                            <button
+                                                className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275] focus:bg-[#457275] focus:text-white"
+                                                onClick={handleOnFollow}
+                                            >
+                                                {follow ? "Ikuti" : "Mengikuti"}
+                                            </button>
+                                        </div>
+
                                     </div>
-                                    <div className="flex-col justify-start">
+                                    <div className="flex-col justify-start border-y-2">
                                         <h1 className="pt-5 text-lg">Deskripsi:</h1>
                                         <h1 className="text-base">{data.data.deskripsi}</h1>
                                         <h1 className="pt-5 text-lg">Link:</h1>
-                                        <h1 className="text-base">{data.data.linkKomunitas}</h1>
+                                        <h1 className="text-base pb-5">{data.data.linkKomunitas}</h1>
                                     </div>
 
                                 </>
                             </div>
                         )}
 
-                        <div className="flex justify-end sticky top-24 right-10 mr-10 mt-10">
-                            <Link href="/upload-community" className="" passHref>
-                                <a>
-                                    <Image
-                                        src="/postIcon.svg"
-                                        className="w-16"
-                                        width={65}
-                                        height={65}
-                                        alt=""
-                                    />
-                                </a>
-                            </Link>
+                        {datas && datas.length < 1 && <div className="flex flex-col justify-center text-center">
+                            <div className="flex justify-center">
+                                <Image src="/User research-pana 1.svg" width={250} height={250} alt="" />
+                            </div>
+                            <div className="pt-5 text-lg">
+                                <p>Belum ada Unggahan Terbaru</p>
+                            </div>
                         </div>
+                        }
 
                         {datas && datas.map((items) => {
                             return (
@@ -130,9 +163,29 @@ const DetailCommunityContainer = () => {
                                     <main className="m-auto flex justify-center font-Poppins">
 
                                         <div className=" rounded-2xl flex justify-center items-center w-96 shadow-xl flex-col my-3 border border-[#16737B]">
-                                            <div>
-                                                <img src={items.user.urlFileName1} className="rounded-t-2xl" alt="gambar-postingan" />
+                                            <div className="w-96">
+                                                <Swiper
+                                                    modules={[Navigation, Pagination, Scrollbar, A11y]}
+                                                    spaceBetween={50}
+                                                    slidesPerView={1}
+                                                    scrollbar={{ draggable: true }}
+                                                    onSwiper={(swiper) => console.log(swiper)}
+                                                    onSlideChange={() => console.log('slide change')}
+                                                >
+
+                                                    {items && items.filePosts.map((fileItem) => {
+                                                        return (
+                                                            <SwiperSlide className="mb-10">
+                                                                <img src={fileItem.url} className="rounded-t-2xl w-96 h-72" alt="gambar-postingan" />
+                                                            </SwiperSlide>
+                                                        )
+                                                    }
+
+                                                    )}
+
+                                                </Swiper>
                                             </div>
+
                                             <div className=" p-4 flex flex-col w-full rounded-2xl">
                                                 <div className="flex justify-between">
                                                     <div className="flex w-full">
@@ -145,8 +198,10 @@ const DetailCommunityContainer = () => {
                                                         />
                                                         <div className="pr-3 w-96 flex justify-between">
                                                             <div className="flex flex-col ml-2">
-                                                                <div className="font-medium text-sm mt-1">{items.user.nama}</div>
-                                                                <div className="font-normal text-xs">{items.created_date}</div>
+                                                                <a href={`./user-page?nama=${items.user.nama}`}>
+                                                                    <div className="font-medium text-sm mt-1">{items.user.nama}</div>
+                                                                </a>
+                                                                <div className="font-normal text-xs text-[#457275]">{dayjs(items.created_date).fromNow()}{" "}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -167,11 +222,11 @@ const DetailCommunityContainer = () => {
                                                 <div className="bg-white flex justify-start mt-1">
                                                     <div className="flex justify-center items-center -mx-1 my-3">
                                                         <HeartIcon className="text-red-500 w-6 h-6" />{items.jumlahLike}
-                                                        {/* <span className="text-2xl block w-full">
-            {home.counter}
-          </span>
-          </div> */}
-                                                        <ChatIcon className="w-6 h-6 ml-3" />{items.jumlahKomentar}
+                                                        <a href={`./detail-post?id=${items.id}`}>
+                                                            <div className="flex flex-row">
+                                                                <ChatIcon className="w-6 h-6 ml-3" />{items.jumlahKomentar}
+                                                            </div>
+                                                        </a>
                                                     </div>
 
                                                 </div>

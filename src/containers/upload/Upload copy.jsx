@@ -16,8 +16,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { callAPI } from "../../helpers/network";
 import { getJwt, getUser } from "../../helpers/auth";
 import { useRouter } from "next/router";
-import { useCreatePostDispatcher } from '../../redux/reducers/post';
-
 import { Icon } from "@iconify/react";
 import {
   HeartIcon,
@@ -55,36 +53,56 @@ const TextAreaInput = styled.textarea`
   height: ${(props) => props.idealHeight || "160px"};
 `;
 
-const Upload = () => {
+const Upload = (props) => {
+  const { profile } = useAccount();
+  const { picture } = useAccount();
+
   const [loading, setLoading] = useState(false);
-  
-
-  const { profile, picture } = useAccount();
- 
-
-  // const [loading, setLoading] = useState(false);
   const [previews, setPreviews] = useState();
   const { push } = useRouter();
-  
-  const onSubmit = async (formValues) => {
-    console.log(formValues)
-    setLoading(true);
-    const user = JSON.parse(localStorage.getItem("data"));
+  // const {
+  //     makeLoading: { loading },
+  //     makePost,
+  //   } = useUploadDispatcher();
 
-    try {
-       //upload profil picture
+  // const {push} = useRouter();
+
+  // const onSubmit = async (values) => {
+  //   await doSubmit(values);
+  // };
+  const onSubmit = async (formValues) => {
+    setLoading(true);
+    console.log(formValues);
+    const user = JSON.parse(localStorage.getItem("data"));
+    console.log({ user });
+
     const formData = new FormData();
-     if (formValues.file && formValues.file.length > 0) {
+
+    
+  
+    if (formValues.file && formValues.file.length > 0) {
+      for (let i = 0; i < formValues.file.length; i++) {
+        formData.append(`file${i + 1}`, formValues.files[i]);
+      }
+      try {
+        const formData = new FormData();
+
+        const payload = {
+          file: formValues.files,
+          text: formValues.text,
+        };
+
+        if (formValues.file && formValues.file.length > 0) {
           // formData.append("file1", formValues.files[0]);
           for (let i = 0; i < formValues.file.length; i++) {
             formData.append(`file${i + 1}`, formValues.file[i]);
           }
           formData.append("idUser", user.id);
-          formData.append("text", formValues.text);
+          formData.append("text", formValues.post);
         } else {
 
           formData.append("idUser", user.id);
-          formData.append("text", formValues.text);
+          formData.append("text", formValues.post);
         }
 
 
@@ -96,19 +114,79 @@ const Upload = () => {
             Authorization: `Bearer ${user.access_token}`,
           },
         });
-    console.log(response)
-         if (response.status == 200) {
-           push('/home');
-         }
-   
-
-    } catch (error) {
-      console.log("error > ", error);
-      alert(error);
-      setLoading(false);
+        await doCommunity(payload);
+        if (response.status == 200) {
+          push('/home');
+        }
+      } catch (error) {
+        alert(error);
+        console.log({ error });
+      } finally {
+        setLoading(false);
+      }
 
     }
-  
+
+    // try {
+    //   const formData = new FormData();
+
+    //   if (formValues.files && formValues.files.length > 0) {
+    //     formData.append("file1", formValues.files[0]);
+    //     formData.append("idUser", user.id);
+    //     formData.append("text", formValues.post);
+    //   } else {
+
+    //     formData.append("idUser", user.id);
+    //     formData.append("text", formValues.post);
+    //   }
+
+
+    //   const response = await callAPI({
+    //     url: "/post/addpost",
+    //     method: "post",
+    //     data: formData,
+    //     headers: {
+    //       Authorization: `Bearer ${user.access_token}`,
+    //     },
+    //   });
+
+    //   if (response.status == 200) {
+    //     push('/home');
+    //   }
+    // } catch (error) {
+    //   alert(error);
+    //   console.log({ error });
+    // } finally {
+    //   setLoading(false);
+    // }
+
+    // first upload
+
+    // const fileUrl = upload.data[0].url;
+    // const { post } = formValues;
+    // const payload = {
+    //   data: {
+    //     post,
+    //     // files:`${file1}`,
+    //     // files: `${fileUrl}`,
+    //     photo: `${fileUrl}`,
+    //     isPublish: true,
+    //     postedBy: `${getUser().username}`,
+    //   },
+    // };
+    // const submitPost = await callAPI({
+    //   url: "/post/addpost",
+    //   method: "post",
+    //   data: payload,
+    //   headers: {
+    //     Authorization: `Bearer ${getJwt()}`,
+    //   },
+    // });
+    // if (submitPost.status === 200) {
+    //   setLoading(false);
+    //   alert("Create posts success!");
+    //   push("/");
+    // }
   };
 
   const {
@@ -122,15 +200,15 @@ const Upload = () => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit
+    onSubmit,
   });
 
   const handleChangeFiles = (e) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
+    const file = e.target.file;
+    if (file && file.length > 0) {
       const filePreviews = [];
-      for (let i = 0; i < files.length; i++) {
-        filePreviews.push(files[i]);
+      for (let i = 0; i < file.length; i++) {
+        filePreviews.push(file[i]);
       }
 
       setPreviews(filePreviews);
@@ -200,8 +278,7 @@ const Upload = () => {
   return (
     <AuthProvider>
       <UploadLayout>
-        
-        {/* {console.log (previews)} */}
+        {console.log (previews)}
         <div className="min-h-screen font-Poppins flex justify-center ">
           <div className="max-w-lg">
             <div className="flex flex-col mt-5 w-96 justify-center items-center">
@@ -233,7 +310,38 @@ const Upload = () => {
                   </div>
                 </div>
                 <form
-                onSubmit={handleSubmit}
+                  onSubmit={ async (e)  => {
+                    e.preventDefault();
+                    // handleSubmit();
+                    const user = JSON.parse(localStorage.getItem("data"));
+    // console.log( user.id );
+
+                    const formData = new FormData(e.target)
+                    formData.append("idUser", user.id)
+                    // console.log(formData.get("text"))
+                    
+                    const response = await callAPI({
+                      url: "/post/postingan/save",
+                      method: "post",
+                      // data: {
+                      //   text:formData.get("text"),
+                      //   idUser:user.id
+                      // },
+                      data:formData,
+                      headers: {
+                        Authorization: `Bearer ${user.access_token}`,
+                        // "Content-Type":"application/json",
+                        // Accept:"application/json"
+                      },
+
+                    });
+                    console.log (response)
+                    if (response.status == 200) {
+                      push('/home');
+                    }
+                    // onSubmit(formData)
+                    console.log ("test")
+                  }}
                   className="mt-1"
                 >
                   <div className="rounded-lg flex flex-col justify-start items-start">
@@ -253,8 +361,8 @@ const Upload = () => {
                         onBlur={handleBlur}
                         data-testid={"input-caption"}
                         // ref={textareaRef}
-                        
-                        onChange={handleChange}
+                        value={values.post}
+                        onChange={handleChange("post")}
                         ref={textAreaRef}
                         idealHeight={idealHeight.current + "px"}
                       />

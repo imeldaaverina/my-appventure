@@ -1,4 +1,3 @@
-// import { getUser } from '../../../helpers/auth';
 import useAccount from "../../account/hooks/useAccount";
 import usePostItem from "../hooks/usePostItem";
 import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
@@ -9,12 +8,19 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useListPostDispatcher } from "../../../redux/reducers/listPost";
 import { Carousel } from 'react-responsive-carousel';
+import useHome from "../hooks/useHome";
 import { useHomeDispatcher } from "../../../redux/reducers/home";
 import { callAPI } from "../../../helpers/network";
 import { useHomeProvider } from "../HomeProvider";
 import { useFormik, getIn } from "formik";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 dayjs.extend(relativeTime);
 
@@ -129,12 +135,29 @@ const PostItemNotLogin = ({ data }) => {
           })}  
             </div>
             </Carousel> */}
-        <div>
+        <div className="w-96">
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={50}
+            slidesPerView={1}
+            scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+          >
 
-          <img src={`${data.filePosts.url}`} className="rounded-t-2xl" alt="gambar-postingan" />
+            {data && data.filePosts.map((fileItem) => {
+              return (
+                <SwiperSlide className="mb-10">
+                  <img src={fileItem.url} className="rounded-t-2xl w-96 h-72" alt="gambar-postingan" />
+                </SwiperSlide>
+              )
+            }
 
-          {/* <img src={data.filePosts.url} className="rounded-t-2xl" alt="gambar" />  */}
+            )}
+
+          </Swiper>
         </div>
+
         <div className=" p-4 flex flex-col w-full rounded-2xl">
           <div className="flex justify-between">
             <div className="flex w-full">

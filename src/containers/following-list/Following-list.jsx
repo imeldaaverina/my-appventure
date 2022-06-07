@@ -106,7 +106,7 @@ const FollowingListContainer = () => {
                                     >
                                         {follow ? "Ikuti" : "Mengikuti"} {loading && "..."}
                                     </button> */}
-                                        <ButtonFollow />
+                                        {/* <ButtonFollow /> */}
                                     </div>
                                 </div>
                             </a>

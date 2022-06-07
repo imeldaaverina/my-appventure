@@ -14,28 +14,28 @@ const SearchKomunitasContainer = () => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState();
 
-    useEffect(() => {
-        async function searchUser() {
-            try {
-                setLoading(true);
-                const baseUrl = await axios({
-                    url: `https://myappventure-api.herokuapp.com/api/user/detail/carikomunitas?q=${query}`,
-                    method: 'get',
-                    params: {
-                        page: 0,
-                        size: 300,
-                        nama: `${query}`
-                    }
-                });
-                console.log("response > ", baseUrl.data.data.content);
-                setData(baseUrl.data.data.content);
-                setLoading(false);
-            } catch (error) {
-                setLoading(false);
-                console.log("error > ", error);
-            }
-        };
+    async function searchUser() {
+        try {
+            setLoading(true);
+            const baseUrl = await axios({
+                url: `https://myappventure-api.herokuapp.com/api/user/detail/carikomunitas?q=${query}`,
+                method: 'get',
+                params: {
+                    page: 0,
+                    size: 300,
+                    nama: `${query}`
+                }
+            });
+            console.log("response > ", baseUrl.data.data.content);
+            setData(baseUrl.data.data.content);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            console.log("error > ", error);
+        }
+    };
 
+    useEffect(() => {
         searchUser()
     }, [query]);
 

@@ -1,4 +1,3 @@
-// import { getUser } from '../../../helpers/auth';
 import useAccount from "../../account/hooks/useAccount";
 import usePostItem from "../hooks/usePostItem";
 import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
@@ -16,6 +15,12 @@ import { useHomeProvider } from "../HomeProvider";
 import { useFormik, getIn } from "formik";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 dayjs.extend(relativeTime);
 
@@ -29,6 +34,16 @@ const PostItem = ({ data }) => {
   const { likeAction, follow } = useHomeDispatcher();
 
   const { posts, loadPosts } = useHomeProvider();
+  const handleLikeButton = async (detailPost) => {
+    console.log(detailPost)
+    try {
+      await likeAction(detailPost.id);
+      await loadPosts();
+    } catch (e) {
+
+    }
+    // alert("test")
+  }
   const user = JSON.parse(localStorage.getItem('data'))
   const handleUnlikeButton = async (detailPost) => {
     console.log(detailPost)
@@ -43,12 +58,14 @@ const PostItem = ({ data }) => {
   // const onSubmit = async () =>{
   //   console.log("tescuy")
 
-  const handlefollow = async (idFollower) => {
+  const handlefollow = async (idFollowing) => {
 
     const user = JSON.parse(localStorage.getItem('data'))
     try {
       const formData = new FormData();
-      formData.append("idFollowing", 170);
+      console.log(data)
+
+      formData.append("idFollowing", idFollowing);
       formData.append("idFollower", user.id);
       const response = await callAPI({
         url: `/follow/`,
@@ -144,12 +161,27 @@ const PostItem = ({ data }) => {
           })}  
             </div>
             </Carousel> */}
-        <div>
-          {/* <img src={data.filePosts} className="rounded-t-2xl" alt="gambar-postingan" /> */}
+        <div className="w-96">
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={50}
+            slidesPerView={1}
+            scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+          >
 
-          <img src={`${data.filePosts.url}`} className="rounded-t-2xl" alt="gambar-postingan" />
+            {data && data.filePosts.map((fileItem) => {
+              return (
+                <SwiperSlide className="mb-10">
+                  <img src={fileItem.url} className="rounded-t-2xl w-96 h-72" alt="gambar-postingan" />
+                </SwiperSlide>
+              )
+            }
 
-          {/* <img src={data.filePosts.url} className="rounded-t-2xl" alt="gambar" />  */}
+            )}
+
+          </Swiper>
         </div>
         <div className=" p-4 flex flex-col w-full rounded-2xl">
           <div className="flex justify-between">
@@ -163,11 +195,12 @@ const PostItem = ({ data }) => {
               />
               <div className="pr-3 w-96 flex justify-between">
                 <div className="flex flex-col ml-2">
-                  <div className="font-medium text-sm mt-1">{data.user.nama}</div>
+                  <a href={`./user-page?nama=${data.user.nama}`}>
+                    <div className="font-medium text-sm mt-1">{data.user.nama}</div>
+                  </a>
                   <div className="font-normal text-xs text-[#457275]">{dayjs(data.created_date).fromNow()}{" "}</div>
                 </div>
                 <div className="flex justify-center items-center">
-                  {/* <ButtonFollow /> */}
                   {/*                   
                   <ButtonFollow type="submit" label='Ikuti' />
                   <ButtonFollowed type="submit" label='Mengikuti' /> */}
@@ -177,7 +210,7 @@ const PostItem = ({ data }) => {
                 data ? ( */}
 
 
-                  <button label='Ikuti' onClick={() => handlefollow()}>Follow</button>
+                  <button label='Ikuti' onClick={() => handlefollow(data.user.id)}>Follow</button>
 
 
                   {/* //   ) : (
@@ -203,7 +236,7 @@ const PostItem = ({ data }) => {
           </div>
 
           <div className="bg-white flex justify-start mt-1">
-            <div className="flex justify-center items-center -mx-1 my-3">
+            <div className="flex justify-center items-center my-3">
               <div className="cursor-pointer flex flex-row">
                 {
                   data.likedBy.find((like) => like.user.id === user.id) ? (
@@ -221,6 +254,7 @@ const PostItem = ({ data }) => {
 
                 {data.jumlahLike}
               </div>
+
               <a href={`./detail-post?id=${data.id}`}>
                 <div className="flex flex-row">
                   <ChatIcon className="w-6 h-6 ml-3" />{data.jumlahKomentar}
