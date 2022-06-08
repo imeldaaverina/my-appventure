@@ -77,7 +77,7 @@ const Upload = () => {
      if (formValues.file && formValues.file.length > 0) {
           // formData.append("file1", formValues.files[0]);
           for (let i = 0; i < formValues.file.length; i++) {
-            formData.append(`file${i + 1}`, formValues.file[i]);
+            formData.append(`file`, formValues.file[i]);
           }
           formData.append("idUser", user.id);
           formData.append("text", formValues.text);

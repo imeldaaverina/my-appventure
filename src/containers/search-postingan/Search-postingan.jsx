@@ -27,6 +27,7 @@ import 'swiper/css/scrollbar';
 dayjs.extend(relativeTime);
 
 const SearchPostinganContainer = () => {
+
     const [isReadMore, setIsReadMore] = useState(true);
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
@@ -36,6 +37,30 @@ const SearchPostinganContainer = () => {
     const [query] = useDebounce(text, 1000);
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState();
+    const [userId, setUserId] = useState();
+    const [user, setUser] = useState()
+    const [listFollowing, setListFollowing] = useState([]);
+
+
+    const fetchListFollowing = async () => {
+
+        const user = JSON.parse(localStorage.getItem('data'))
+        try {
+            const response = await axios({
+                url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
+                method: 'get',
+                params: {
+                    idUser: user.id,
+                    page: 0,
+                    size: 30,
+                }
+            });
+            console.log("response > ", response.data);
+            setListFollowing(response.data.Data.content.map((value) => value.userFollowing.id));
+        } catch (error) {
+            console.log("error > ", error);
+        }
+    }
 
     async function searchUser() {
         try {
@@ -59,7 +84,10 @@ const SearchPostinganContainer = () => {
     };
 
     useEffect(() => {
-        searchUser()
+        searchUser();
+        fetchListFollowing();
+        setUser(JSON.parse(localStorage.getItem('data')))
+        setUserId(JSON.parse(localStorage.getItem('data')).id)
     }, [query]);
 
     // const { likeAction, follow } = useHomeDispatcher();
@@ -86,6 +114,66 @@ const SearchPostinganContainer = () => {
     //     }
     // };
 
+
+    const { likeAction, follow } = useHomeDispatcher();
+
+
+    const { posts, loadPosts } = useHomeProvider();
+    const handleLikeButton = async (detailPost) => {
+        console.log(detailPost)
+        try {
+            await likeAction(detailPost.id);
+            await searchUser();
+        } catch (e) {
+
+        }
+        // alert("test")
+    }
+    // const user = JSON.parse(localStorage.getItem('data'))
+    const handleUnlikeButton = async (detailPost) => {
+        console.log(detailPost)
+        try {
+            await likeAction(detailPost.id);
+            await searchUser();
+        } catch (e) {
+
+        }
+        // alert("test")
+    }
+
+    const handlefollow = async (idFollowing) => {
+
+        const user = JSON.parse(localStorage.getItem('data'))
+        try {
+            const formData = new FormData();
+            console.log(data)
+
+            formData.append("idFollowing", idFollowing);
+            formData.append("idFollower", user.id);
+            const response = await callAPI({
+                url: `/follow/`,
+                method: "POST",
+                data: formData,
+                headers: {
+                    Authorization: `Bearer ${user.access_token}`
+                },
+            });
+            // loadPosts();
+            if (response.data.status === "404") {
+                alert(`Failed to follow post`);
+                return;
+            }
+            await fetchListFollowing();
+            await searchUser();
+        } catch (error) {
+            console.log(error)
+            alert(`Failed to unfollow post`);
+        }
+        // loadPosts();
+        // fetchListFollowing();
+
+
+    };
     return (
         <AuthProvider>
             <SearchPostinganLayout>
@@ -158,6 +246,12 @@ const SearchPostinganContainer = () => {
                                                     <div className="font-medium text-sm mt-1">{search.user.nama}</div>
                                                     <div className="font-normal text-xs">{dayjs(search.created_date).fromNow()}{" "}</div>
                                                 </div>
+
+                                                <div className="flex justify-center items-center">
+                                                {hideFollowButton = search.user.id === user.id ? <div /> : isFollowed = listFollowing.includes(search.user.id) ?
+                                                        <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(search.user.id)}>Mengikuti</button> </div>
+                                                        : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(search.user.id)}>Ikuti</button></div>}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -176,8 +270,23 @@ const SearchPostinganContainer = () => {
 
                                     <div className="bg-white flex justify-start mt-1">
                                         <div className="flex justify-center items-center -mx-1 my-3">
-                                            <HeartIcon className="text-red-500 w-6 h-6" />{search.jumlahLike}
+                                            <div className="cursor-pointer flex flex-row">
+                                                {
+                                                    search.likedBy.find((like) => like.user.id === user.id) ? (
+                                                        <LikeSolidIcon
+                                                            className="text-red-500 w-6 h-6"
+                                                            onClick={() => handleLikeButton(search)}
+                                                        />
+                                                    ) : (
+                                                        <LikeOutlineIcon
+                                                            className="text-red-500 w-6 h-6"
+                                                            onClick={() => handleUnlikeButton(search)}
+                                                        />
+                                                    )
+                                                }
 
+                                                {search.jumlahLike}
+                                            </div>
                                             <a href={`./detail-post?id=${search.id}`}>
                                                 <div className="flex flex-row">
                                                     <ChatIcon className="w-6 h-6 ml-3" />{search.jumlahKomentar}

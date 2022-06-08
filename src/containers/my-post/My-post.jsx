@@ -24,7 +24,7 @@ dayjs.extend(relativeTime);
 
 
 const MyPostContainer = () => {
-    // const user = JSON.parse(localStorage.getItem('data'))
+    const [user, setUser] = useState()
     const [isReadMore, setIsReadMore] = useState(true);
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
@@ -60,33 +60,29 @@ const MyPostContainer = () => {
 
     useEffect(() => {
         fetchData();
+        setUser(JSON.parse(localStorage.getItem('data')))
     }, []);
 
     const { likeAction, follow } = useHomeDispatcher();
-    const { posts, loadPosts } = useHomeProvider();
-
-    // const user = JSON.parse(datalocal)
 
     const handleLikeButton = async (detailPost) => {
         console.log(detailPost)
         try {
             await likeAction(detailPost.id);
-            await loadPosts();
+            await fetchData();
         } catch (e) {
 
         }
-        // alert("test")
     }
 
     const handleUnlikeButton = async (detailPost) => {
         console.log(detailPost)
         try {
             await likeAction(detailPost.id);
-            await loadPosts();
+            await fetchData();
         } catch (e) {
 
         }
-        // alert("test")
     }
 
 
@@ -176,16 +172,8 @@ const MyPostContainer = () => {
                                                 </div>
 
                                                 <div className="bg-white flex justify-start mt-1">
-                                                    <div className="flex justify-center items-center -mx-1 my-3">
-                                                        <HeartIcon className="text-red-500 w-6 h-6" />{item.jumlahLike}
-
-                                                        <a href={`./detail-post?id=${item.id}`}>
-                                                            <div className="flex flex-row">
-                                                                <ChatIcon className="w-6 h-6 ml-3" />{item.jumlahKomentar}
-                                                            </div>
-                                                        </a>
-
-                                                        {/* {
+                                                    <div className="flex justify-center items-center my-3 cursor-pointer">
+                                                        {
                                                             item.likedBy.find((like) => like.user.id === user.id) ? (
                                                                 <LikeSolidIcon
                                                                     className="text-red-500 w-6 h-6"
@@ -200,9 +188,13 @@ const MyPostContainer = () => {
                                                         }
 
                                                         {item.jumlahLike}
-                                                        <ChatIcon className="w-6 h-6 ml-3" />{item.jumlahKomentar} */}
-                                                    </div>
+                                                        <a href={`./detail-post?id=${item.id}`}>
+                                                            <div className="flex flex-row">
+                                                                <ChatIcon className="w-6 h-6 ml-3" />{item.jumlahKomentar}
+                                                            </div>
+                                                        </a>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

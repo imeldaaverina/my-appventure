@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { DetailCommunityLayout } from "../../components/layout";
 import { useRouter } from 'next/router';
-import { ButtonFollow } from "../../components/button";
+import { useHomeProvider } from "../home/HomeProvider";
+import { useHomeDispatcher } from "../../redux/reducers/home";
+import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
+import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
 import { HeartIcon, ChatIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,13 +23,83 @@ import 'swiper/css/scrollbar';
 
 dayjs.extend(relativeTime);
 
-const DetailCommunityContainer = () => {
+const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedCommunity }) => {
     const { query } = useRouter();
     const [data, setData] = useState();
     const [datas, setDatas] = useState();
-    const [follow, setFollow] = useState();
+    const [followCommunity, setFollowCommunity] = useState();
+    const [listFollowing, setListFollowing] = useState([]);
+    const [listFollowingCommunity, setListFollowingCommunity] = useState([]);
 
     const id = query.id;
+
+    const fetchListFollowingCommunity = async () => {
+        const user = JSON.parse(localStorage.getItem('data'))
+        try {
+            const response = await axios({
+                url: 'https://myappventure-api.herokuapp.com/api/komunitas/komunitasuser/',
+                method: 'get',
+                params: {
+                    idUser: user.id,
+                    page: 0,
+                    size: 30,
+                }
+            });
+            console.log("responseeee > ", response.data);
+            setListFollowingCommunity(response.data.Data.content.map((value) => value.komunitas.id));
+
+        } catch (error) {
+            console.log("error > ", error);
+        }
+    }
+
+    const fetchListFollowing = async () => {
+        const user = JSON.parse(localStorage.getItem('data'))
+        try {
+            const response = await axios({
+                url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
+                method: 'get',
+                params: {
+                    idUser: user.id,
+                    page: 0,
+                    size: 30,
+                }
+            });
+            console.log("responsee > ", response.data);
+            setListFollowing(response.data.Data.content.map((value) => value.userFollowing.id));
+
+        } catch (error) {
+            console.log("error > ", error);
+        }
+    }
+
+    const handlefollow = async (idFollowing) => {
+        const user = JSON.parse(localStorage.getItem('data'))
+        try {
+            const formData = new FormData();
+            console.log(data)
+
+            formData.append("idFollowing", idFollowing);
+            formData.append("idFollower", user.id);
+            const response = await callAPI({
+                url: `/follow/`,
+                method: "POST",
+                data: formData,
+                headers: {
+                    Authorization: `Bearer ${user.access_token}`
+                },
+            });
+            if (response.data.status === "404") {
+                alert(`Failed to follow post`);
+                return;
+            }
+            await fetchListFollowing();
+            await loadPosts();
+        } catch (error) {
+            console.log(error)
+            alert(`Failed to unfollow post`);
+        }
+    };
 
     const fetchData = async () => {
         try {
@@ -85,13 +158,44 @@ const DetailCommunityContainer = () => {
                 Authorization: `Bearer ${user.access_token}`,
             },
         });
-        setFollow();
+        setFollowCommunity();
+        fetchListFollowingCommunity();
+        fetchData();
     };
+
+    const { likeAction, follow } = useHomeDispatcher();
+    const { posts, loadPosts } = useHomeProvider();
+    const [user, setUser] = useState();
+
+    const handleLikeButton = async (detailPost) => {
+        console.log(detailPost)
+        try {
+            await likeAction(detailPost.id);
+            await fetchDatas();
+        } catch (e) {
+
+        }
+        // alert("test")
+    }
+    const handleUnlikeButton = async (detailPost) => {
+        console.log(detailPost)
+        try {
+            await likeAction(detailPost.id);
+            await fetchDatas();
+        } catch (e) {
+
+        }
+        // alert("test")
+    }
+
 
     useEffect(() => {
         if (id) {
             fetchData();
             fetchDatas();
+            fetchListFollowing();
+            fetchListFollowingCommunity();
+            setUser(JSON.parse(localStorage.getItem('data')))
         }
     }, [id]);
 
@@ -126,14 +230,10 @@ const DetailCommunityContainer = () => {
                                         <img src={data.data.urlFileName} className='rounded-full h-28 w-28' width={100} height={100} alt='' />
                                         <h1 className="text-2xl py-5">{data.data.namaKomunitas}</h1>
 
-                                        <div>
-                                            <button
-                                                className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275] focus:bg-[#457275] focus:text-white"
-                                                onClick={handleOnFollow}
-                                            >
-                                                {follow ? "Ikuti" : "Mengikuti"}
-                                            </button>
-                                        </div>
+                                        {isFollowedCommunity = listFollowingCommunity.includes(data.data.id) ?
+                                            <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handleOnFollow(data.data.id)}>Mengikuti</button> </div>
+                                            : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handleOnFollow(data.data.id)}>Ikuti</button></div>}
+
 
                                     </div>
                                     <div className="flex-col justify-start border-y-2">
@@ -203,6 +303,12 @@ const DetailCommunityContainer = () => {
                                                                 </a>
                                                                 <div className="font-normal text-xs text-[#457275]">{dayjs(items.created_date).fromNow()}{" "}</div>
                                                             </div>
+                                                            <div className="flex justify-center items-center">
+                                                                {hideFollowButton = items.user.id === user.id ? <div /> : isFollowed = listFollowing.includes(items.user.id) ?
+                                                                    <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(items.user.id)}>Mengikuti</button> </div>
+                                                                    : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(items.user.id)}>Ikuti</button></div>}
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -220,8 +326,22 @@ const DetailCommunityContainer = () => {
                                                 </div>
 
                                                 <div className="bg-white flex justify-start mt-1">
-                                                    <div className="flex justify-center items-center -mx-1 my-3">
-                                                        <HeartIcon className="text-red-500 w-6 h-6" />{items.jumlahLike}
+                                                    <div className="flex justify-center items-center my-3 cursor-pointer">
+                                                        {
+                                                            items.likedBy.find((like) => like.user.id === user.id) ? (
+                                                                <LikeSolidIcon
+                                                                    className="text-red-500 w-6 h-6"
+                                                                    onClick={() => handleLikeButton(items)}
+                                                                />
+                                                            ) : (
+                                                                <LikeOutlineIcon
+                                                                    className="text-red-500 w-6 h-6"
+                                                                    onClick={() => handleUnlikeButton(items)}
+                                                                />
+                                                            )
+                                                        }
+
+                                                        {items.jumlahLike}
                                                         <a href={`./detail-post?id=${items.id}`}>
                                                             <div className="flex flex-row">
                                                                 <ChatIcon className="w-6 h-6 ml-3" />{items.jumlahKomentar}

@@ -7,14 +7,44 @@ import { Searchbar } from "../../components/searchbar";
 import { Icon } from '@iconify/react';
 import { SearchIcon } from "@heroicons/react/outline";
 import { ButtonFollow } from "../../components/button";
+import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
+import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
+import { useHomeDispatcher } from "../../redux/reducers/home";
+import { callAPI } from "../../helpers/network";
+import { useHomeProvider } from "../home/HomeProvider";
 
 const SearchPenggunaContainer = () => {
+    const [userId, setUserId] = useState();
     const [text, setText] = useState('')
     const [query] = useDebounce(text, 1000);
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState();
+    const [user, setUser] = useState()
+    const [listFollowing, setListFollowing] = useState([]);
+
+    const fetchListFollowing = async () => {
+
+        const user = JSON.parse(localStorage.getItem('data'))
+        try {
+            const response = await axios({
+                url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
+                method: 'get',
+                params: {
+                    idUser: user.id,
+                    page: 0,
+                    size: 30,
+                }
+            });
+            console.log("response > ", response.data);
+            setListFollowing(response.data.Data.content.map((value) => value.userFollowing.id));
+        } catch (error) {
+            console.log("error > ", error);
+        }
+    }
 
     async function searchUser() {
+        const user = JSON.parse(localStorage.getItem('data'))
+
         try {
             setLoading(true);
             const baseUrl = await axios({
@@ -36,8 +66,47 @@ const SearchPenggunaContainer = () => {
     };
 
     useEffect(() => {
-        searchUser()
+        searchUser();
+        fetchListFollowing();
+        setUser(JSON.parse(localStorage.getItem('data')))
+        setUserId(JSON.parse(localStorage.getItem('data')).id)
     }, [query]);
+
+
+    const handlefollow = async (idFollowing) => {
+
+        const user = JSON.parse(localStorage.getItem('data'))
+        try {
+            const formData = new FormData();
+            console.log(data)
+
+            formData.append("idFollowing", idFollowing);
+            formData.append("idFollower", user.id);
+            const response = await callAPI({
+                url: `/follow/`,
+                method: "POST",
+                data: formData,
+                headers: {
+                    Authorization: `Bearer ${user.access_token}`
+                },
+            });
+            // loadPosts();
+            if (response.data.status === "404") {
+                alert(`Failed to follow post`);
+                return;
+            }
+            await fetchListFollowing();
+            await searchUser();
+        } catch (error) {
+            console.log(error)
+            alert(`Failed to unfollow post`);
+        }
+        // loadPosts();
+        // fetchListFollowing();
+
+
+    };
+
 
     return (
         <AuthProvider>
@@ -83,15 +152,12 @@ const SearchPenggunaContainer = () => {
                                     </div>
                                 </div>
                             </a>
-                            <div>
-                                {/* <ButtonFollow /> */}
-                            </div>
 
+                            {hideFollowButton = search.id === user.id ? <div /> : isFollowed = listFollowing.includes(search.id) ?
+                                <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(search.id)}>Mengikuti</button> </div>
+                                : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(search.id)}>Ikuti</button></div>}
                         </div>
                     ))}
-                    <div>
-
-                    </div>
                 </section>
             </SearchPenggunaLayout>
         </AuthProvider>

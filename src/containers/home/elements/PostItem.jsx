@@ -24,16 +24,33 @@ import 'swiper/css/scrollbar';
 
 dayjs.extend(relativeTime);
 
-const PostItem = ({ data }) => {
-  console.log({ data });
+const PostItem = ({ data, isFollowed, hideFollowButton}) => {
   const { profile, picture } = useAccount();
-  // const { post } = usePostItem();
-  // const { handleRemove, handleEdit } = usePostItem();
-
-  // const postData = "test";
+  const [listFollowing, setListFollowing] = useState([]);
+  const [userId, setUserId] = useState();
   const { likeAction, follow } = useHomeDispatcher();
-
   const { posts, loadPosts } = useHomeProvider();
+
+  const fetchListFollowing = async () => {
+    const user = JSON.parse(localStorage.getItem('data'))
+    try {
+      const response = await axios({
+        url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
+        method: 'get',
+        params: {
+          idUser: user.id,
+          page: 0,
+          size: 30,
+        }
+      });
+      console.log("response > ", response.data);
+      setListFollowing(response.data.Data.content.map((value) => value.userFollowing.id));
+
+    } catch (error) {
+      console.log("error > ", error);
+    }
+  }
+
   const handleLikeButton = async (detailPost) => {
     console.log(detailPost)
     try {
@@ -42,7 +59,6 @@ const PostItem = ({ data }) => {
     } catch (e) {
 
     }
-    // alert("test")
   }
   const user = JSON.parse(localStorage.getItem('data'))
   const handleUnlikeButton = async (detailPost) => {
@@ -53,13 +69,9 @@ const PostItem = ({ data }) => {
     } catch (e) {
 
     }
-    // alert("test")
   }
-  // const onSubmit = async () =>{
-  //   console.log("tescuy")
 
   const handlefollow = async (idFollowing) => {
-
     const user = JSON.parse(localStorage.getItem('data'))
     try {
       const formData = new FormData();
@@ -75,31 +87,31 @@ const PostItem = ({ data }) => {
           Authorization: `Bearer ${user.access_token}`
         },
       });
-
+      fetchListFollowing();
+      loadPosts();
       if (response.data.status === "404") {
         alert(`Failed to follow post`);
         return;
       }
-
+      // await fetchListFollowing();
+      // await loadPosts();
     } catch (error) {
       console.log(error)
       alert(`Failed to unfollow post`);
     }
   };
-  // try{
-  //   await follow(followuser.id);
-  //   await loadPosts();
-  // }catch(e){
-
-  // }
-  // alert("test")
-  // }
-
 
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
+
+  useEffect(() => {
+    fetchListFollowing();
+    loadPosts();
+  }, []);
+
+
 
   // const filePosts = callAPI({
   //   url: `/post/list/${data.content.filePosts}`,
@@ -208,9 +220,13 @@ const PostItem = ({ data }) => {
                   {/* {
                 data.followedBy.find((follow) => follow.user.id === user.id) 
                 data ? ( */}
+                  {hideFollowButton ? <div /> : isFollowed ?
+                    <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(data.user.id)}>Mengikuti</button> </div>
+                    : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(data.user.id)}>Ikuti</button></div>}
 
 
-                  <button label='Ikuti' onClick={() => handlefollow(data.user.id)}>Follow</button>
+
+                  {/* <button label='Ikuti' onClick={() => handlefollow(data.user.id)}>Follow</button> */}
 
 
                   {/* //   ) : (
