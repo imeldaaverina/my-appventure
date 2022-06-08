@@ -7,7 +7,7 @@ import Navbarlogin from "./elements/Navbarlogin";
 
 const MainLayout = () => {
   return (
-    <>
+    <div className="flex justify-center items-center flex-col right-0 left-0 min-w-fit">
       <Navbarlogin />
       <Jumbotron />
       <main className="min-h-screen max-w-md mx-auto">
@@ -17,7 +17,7 @@ const MainLayout = () => {
         </HomeProvider>
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 

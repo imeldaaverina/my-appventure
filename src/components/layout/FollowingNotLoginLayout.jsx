@@ -7,7 +7,7 @@ import Image from "next/image";
 const FollowingNotLoginLayout = () => {
 
   return (
-    <>
+    <div className="flex justify-center items-center flex-col right-0 left-0 min-w-fit">
       <Navbar />
       <Jumbotronn />
       <main className="min-h-screen max-w-md mx-auto font-Poppins">
@@ -20,14 +20,14 @@ const FollowingNotLoginLayout = () => {
             <p>Anda belum mengikuti siapapun</p>
           </div>
           <div className="pt-10 text-lg text-[#008C96] underline">
-            <a href="./registration">
+            <a href="./login">
               Yuk bergabung!
             </a>
           </div>
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 

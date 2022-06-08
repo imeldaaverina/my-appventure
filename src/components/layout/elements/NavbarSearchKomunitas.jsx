@@ -2,8 +2,9 @@ import Link from "next/link";
 
 const NavbarSearchKomunitas = () => {
     return (
-        <nav className="font-Poppins bg-white h-16 sticky top-0 left-0 w-full z-50">
-            <div className="max-w-md h-full flex justify-between">
+        <div className="flex justify-center items-center flex-col right-0 left-0 min-w-fit">
+        <nav className="font-Poppins bg-white h-16 sticky top-0 left-0 right-0 min-w-fit z-50">
+        <div className="max-w-md h-full flex justify-between">
                 <Link href="/search-community" passHref>
                     <a>
                         <button type="button" className="flex h-full justify-center items-center px-7 flex-col border-b-4 border-[#186F79] text-[#186F79]">
@@ -42,6 +43,7 @@ const NavbarSearchKomunitas = () => {
 
             </div>
         </nav>
+        </div>
     )
 }
 

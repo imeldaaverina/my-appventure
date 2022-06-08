@@ -149,11 +149,11 @@ const SearchPostinganContainer = ({ hideFollowButton, isFollowed }) => {
     return (
         <AuthProvider>
             <SearchPostinganLayout>
-                <section>
+            <section className="left-0 right-0 min-w-fit">
                     <div className="navbar">
-                        <nav className="font-Poppins bg-[#457275] h-24 absolute top-0 left-0 w-full z-50">
-                            <div className="max-w-md mx-auto px-3 h-full flex justify-between items-center">
-                                <div className="text-white px-5">
+                        <nav className="font-Poppins flex justify-center items-center bg-[#457275] h-24 absolute top-0 left-0 right-0 min-w-fit z-50">
+                            <div className="max-w-2xl w-[400px] px-3 h-full flex justify-between items-center">
+                            <div className="text-white px-5">
                                     <a href="./home">
                                         <Icon icon="eva:arrow-circle-left-outline" width="30" />
                                     </a>

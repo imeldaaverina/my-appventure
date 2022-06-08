@@ -220,7 +220,7 @@ const ListDestinationContainer = () => {
                     <div className='mt-8 mb-4 font-semibold'>Popular Destination Untuk Kamu</div>
                     <Swiper
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
-                        spaceBetween={10}
+                        spaceBetween={2}
                         slidesPerView={3}
                         scrollbar={{ draggable: true }}
                         onSwiper={(swiper) => console.log(swiper)}
@@ -229,12 +229,12 @@ const ListDestinationContainer = () => {
                         {console.log(data)}
                         {data && data.map((item) => {
                             return (
-                                <SwiperSlide className="ml-8">
-                                    <div className='flex justify-around'>
+                                <SwiperSlide className="w-full">
+                                    <div className='flex w-full'>
                                         <a href={`./detail-destination?id=${item.id}`}>
-                                            <div className="flex w-40 h-48 flex-col items-center mb-10 border shadow-xl">
+                                            <div className="flex w-32 h-48 flex-col text-center items-center mb-10 border shadow-xl">
 
-                                                <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
+                                                <img src={item.urlFileName} className='mx-2 w-28 mt-2 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2 h-16">
                                                     <h1 className="font-semibold text-sm flex justify-center">{item.nama}</h1>
                                                 </div>
@@ -262,12 +262,12 @@ const ListDestinationContainer = () => {
                     >
                         {bali && bali.map((item) => {
                             return (
-                                <SwiperSlide className="ml-8">
-                                    <div className='flex justify-around'>
+                                <SwiperSlide className="w-full">
+                                    <div className='flex w-full'>
                                         <a href={`./detail-destination?id=${item.id}`}>
-                                            <div className="flex w-40 h-48 flex-col items-center mb-10 border shadow-xl">
+                                            <div className="flex w-32 h-48 flex-col text-center items-center mb-10 border shadow-xl">
 
-                                                <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
+                                                <img src={item.urlFileName} className='mx-2 w-28 mt-2 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2 h-16">
                                                     <h1 className="font-semibold text-sm flex justify-center">{item.nama}</h1>
                                                 </div>
@@ -295,12 +295,12 @@ const ListDestinationContainer = () => {
                     >
                         {jakarta && jakarta.map((item) => {
                             return (
-                                <SwiperSlide className="ml-8">
-                                    <div className='flex justify-around'>
+                                <SwiperSlide className="w-full">
+                                    <div className='flex w-full'>
                                         <a href={`./detail-destination?id=${item.id}`}>
-                                            <div className="flex w-40 h-48 flex-col items-center mb-10 border shadow-xl">
+                                            <div className="flex w-32 h-48 flex-col text-center items-center mb-10 border shadow-xl">
 
-                                                <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
+                                                <img src={item.urlFileName} className='mx-2 w-28 mt-2 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2 h-16">
                                                     <h1 className="font-semibold text-sm flex justify-center">{item.nama}</h1>
                                                 </div>
@@ -328,12 +328,12 @@ const ListDestinationContainer = () => {
                     >
                         {lombok && lombok.map((item) => {
                             return (
-                                <SwiperSlide className="ml-8">
-                                    <div className='flex justify-around'>
+                                <SwiperSlide className="w-full">
+                                    <div className='flex w-full'>
                                         <a href={`./detail-destination?id=${item.id}`}>
-                                            <div className="flex w-40 h-48 flex-col items-center mb-10 border shadow-xl">
+                                            <div className="flex w-32 h-48 flex-col text-center items-center mb-10 border shadow-xl">
 
-                                                <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
+                                                <img src={item.urlFileName} className='mx-2 w-28 mt-2 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2 h-16">
                                                     <h1 className="font-semibold text-sm flex justify-center">{item.nama}</h1>
                                                 </div>
@@ -361,12 +361,12 @@ const ListDestinationContainer = () => {
                     >
                         {jogja && jogja.map((item) => {
                             return (
-                                <SwiperSlide className="ml-8">
-                                    <div className='flex justify-around'>
+                                <SwiperSlide className="w-full">
+                                    <div className='flex w-full'>
                                         <a href={`./detail-destination?id=${item.id}`}>
-                                            <div className="flex w-40 h-48 flex-col items-center mb-10 border shadow-xl">
+                                            <div className="flex w-32 h-48 flex-col text-center items-center mb-10 border shadow-xl">
 
-                                                <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
+                                                <img src={item.urlFileName} className='mx-2 w-28 mt-2 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2 h-16">
                                                     <h1 className="font-semibold text-sm flex justify-center">{item.nama}</h1>
                                                 </div>
@@ -394,12 +394,12 @@ const ListDestinationContainer = () => {
                     >
                         {surabaya && surabaya.map((item) => {
                             return (
-                                <SwiperSlide className="ml-8">
-                                    <div className='flex justify-around'>
+                                <SwiperSlide className="w-full">
+                                    <div className='flex w-full'>
                                         <a href={`./detail-destination?id=${item.id}`}>
-                                            <div className="flex w-40 h-48 flex-col items-center mb-10 border shadow-xl">
+                                            <div className="flex w-32 h-48 flex-col text-center items-center mb-10 border shadow-xl">
 
-                                                <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
+                                                <img src={item.urlFileName} className='mx-2 w-28 mt-2 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2 h-16">
                                                     <h1 className="font-semibold text-sm flex justify-center">{item.nama}</h1>
                                                 </div>
@@ -427,12 +427,12 @@ const ListDestinationContainer = () => {
                     >
                         {malang && malang.map((item) => {
                             return (
-                                <SwiperSlide className="ml-8">
-                                    <div className='flex justify-around'>
+                                <SwiperSlide className="w-full">
+                                    <div className='flex w-full'>
                                         <a href={`./detail-destination?id=${item.id}`}>
-                                            <div className="flex w-40 h-48 flex-col items-center mb-10 border shadow-xl">
+                                            <div className="flex w-32 h-48 flex-col text-center items-center mb-10 border shadow-xl">
 
-                                                <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
+                                                <img src={item.urlFileName} className='mx-2 w-28 mt-2 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2 h-16">
                                                     <h1 className="font-semibold text-sm flex justify-center">{item.nama}</h1>
                                                 </div>
@@ -460,12 +460,12 @@ const ListDestinationContainer = () => {
                     >
                         {makassar && makassar.map((item) => {
                             return (
-                                <SwiperSlide className="ml-8">
-                                    <div className='flex justify-around'>
+                                <SwiperSlide className="w-full">
+                                    <div className='flex w-full'>
                                         <a href={`./detail-destination?id=${item.id}`}>
-                                            <div className="flex w-40 h-48 flex-col items-center mb-10 border shadow-xl">
+                                            <div className="flex w-32 h-48 flex-col text-center items-center mb-10 border shadow-xl">
 
-                                                <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
+                                                <img src={item.urlFileName} className='mx-2 w-28 mt-2 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2 h-16">
                                                     <h1 className="font-semibold text-sm flex justify-center">{item.nama}</h1>
                                                 </div>
@@ -493,12 +493,12 @@ const ListDestinationContainer = () => {
                     >
                         {lampung && lampung.map((item) => {
                             return (
-                                <SwiperSlide className="ml-8">
-                                    <div className='flex justify-around'>
+                                <SwiperSlide className="w-full">
+                                    <div className='flex w-full'>
                                         <a href={`./detail-destination?id=${item.id}`}>
-                                            <div className="flex w-40 h-48 flex-col items-center mb-10 border shadow-xl">
+                                            <div className="flex w-32 h-48 flex-col text-center items-center mb-10 border shadow-xl">
 
-                                                <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
+                                                <img src={item.urlFileName} className='mx-2 w-28 mt-2 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2 h-16">
                                                     <h1 className="font-semibold text-sm flex justify-center">{item.nama}</h1>
                                                 </div>
@@ -526,12 +526,12 @@ const ListDestinationContainer = () => {
                     >
                         {bandung && bandung.map((item) => {
                             return (
-                                <SwiperSlide className="ml-8">
-                                    <div className='flex justify-around'>
+                                <SwiperSlide className="w-full">
+                                    <div className='flex w-full'>
                                         <a href={`./detail-destination?id=${item.id}`}>
-                                            <div className="flex w-40 h-48 flex-col items-center mb-10 border shadow-xl">
+                                            <div className="flex w-32 h-48 flex-col text-center items-center mb-10 border shadow-xl">
 
-                                                <img src={item.urlFileName} className='m-2 w-36 rounded-sm h-32' width={90} height={90} alt='' />
+                                                <img src={item.urlFileName} className='mx-2 w-28 mt-2 rounded-sm h-32' width={90} height={90} alt='' />
                                                 <div className="flex justify-center items-center mx-2 mb-2 h-16">
                                                     <h1 className="font-semibold text-sm flex justify-center">{item.nama}</h1>
                                                 </div>

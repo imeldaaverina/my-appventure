@@ -8,7 +8,7 @@ import PostsNotLogin from "../../containers/home/elements/PostsNotLogin";
 const HomeNotLoginLayout = () => {
 
   return (
-    <>
+    <div className="flex justify-center items-center flex-col right-0 left-0 min-w-fit">
       <Navbar />
       <Jumbotronn />
       <main className="min-h-screen max-w-md mx-auto">
@@ -18,7 +18,7 @@ const HomeNotLoginLayout = () => {
         </HomeProvider>
       </main>
       <Footer />
-    </>
+    </div>
   );
 
 };

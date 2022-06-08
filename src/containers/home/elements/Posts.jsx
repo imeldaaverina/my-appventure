@@ -48,7 +48,7 @@ const Posts = () => {
 
   return (
     <section>
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         {loading && <div className="mt-16">
           <FadeLoader color={color} loading={loading} css={override} size={200} />
           <p className="mt-2 font-Poppins font-semibold text-xl">Silahkan Tunggu...</p>

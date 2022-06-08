@@ -94,12 +94,12 @@ const CommunityContainer = () => {
 
   return (
     <AuthProvider>
-      <main className="font-Poppins min-h-screen bg-cover flex flex-col justify-center items-center bg-center w-full">
+      <main className="font-Poppins min-h-screen bg-cover flex flex-col justify-center items-center bg-center mx-auto min-w-fit">
         <div className='flex flex-col w-96'>
 
-          <div className='flex'>
+          <div className='flex justify-center items-center'>
             <a href="./community">
-              <ArrowCircleLeftIcon className='w-10 h-10 ' />
+              <ArrowCircleLeftIcon className='w-10 h-10 -ml-5' />
             </a>
             <div className='font-medium text-2xl flex justify-center items-center ml-5 lg:max-w-7-xl max-w-sm'>Buat Komunitas Baru</div>
           </div>

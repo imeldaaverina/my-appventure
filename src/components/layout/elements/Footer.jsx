@@ -2,7 +2,8 @@ import Image from 'next/image'
 
 const Footer = () => {
   return (
-    <footer className="font-Poppins bg-[#457275] min-h-min px-3 rounded-t-xl bottom-0 left-0 w-full z-50">
+    // <div className='flex justify-center items-center bg-[#457275] left-0 right-0'>
+    <footer className="font-Poppins bg-[#457275] bg-cover min-h-min px-3 rounded-t-xl bottom-0 left-0 right-0 w-full z-50">
       <div className="max-w-md mx-auto h-full">
         <div className="flex justify-start font-bold text-2xl text-white pb-5">
           <div className="flex self-center mr-4">
@@ -28,6 +29,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    // </div>
   )
 }
 

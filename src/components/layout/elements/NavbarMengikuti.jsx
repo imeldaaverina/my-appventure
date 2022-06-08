@@ -2,8 +2,8 @@ import Link from "next/link";
 
 const NavbarMengikuti = () => {
   return (
-    <nav className="font-Poppins bg-white h-16 sticky top-0 left-0 w-full z-50">
-      <div className="max-w-md h-full flex justify-between mx-3">
+    <nav className="font-Poppins backdrop-blur-sm bg-white/40 h-16 stikcy top-0 left-0 min-w-fit right-0 z-50">
+      <div className="max-w-md  h-full flex justify-between mx-3">
 
         <Link href="/follower-list" passHref>
           <a>

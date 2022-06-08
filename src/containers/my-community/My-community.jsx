@@ -68,7 +68,7 @@ const MyCommunityContainer = () => {
                                             <a href={`./detail-community?id=${item.komunitas.id}`}>
                                                 <div className="flex flex-col justify-center items-center mb-10">
                                                     <img src={item.komunitas.urlFileName} className='rounded-full w-20 h-20' width={90} height={90} alt='' />
-                                                    <h1 className="text-[#3D3D3D] mt-2">{item.komunitas.namaKomunitas}</h1>
+                                                    <h1 className="text-[#3D3D3D] mt-2 flex justify-center text-center">{item.komunitas.namaKomunitas}</h1>
                                                 </div>
                                             </a>
                                         </>

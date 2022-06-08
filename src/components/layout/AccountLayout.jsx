@@ -4,11 +4,12 @@ import Navbarmyprofile from "./elements/Navbarmyprofile";
 const AccountLayout = ({ children }) => {
 
   return (
-    <>
+    <div>
       <Navbarmyprofile />
+      
       {children}
       <Footer />
-    </>
+    </div>
   );
 
 };
