@@ -1,12 +1,12 @@
 import Footer from "./elements/Footer";
 import Navbarmyprofile from "./elements/Navbarmyprofile";
 
-const AccountLayout = ({children}) => {
+const AccountLayout = ({ children }) => {
 
   return (
     <>
       <Navbarmyprofile />
-        {children}
+      {children}
       <Footer />
     </>
   );

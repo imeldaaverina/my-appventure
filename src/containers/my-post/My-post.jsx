@@ -3,14 +3,11 @@ import { Icon } from '@iconify/react';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { MyPostLayout } from "../../components/layout";
-import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
+import { ChatIcon} from "@heroicons/react/outline";
 import Image from "next/image"
-import { useListCommunityDispatcher } from "../../redux/reducers/listCommunity/slice";
 import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
 import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
 import { useHomeDispatcher } from "../../redux/reducers/home";
-import { callAPI } from "../../helpers/network";
-import { useHomeProvider } from "../home/HomeProvider";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -22,20 +19,17 @@ import 'swiper/css/scrollbar';
 
 dayjs.extend(relativeTime);
 
-
 const MyPostContainer = () => {
-    const [user, setUser] = useState()
+    const [user, setUser] = useState();
+    const [data, setData] = useState();
+    const { likeAction, follow } = useHomeDispatcher();
     const [isReadMore, setIsReadMore] = useState(true);
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
     };
 
-
-    const [data, setData] = useState();
-
     const fetchData = async () => {
         const user = JSON.parse(localStorage.getItem('data'))
-        // const user = JSON.parse(datalocal)
         try {
             const response = await axios({
                 url: `https://myappventure-api.herokuapp.com/api/post/list`,
@@ -54,16 +48,7 @@ const MyPostContainer = () => {
         } catch (error) {
             console.log("error > ", error);
         }
-
-
     };
-
-    useEffect(() => {
-        fetchData();
-        setUser(JSON.parse(localStorage.getItem('data')))
-    }, []);
-
-    const { likeAction, follow } = useHomeDispatcher();
 
     const handleLikeButton = async (detailPost) => {
         console.log(detailPost)
@@ -85,6 +70,10 @@ const MyPostContainer = () => {
         }
     }
 
+    useEffect(() => {
+        fetchData();
+        setUser(JSON.parse(localStorage.getItem('data')))
+    }, []);
 
     return (
         <AuthProvider>

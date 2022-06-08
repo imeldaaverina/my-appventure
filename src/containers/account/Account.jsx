@@ -2,17 +2,9 @@ import AuthProvider from "../../providers/auth/AuthProvider";
 import AccountLayout from "../../components/layout/AccountLayout";
 import { Icon } from '@iconify/react';
 import { ButtonMyProfile, ButtonMyProfileSandi, Button } from "../../components/button";
-import { useAccountDispatcher } from '../../redux/reducers/account';
-import { useFormik, getIn } from "formik";
-import { CameraIcon } from '@heroicons/react/outline';
-import { useRouter } from "next/router";
 import useAccount from "./hooks/useAccount"
-import { data } from "autoprefixer";
-import Image from "next/dist/client/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLoginDispatcher } from "../../redux/reducers/login/slice";
-import { callAPI } from "../../helpers/network";
 
 const initialValues = {
   files: null,
@@ -88,9 +80,9 @@ const AccountContainer = () => {
                 </a>
               </div>
 
-                <div className="w-40 h-40 m-auto flex justify-center items-center border rounded-full bg-white">
-                  <img className="rounded-full w-40 h-40" src={picture} width={100} height={100} />
-                </div>
+              <div className="w-40 h-40 m-auto flex justify-center items-center border rounded-full bg-white">
+                <img className="rounded-full w-40 h-40" src={picture} width={100} height={100} />
+              </div>
 
               <div className="text-white pt-8 font-medium text-2xl flex justify-center">
                 {profile}
@@ -133,9 +125,6 @@ const AccountContainer = () => {
               </div>
             </a>
             <div className="pt-14">
-              <ButtonMyProfileSandi type="" label="Undang Teman" />
-            </div>
-            <div className="pt-3">
               <button onClick={() => handleLogout()} type="button"
                 className="text-white bg-[#329D9C] text-xl font-semibold w-full h-full rounded-xl py-3 px-3 flex justify-center items-center">Keluar</button>
             </div>

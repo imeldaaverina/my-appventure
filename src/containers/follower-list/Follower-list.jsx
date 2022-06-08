@@ -6,13 +6,10 @@ import useAccount from "../account/hooks/useAccount"
 import Image from "next/image"
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ButtonFollow } from "../../components/button";
 import { callAPI } from "../../helpers/network";
-import { Searchbar } from "../../components/searchbar";
 
 const FollowerListContainer = ({ hideFollowButton, isFollowed }) => {
     const { profile } = useAccount();
-
     const [data, setData] = useState();
     const [listFollowing, setListFollowing] = useState([]);
     const [user, setUser] = useState();

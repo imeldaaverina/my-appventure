@@ -31,23 +31,23 @@ const MyCommunityContainer = () => {
                             <p>
                                 <b className="text-[#457275]">Kebijakan Privasi</b><br></br>
 
-                                My Appventure merupakan platform online bagi seluruh komunitas pecinta alam di Indonesia. 
-                                Dengan menjadi pengguna, Anda memercayakan informasi personal Anda kepada kami. 
-                                Kebijakan Privasi ini bertujuan untuk membantu Anda memahami data apa saja yang kami kumpulkan, 
-                                alasan kami mengumpulkannya, dan apa yang kami lakukan terhadap data tersebut. 
+                                My Appventure merupakan platform online bagi seluruh komunitas pecinta alam di Indonesia.
+                                Dengan menjadi pengguna, Anda memercayakan informasi personal Anda kepada kami.
+                                Kebijakan Privasi ini bertujuan untuk membantu Anda memahami data apa saja yang kami kumpulkan,
+                                alasan kami mengumpulkannya, dan apa yang kami lakukan terhadap data tersebut.
                                 Ini penting, kami harap Anda dapat meluangkan waktu untuk membaca dan memahaminya dengan saksama.
-<br></br><br></br>
+                                <br></br><br></br>
                                 <b className="text-[#457275]">Pengenalan</b><br></br>
 
-                                My Appventure sebagai media komunikasi untuk pecinta alam di Indonesia selalu memberikan yang terbaik untuk 
-                                pengguna. 
+                                My Appventure sebagai media komunikasi untuk pecinta alam di Indonesia selalu memberikan yang terbaik untuk
+                                pengguna.
                                 My Appventure sangat menghormati dan melindungi privasi pengguna dengan menerapkan prinsip-prinsip:<br></br><br></br>
-                                1. My Appventure akan mengonfirmasikan kepada pengguna mengenai informasi pribadi yang akan dikumpulkan dan apabila 
-                                diperlukan meminta persetujuan pengguna untuk mengumpulkan, mengolah, menggunakan, atau mengungkapkan informasi 
+                                1. My Appventure akan mengonfirmasikan kepada pengguna mengenai informasi pribadi yang akan dikumpulkan dan apabila
+                                diperlukan meminta persetujuan pengguna untuk mengumpulkan, mengolah, menggunakan, atau mengungkapkan informasi
                                 pribadi pengguna.<br></br><br></br>
-                                2. My Appventure hanya mengumpulkan informasi yang diperlukan untuk mencapai tujuan penggunaan yang telah 
+                                2. My Appventure hanya mengumpulkan informasi yang diperlukan untuk mencapai tujuan penggunaan yang telah
                                 diiidentifikasi.<br></br><br></br>
-                                3. My Appventure akan menggunakan atau mengungkapkan informasi pribadi pengguna hanya sesuai dengan tujuan 
+                                3. My Appventure akan menggunakan atau mengungkapkan informasi pribadi pengguna hanya sesuai dengan tujuan
                                 pengumpulannya.<br></br><br></br>
                             </p>
                         </div>

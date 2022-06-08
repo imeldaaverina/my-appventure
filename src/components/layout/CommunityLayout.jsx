@@ -7,10 +7,10 @@ const CommunityLayout = ({ children }) => {
   return (
     <>
       <Navbarlogin />
-        <Jumbotron />
-        <main className="min-h-screen max-w-md mx-auto">
-          {children}
-        </main>
+      <Jumbotron />
+      <main className="min-h-screen max-w-md mx-auto">
+        {children}
+      </main>
       <Footer />
     </>
   );

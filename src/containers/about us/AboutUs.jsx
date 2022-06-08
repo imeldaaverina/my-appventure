@@ -80,17 +80,17 @@ const AboutUsContainer = () => {
                             </div>
                         </div>
                         <div className="flex gap-12 justify-center ">
-                                <div className="flex flex-col justify-center items-center mb-8">
-                                    <img src="/krissy.svg" className='rounded-full w-24 h-24 mb-3' width={100} height={100} alt='' />
-                                    <h1 className="font-medium text-sm">Krissy Vieri</h1>
-                                    <h1 className="text-xs">QA Team</h1>
-                                </div>
-                                <div className="flex flex-col justify-center items-center mb-8">
-                                    <img src="/daniella.svg" className='rounded-full w-24 h-24 mb-3' width={100} height={100} alt='' />
-                                    <h1 className="font-medium text-sm">Daniella Deilova</h1>
-                                    <h1 className="text-xs">QA Team</h1>
-                                </div>
+                            <div className="flex flex-col justify-center items-center mb-8">
+                                <img src="/krissy.svg" className='rounded-full w-24 h-24 mb-3' width={100} height={100} alt='' />
+                                <h1 className="font-medium text-sm">Krissy Vieri</h1>
+                                <h1 className="text-xs">QA Team</h1>
                             </div>
+                            <div className="flex flex-col justify-center items-center mb-8">
+                                <img src="/daniella.svg" className='rounded-full w-24 h-24 mb-3' width={100} height={100} alt='' />
+                                <h1 className="font-medium text-sm">Daniella Deilova</h1>
+                                <h1 className="text-xs">QA Team</h1>
+                            </div>
+                        </div>
 
                     </div>
                 </section>

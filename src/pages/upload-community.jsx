@@ -4,7 +4,7 @@ const UploadKomunitasPage = () => {
   return (
     <>
       <Head>
-        <title>Upload - My Appventure</title>
+        <title>Upload Community - My Appventure</title>
       </Head>
       <UploadKomunitasContainer />
     </>

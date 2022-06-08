@@ -3,17 +3,11 @@ import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { SearchPenggunaLayout } from "../../components/layout";
 import axios from "axios";
-import { Searchbar } from "../../components/searchbar";
 import { Icon } from '@iconify/react';
 import { SearchIcon } from "@heroicons/react/outline";
-import { ButtonFollow } from "../../components/button";
-import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
-import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
-import { useHomeDispatcher } from "../../redux/reducers/home";
 import { callAPI } from "../../helpers/network";
-import { useHomeProvider } from "../home/HomeProvider";
 
-const SearchPenggunaContainer = ({hideFollowButton, isFollowed}) => {
+const SearchPenggunaContainer = ({ hideFollowButton, isFollowed }) => {
     const [userId, setUserId] = useState();
     const [text, setText] = useState('')
     const [query] = useDebounce(text, 1000);
@@ -105,7 +99,6 @@ const SearchPenggunaContainer = ({hideFollowButton, isFollowed}) => {
         // };
     }, [query]);
 
-
     return (
         <AuthProvider>
             <SearchPenggunaLayout>
@@ -150,9 +143,10 @@ const SearchPenggunaContainer = ({hideFollowButton, isFollowed}) => {
                                     </div>
                                 </div>
                             </a>
+                            
                             <div className="flex justify-center items-center">
                                 {console.log(search)}
-                                {hideFollowButton = search.id === user.id? <div /> : isFollowed = listFollowing.includes(search.id)?
+                                {hideFollowButton = search.id === user.id ? <div /> : isFollowed = listFollowing.includes(search.id) ?
                                     <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(search.id)}>Mengikuti</button> </div>
                                     : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(search.id)}>Ikuti</button></div>}
                             </div>

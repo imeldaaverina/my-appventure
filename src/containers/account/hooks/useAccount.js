@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react"; 
- 
-const useAccount = () => { 
- 
-  const [profile, setProfile] = useState(); 
-  const [picture, setPicture] = useState(); 
-  
- 
+import { useState, useEffect } from "react";
+
+const useAccount = () => {
+
+  const [profile, setProfile] = useState();
+  const [picture, setPicture] = useState();
+
+
   const loadProfile = () => {
     const _profile = localStorage.getItem('username');
     setProfile(_profile);
@@ -15,17 +15,17 @@ const useAccount = () => {
     const _picture = localStorage.getItem('picture');
     setPicture(_picture);
   };
- 
-  useEffect(() => { 
+
+  useEffect(() => {
     loadProfile(),
-    loadPicture();  
-  }, []) 
- 
-  return { 
+      loadPicture();
+  }, [])
+
+  return {
     profile,
     picture
-  } 
- 
-} 
- 
+  }
+
+}
+
 export default useAccount;

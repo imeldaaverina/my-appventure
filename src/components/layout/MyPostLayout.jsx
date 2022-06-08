@@ -1,6 +1,6 @@
 import Footer from "./elements/Footer";
 
-const MyPostLayout = ({children}) => {
+const MyPostLayout = ({ children }) => {
 
   return (
     <>

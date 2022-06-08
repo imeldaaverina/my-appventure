@@ -10,7 +10,7 @@ const useForm = ({
     const [touched, setTouched] = useState(initTouched);
     const [errors, setErrors] = useState();
     const [isValid, setIsValid] = useState(false);
-    
+
     const handleChange = (fieldName, value) => {
         setValues({
             ...values,
@@ -36,55 +36,55 @@ const useForm = ({
                 console.log('error > ', error);
             }
         }
-     }
-     const hasErrors = (fieldName) => {
-         if (touched && errors) {
-             return touched[fieldName] && errors[fieldName];
-            }
+    }
+    const hasErrors = (fieldName) => {
+        if (touched && errors) {
+            return touched[fieldName] && errors[fieldName];
         }
-        const validateField = () => {
-            const _isValid = true;
-            const _errors = {};
-            if (!values.password) {
-                _isValid = false;
-                Object.assign(_errors, { ..._errors, password: 'password and email is required' });
-            }
-            if (!values.email) {
-                _isValid = false;
-                Object.assign(_errors, { ..._errors, email: 'diperlukan email' });
-            }
-            if (touched.email && !values.email) {
-                _isValid = false;
-                Object.assign(_errors, { ..._errors, email: 'diperlukan email' });
-            }
-            if (touched.password && !values.password) {
-                _isValid = false;
-                Object.assign(_errors, { ..._errors, password: 'password and email is required' });
-            }
-            if (values.password && values.password !== "" && values.password.length < 6 && values.password.length > 10) {
-                _isValid = false;
-                Object.assign(_errors, { ..._errors, password: 'password harus 6-10 karakter' });
-            }
-            if (values.email && values.email !== "" && !values.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-                _isValid = false;
-                Object.assign(_errors, { ..._errors, email: 'email tidak valid' });
-            }
-           
-            setErrors(_errors);
-            setIsValid(_isValid);
+    }
+    const validateField = () => {
+        const _isValid = true;
+        const _errors = {};
+        if (!values.password) {
+            _isValid = false;
+            Object.assign(_errors, { ..._errors, password: 'password and email is required' });
         }
-        useEffect(() => {
-            validateField();
-        }, [values, touched]);
-        return {
-            handleChange,
-            handleSubmit,
-            handleBlur,
-            hasErrors,
-            errors,
-            values,
-            touched,
-            isValid
+        if (!values.email) {
+            _isValid = false;
+            Object.assign(_errors, { ..._errors, email: 'diperlukan email' });
         }
-    };
-    export default useForm;
+        if (touched.email && !values.email) {
+            _isValid = false;
+            Object.assign(_errors, { ..._errors, email: 'diperlukan email' });
+        }
+        if (touched.password && !values.password) {
+            _isValid = false;
+            Object.assign(_errors, { ..._errors, password: 'password and email is required' });
+        }
+        if (values.password && values.password !== "" && values.password.length < 6 && values.password.length > 10) {
+            _isValid = false;
+            Object.assign(_errors, { ..._errors, password: 'password harus 6-10 karakter' });
+        }
+        if (values.email && values.email !== "" && !values.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+            _isValid = false;
+            Object.assign(_errors, { ..._errors, email: 'email tidak valid' });
+        }
+
+        setErrors(_errors);
+        setIsValid(_isValid);
+    }
+    useEffect(() => {
+        validateField();
+    }, [values, touched]);
+    return {
+        handleChange,
+        handleSubmit,
+        handleBlur,
+        hasErrors,
+        errors,
+        values,
+        touched,
+        isValid
+    }
+};
+export default useForm;

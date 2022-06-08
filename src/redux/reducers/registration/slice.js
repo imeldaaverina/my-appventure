@@ -73,12 +73,6 @@ export const useRegistrationDispatcher = () => {
 
     
     console.log(data.data.data)
-    localStorage.setItem("access_token", data.data.access_token);
-    localStorage.setItem("data", JSON.stringify(data.data));
-    localStorage.setItem("username", data.data.data.nama);
-    localStorage.setItem("picture", data.data.data.urlFileName);
-    localStorage.setItem("email", data.data.data.username);
-    localStorage.setItem("id", data.data.data.id);
     push('/success-registration');
     dispatch(toggleLoading(false));
   };

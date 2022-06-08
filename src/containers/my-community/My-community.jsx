@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { MyCommunityLayout } from "../../components/layout";
 import Image from "next/image"
-import { useListCommunityDispatcher } from "../../redux/reducers/listCommunity/slice";
 
 const MyCommunityContainer = () => {
     const [data, setData] = useState();

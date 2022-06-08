@@ -3,10 +3,8 @@ import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { SearchKomunitasLayout } from "../../components/layout";
 import axios from "axios";
-import { Searchbar } from "../../components/searchbar";
 import { Icon } from '@iconify/react';
 import { SearchIcon } from "@heroicons/react/outline";
-import { ButtonFollow } from "../../components/button";
 
 const SearchKomunitasContainer = () => {
     const [text, setText] = useState('')

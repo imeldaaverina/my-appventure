@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import { useLandingDispatcher } from '../../redux/reducers/landing';
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
 import Image from "next/dist/client/image";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const validationSchema = Yup.object({
     email: Yup.string().required("diperlukan email").email("email tidak valid"),
@@ -18,8 +18,6 @@ const initialValues = {
 };
 
 const LandingContainer = () => {
-    const [text, setText] = useState('')
-
     const { landing: { loading }, doLanding } = useLandingDispatcher();
 
     const onSubmit = async (values) => {

@@ -1,7 +1,5 @@
 import useAccount from "../account/hooks/useAccount";
-import ReactDOM from "react-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import Link from "next/link";
 import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -12,30 +10,11 @@ import { useFormik, getIn } from "formik";
 import * as Yup from "yup";
 import React, { useState, useRef, useEffect } from "react";
 import { callAPI } from "../../helpers/network";
-import { getJwt, getUser } from "../../helpers/auth";
 import { useRouter } from "next/router";
-import { useCreatePostDispatcher } from '../../redux/reducers/post';
 
 import { Icon } from "@iconify/react";
-import {
-  HeartIcon,
-  ChatIcon,
-  LinkIcon,
-  ArrowCircleLeftIcon,
-  UsersIcon,
-  ClipboardCheckIcon,
-  CameraIcon,
-  ExclamationCircleIcon,
-} from "@heroicons/react/outline";
-import {
-  Button3,
-  ButtonFollow,
-  Button,
-  ButtonPost,
-} from "../../components/button";
-
-// import { useUploadDispatcher } from "../redux/reducers/create-post";
-// import { useUploadtDispatcher } from "../../redux/reducers/upload";
+import { ArrowCircleLeftIcon, ExclamationCircleIcon, } from "@heroicons/react/outline";
+import { ButtonPost, } from "../../components/button";
 
 const validationSchema = Yup.object({
   text: Yup.string().required("diperlukan text").max(2500, "text tidak lebih dari 2500 kata"),
@@ -46,8 +25,6 @@ const initialValues = {
   text: "",
   file: null,
 };
-
-// const user = JSON.parse(localStorage.getItem("data"));
 
 const TextAreaInput = styled.textarea`
   height: ${(props) => props.idealHeight || "160px"};
@@ -61,7 +38,6 @@ const UploadKomunitas = () => {
 
   const id = query.id;
 
-  // const [loading, setLoading] = useState(false);
   const [previews, setPreviews] = useState();
   const { push } = useRouter();
 
@@ -94,9 +70,9 @@ const UploadKomunitas = () => {
         },
       });
       console.log(response)
-       if (response.data.status == 200) {
-         push(`./detail-community?id=${id}`);
-       }
+      if (response.data.status == 200) {
+        push(`./detail-community?id=${id}`);
+      }
 
 
     } catch (error) {
@@ -107,20 +83,6 @@ const UploadKomunitas = () => {
     }
 
   };
-
-  const {
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    errors,
-    values,
-    touched,
-    setFieldValue,
-  } = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit
-  });
 
   const handleChangeFiles = (e) => {
     const files = e.target.files;
@@ -140,12 +102,6 @@ const UploadKomunitas = () => {
   const textareaRef = useRef("");
   const [currentValue, setCurrentValue] = useState(""); // you can manage data with it
 
-  // useEffect(() => {
-  //     textareaRef.current.style.height = "0px";
-  //     const scrollHeight = textareaRef.current.scrollHeight;
-  //     textareaRef.current.style.height = scrollHeight + "px";
-  // }, [currentValue]);
-
   const idealHeight = useRef(32);
   const lastScrollHeight = useRef(50);
   const textAreaRef = useRef(null);
@@ -164,10 +120,6 @@ const UploadKomunitas = () => {
     if (previews && previews.length > 0) {
       return previews.map((item) => (
         <div className="inline-flex justify-center items-center text-center h-28 w-28  text-sm cursor-pointer hover:bg-gray-300 rounded-lg">
-          {/* <img
-                src={URL.createObjectURL(item)}
-                className="object-cover h-full w-full rounded-lg"
-              /> */}
           {item.type.includes("image") ? (
             <Image
               src={URL.createObjectURL(item)}
@@ -188,11 +140,19 @@ const UploadKomunitas = () => {
     return <></>;
   };
 
-  // const PostItem = ({ id, data }) => {
-  //   const { handleRemove, handleEdit } = usePostItem();
-  //   // const { home, makeIncrement } = useHomeDispatch();
-
-  //   const postData = 'besok minggu saya akan pergi berkemah dengan teman - teman saya. Saya berkemah di gunung bromo! Saya sangat tidak sabar!';
+  const {
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    errors,
+    values,
+    touched,
+    setFieldValue,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit
+  });
 
   useEffect(() => {
     if (id) {
@@ -203,8 +163,6 @@ const UploadKomunitas = () => {
   return (
     <AuthProvider>
       <UploadLayout>
-
-        {/* {console.log (previews)} */}
         <div className="min-h-screen font-Poppins flex justify-center ">
           <div className="max-w-lg">
             <div className="flex flex-col mt-5 w-96 justify-center items-center">

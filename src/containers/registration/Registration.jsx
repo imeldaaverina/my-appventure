@@ -14,7 +14,6 @@ const validationSchema = Yup.object({
   username: Yup.string().required("diperlukan username").min(3, "username gunakan 3-15 karakter").max(15, "username gunakan 3-15 karakter"),
   email: Yup.string().required("diperlukan email").email("email tidak valid"),
   password: Yup.string().required("diperlukan kata sandi").min(6, "gunakan 6-10 karakter, tanpa spasi").max(10, "gunakan 6-10 karakter, tanpa spasi").matches(/^\S+$/, "gunakan 6-10 karakter, tanpa spasi"),
-  // files: Yup.mixed().required("diperlukan foto profil"),
 });
 
 const initialValues = {
@@ -29,10 +28,17 @@ const RegistrationContainer = () => {
 
   const { push } = useRouter();
 
+  const [preview, setPreview] = useState();
+  const handleChangeFile = (e) => {
+    const files = e.target.files;
+    if (files) {
+      setPreview(URL.createObjectURL(files[0]));
+      setFieldValue('files', files[0]);
+    }
+  };
+
   const onSubmit = async (values) => {
-
     try {
-
       const payload = {
         file: values.files,
         username: values.username,
@@ -42,7 +48,6 @@ const RegistrationContainer = () => {
 
       await doRegistration(payload);
 
-      // window.location.href = "/";  
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +57,6 @@ const RegistrationContainer = () => {
     const formData = new FormData();
     formData.append('file', formValues.files);
     const upload = await callAPI({
-      // url: '/v1/upload',
       url: "/user/register",
       method: 'post',
       data: formData,
@@ -99,15 +103,6 @@ const RegistrationContainer = () => {
     onSubmit
   });
 
-  const [preview, setPreview] = useState();
-  const handleChangeFile = (e) => {
-    const files = e.target.files;
-    if (files) {
-      setPreview(URL.createObjectURL(files[0]));
-      setFieldValue('files', files[0]);
-    }
-  };
-
   return (
     <NoAuthProvider>
       <main className="font-Poppins min-h-screen bg-cover flex justify-center items-center bg-center bg-[url('/blur_bg.png')]">
@@ -118,7 +113,7 @@ const RegistrationContainer = () => {
                 <div className="pr-9 pt-3">
                   <Title text="Hai," />
                 </div>
-                <a href="#">
+                <a href="./for-you">
                   <ButtonExit />
                 </a>
               </div>
@@ -161,9 +156,7 @@ const RegistrationContainer = () => {
                 placeholder="Ketik username anda disini"
                 onChange={handleChange}
                 onBlur={handleBlur}
-              // dataTestId="input-nama"
               />
-              {/* <div className="flex justify-center"> */}
               <div className="font-normal text-sm mb-1 flex justify-between">
                 Email
                 {getIn(touched, "email") && getIn(errors, "email") && (
@@ -200,7 +193,6 @@ const RegistrationContainer = () => {
                 placeholder="Masukan kata sandi anda"
                 onChange={handleChange}
                 onBlur={handleBlur}
-              // dataTestId="input-password"
               />
 
               <div className="mt-8">

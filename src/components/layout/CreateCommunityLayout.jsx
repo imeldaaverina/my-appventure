@@ -1,6 +1,6 @@
 import Footer from "./elements/Footer";
 
-const MyCommunityLayout = ({ children }) => {
+const CreateCommunityLayout = ({ children }) => {
 
   return (
     <>
@@ -13,4 +13,4 @@ const MyCommunityLayout = ({ children }) => {
 
 };
 
-export default MyCommunityLayout;
+export default CreateCommunityLayout;

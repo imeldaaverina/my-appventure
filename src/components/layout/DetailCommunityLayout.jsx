@@ -1,6 +1,6 @@
 import Footer from "./elements/Footer";
 
-const DetailCommunityLayout = ({children}) => {
+const DetailCommunityLayout = ({ children }) => {
 
   return (
     <>

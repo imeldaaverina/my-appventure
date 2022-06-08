@@ -18,4 +18,5 @@ export { default as CommunityLayout } from './CommunityLayout';
 export { default as DetailCommunityLayout } from './DetailCommunityLayout';
 export { default as DetailPostLayout } from './DetailPostLayout';
 export { default as ListDestinationLayout } from './ListDestinationLayout';
+export { default as CreateCommunityLayout } from './CreateCommunityLayout';
 

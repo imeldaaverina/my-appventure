@@ -5,7 +5,7 @@ const PrivacyPolicyPage = () => {
   return (
     <>
       <Head>
-        <title>My Post - My Appventure</title>
+        <title>Privacy Policy - My Appventure</title>
       </Head>
       <PrivacyPolicytContainer />
     </>

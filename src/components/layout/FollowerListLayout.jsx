@@ -1,6 +1,6 @@
 import Footer from "./elements/Footer";
 
-const FollowerListLayout = ({children}) => {
+const FollowerListLayout = ({ children }) => {
 
   return (
     <>

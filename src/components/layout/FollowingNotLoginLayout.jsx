@@ -14,7 +14,7 @@ const FollowingNotLoginLayout = () => {
         <NavbarFollowingNotLogin />
         <div className="pt-20 text-center">
           <div className="flex justify-center">
-            <Image src="/Feeling sorry-pana 1.svg" width={250} height={250} alt=""  />
+            <Image src="/Feeling sorry-pana 1.svg" width={250} height={250} alt="" />
           </div>
           <div className="pt-5 text-lg">
             <p>Anda belum mengikuti siapapun</p>

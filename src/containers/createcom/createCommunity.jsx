@@ -127,14 +127,11 @@ const CommunityContainer = () => {
               placeholder="Isi nama komunitas kamu"
               onChange={handleChange}
               onBlur={handleBlur}
-            //   dataTestId="input-nama" 
             />
-            {/* <div className="flex justify-center"> */}
             <div className="font-normal text-sm mb-1 flex justify-between">
               Link Grup Komunitas
               {getIn(touched, "namaKomunitas") && getIn(errors, "namaKomunitas") && (
                 <div className="flex items-center justify-start text-xs text-white font-light" data-testid="error-namaKomunitas">
-                  {/* <ExclamationCircleIcon className="w-5 h-5 text-[#FF8181] pr-1" /> */}
                   {getIn(errors, "namaKomunitas")}
                 </div>
               )}
@@ -146,7 +143,6 @@ const CommunityContainer = () => {
               placeholder="Grup whatsApp, telegram, dll"
               onChange={handleChange}
               onBlur={handleBlur}
-            //   dataTestId="input-link" 
             />
             <div className="font-normal text-sm flex justify-between">
               Deskripsi
@@ -179,6 +175,7 @@ const CommunityContainer = () => {
           </form>
 
         </div>
+
       </main>
 
 

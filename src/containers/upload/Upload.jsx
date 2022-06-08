@@ -1,9 +1,5 @@
 import useAccount from "../account/hooks/useAccount";
-// import useUpload from "./hooks/useUpload";
-// import MainLayout from "../../components/layout/MainLayout";
-import ReactDOM from "react-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import Link from "next/link";
 import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -12,32 +8,12 @@ import AuthProvider from "../../providers/auth/AuthProvider";
 import UploadLayout from "../../components/layout/UploadLayout";
 import { useFormik, getIn } from "formik";
 import * as Yup from "yup";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { callAPI } from "../../helpers/network";
-import { getJwt, getUser } from "../../helpers/auth";
 import { useRouter } from "next/router";
-import { useCreatePostDispatcher } from '../../redux/reducers/post';
-
 import { Icon } from "@iconify/react";
-import {
-  HeartIcon,
-  ChatIcon,
-  LinkIcon,
-  ArrowCircleLeftIcon,
-  UsersIcon,
-  ClipboardCheckIcon,
-  CameraIcon,
-  ExclamationCircleIcon,
-} from "@heroicons/react/outline";
-import {
-  Button3,
-  ButtonFollow,
-  Button,
-  ButtonPost,
-} from "../../components/button";
-
-// import { useUploadDispatcher } from "../redux/reducers/create-post";
-// import { useUploadtDispatcher } from "../../redux/reducers/upload";
+import { ArrowCircleLeftIcon, ExclamationCircleIcon, } from "@heroicons/react/outline";
+import { ButtonPost, } from "../../components/button";
 
 const validationSchema = Yup.object({
   text: Yup.string().required("diperlukan text").max(2500, "text tidak lebih dari 2500 kata"),
@@ -49,81 +25,55 @@ const initialValues = {
   file: null,
 };
 
-// const user = JSON.parse(localStorage.getItem("data"));
-
 const TextAreaInput = styled.textarea`
   height: ${(props) => props.idealHeight || "160px"};
 `;
 
 const Upload = () => {
   const [loading, setLoading] = useState(false);
-  
-
   const { profile, picture } = useAccount();
- 
-
-  // const [loading, setLoading] = useState(false);
   const [previews, setPreviews] = useState();
   const { push } = useRouter();
-  
+
   const onSubmit = async (formValues) => {
     console.log(formValues)
     setLoading(true);
     const user = JSON.parse(localStorage.getItem("data"));
 
     try {
-       //upload profil picture
-    const formData = new FormData();
-     if (formValues.file && formValues.file.length > 0) {
-          // formData.append("file1", formValues.files[0]);
-          for (let i = 0; i < formValues.file.length; i++) {
-            formData.append(`file`, formValues.file[i]);
-          }
-          formData.append("idUser", user.id);
-          formData.append("text", formValues.text);
-        } else {
-
-          formData.append("idUser", user.id);
-          formData.append("text", formValues.text);
+      //upload profil picture
+      const formData = new FormData();
+      if (formValues.file && formValues.file.length > 0) {
+        for (let i = 0; i < formValues.file.length; i++) {
+          formData.append(`file`, formValues.file[i]);
         }
+        formData.append("idUser", user.id);
+        formData.append("text", formValues.text);
+      } else {
+        formData.append("idUser", user.id);
+        formData.append("text", formValues.text);
+      }
 
-
-        const response = await callAPI({
-          url: "/post/postingan/save",
-          method: "post",
-          data: formData,
-          headers: {
-            Authorization: `Bearer ${user.access_token}`,
-          },
-        });
-    console.log(response)
-         if (response.status == 200) {
-           push('/home');
-         }
-   
-
+      const response = await callAPI({
+        url: "/post/postingan/save",
+        method: "post",
+        data: formData,
+        headers: {
+          Authorization: `Bearer ${user.access_token}`,
+        },
+      });
+      console.log(response)
+      if (response.status == 200) {
+        push('/home');
+      }
     } catch (error) {
       console.log("error > ", error);
       alert(error);
       setLoading(false);
 
     }
-  
-  };
 
-  const {
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    errors,
-    values,
-    touched,
-    setFieldValue,
-  } = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit
-  });
+  };
 
   const handleChangeFiles = (e) => {
     const files = e.target.files;
@@ -143,12 +93,6 @@ const Upload = () => {
   const textareaRef = useRef("");
   const [currentValue, setCurrentValue] = useState(""); // you can manage data with it
 
-  // useEffect(() => {
-  //     textareaRef.current.style.height = "0px";
-  //     const scrollHeight = textareaRef.current.scrollHeight;
-  //     textareaRef.current.style.height = scrollHeight + "px";
-  // }, [currentValue]);
-
   const idealHeight = useRef(32);
   const lastScrollHeight = useRef(50);
   const textAreaRef = useRef(null);
@@ -167,10 +111,6 @@ const Upload = () => {
     if (previews && previews.length > 0) {
       return previews.map((item) => (
         <div className="inline-flex justify-center items-center text-center h-28 w-28  text-sm cursor-pointer hover:bg-gray-300 rounded-lg">
-          {/* <img
-                src={URL.createObjectURL(item)}
-                className="object-cover h-full w-full rounded-lg"
-              /> */}
           {item.type.includes("image") ? (
             <Image
               src={URL.createObjectURL(item)}
@@ -191,17 +131,22 @@ const Upload = () => {
     return <></>;
   };
 
-  // const PostItem = ({ id, data }) => {
-  //   const { handleRemove, handleEdit } = usePostItem();
-  //   // const { home, makeIncrement } = useHomeDispatch();
-
-  //   const postData = 'besok minggu saya akan pergi berkemah dengan teman - teman saya. Saya berkemah di gunung bromo! Saya sangat tidak sabar!';
+  const {
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    setFieldValue,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit
+  });
 
   return (
     <AuthProvider>
       <UploadLayout>
-        
-        {/* {console.log (previews)} */}
         <div className="min-h-screen font-Poppins flex justify-center ">
           <div className="max-w-lg">
             <div className="flex flex-col mt-5 w-96 justify-center items-center">
@@ -233,27 +178,18 @@ const Upload = () => {
                   </div>
                 </div>
                 <form
-                onSubmit={handleSubmit}
+                  onSubmit={handleSubmit}
                   className="mt-1"
                 >
                   <div className="rounded-lg flex flex-col justify-start items-start">
                     <label className="block w-full mb-3">
-                      {/* <input type="hidden" name="idUser" value={user.id} /> */}
                       <TextAreaInput
-                        // rows={10}
-                        // className="w-full rounded-lg outline-none  scrol"
-                        // placeholder="Tulis cerita kamu disini..."
-                        // name="post"
-                        // onChange={handleChange}
-                        // onBlur={handleBlur}
                         name="text"
                         type="text"
                         className="pt-3 pb-4 focus:ring-0 focus:outline-none font-light w-full resize-none overflow-hidden text-sm"
                         placeholder="Tulis Postingan..."
                         onBlur={handleBlur}
                         data-testid={"input-caption"}
-                        // ref={textareaRef}
-                        
                         onChange={handleChange}
                         ref={textAreaRef}
                         idealHeight={idealHeight.current + "px"}

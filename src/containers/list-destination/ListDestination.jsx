@@ -3,7 +3,6 @@ import { Icon } from '@iconify/react';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ListDestinationLayout } from "../../components/layout";
-import Image from "next/image"
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -250,7 +249,7 @@ const ListDestinationContainer = () => {
                     </Swiper>
 
                     <div className='mt-8 mb-4 font-semibold flex flex-row items-center'>
-                        <Icon icon="el:map-marker" className="mr-1"/>
+                        <Icon icon="el:map-marker" className="mr-1" />
                         Bali
                     </div>
                     <Swiper
@@ -283,7 +282,7 @@ const ListDestinationContainer = () => {
                     </Swiper>
 
                     <div className='mt-8 mb-4 font-semibold flex flex-row items-center'>
-                        <Icon icon="el:map-marker" className="mr-1"/>
+                        <Icon icon="el:map-marker" className="mr-1" />
                         Jakarta
                     </div>
                     <Swiper
@@ -316,7 +315,7 @@ const ListDestinationContainer = () => {
                     </Swiper>
 
                     <div className='mt-8 mb-4 font-semibold flex flex-row items-center'>
-                        <Icon icon="el:map-marker" className="mr-1"/>
+                        <Icon icon="el:map-marker" className="mr-1" />
                         Lombok
                     </div>
                     <Swiper
@@ -349,7 +348,7 @@ const ListDestinationContainer = () => {
                     </Swiper>
 
                     <div className='mt-8 mb-4 font-semibold flex flex-row items-center'>
-                        <Icon icon="el:map-marker" className="mr-1"/>
+                        <Icon icon="el:map-marker" className="mr-1" />
                         Yogyakarta
                     </div>
                     <Swiper
@@ -382,7 +381,7 @@ const ListDestinationContainer = () => {
                     </Swiper>
 
                     <div className='mt-8 mb-4 font-semibold flex flex-row items-center'>
-                        <Icon icon="el:map-marker" className="mr-1"/>
+                        <Icon icon="el:map-marker" className="mr-1" />
                         Surabaya
                     </div>
                     <Swiper
@@ -415,7 +414,7 @@ const ListDestinationContainer = () => {
                     </Swiper>
 
                     <div className='mt-8 mb-4 font-semibold flex flex-row items-center'>
-                        <Icon icon="el:map-marker" className="mr-1"/>
+                        <Icon icon="el:map-marker" className="mr-1" />
                         Malang
                     </div>
                     <Swiper
@@ -448,7 +447,7 @@ const ListDestinationContainer = () => {
                     </Swiper>
 
                     <div className='mt-8 mb-4 font-semibold flex flex-row items-center'>
-                        <Icon icon="el:map-marker" className="mr-1"/>
+                        <Icon icon="el:map-marker" className="mr-1" />
                         Makassar
                     </div>
                     <Swiper
@@ -481,7 +480,7 @@ const ListDestinationContainer = () => {
                     </Swiper>
 
                     <div className='mt-8 mb-4 font-semibold flex flex-row items-center'>
-                        <Icon icon="el:map-marker" className="mr-1"/>
+                        <Icon icon="el:map-marker" className="mr-1" />
                         Lampung
                     </div>
                     <Swiper
@@ -514,7 +513,7 @@ const ListDestinationContainer = () => {
                     </Swiper>
 
                     <div className='mt-8 mb-4 font-semibold flex flex-row items-center'>
-                        <Icon icon="el:map-marker" className="mr-1"/>
+                        <Icon icon="el:map-marker" className="mr-1" />
                         Bandung
                     </div>
                     <Swiper

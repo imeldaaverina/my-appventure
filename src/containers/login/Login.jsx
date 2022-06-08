@@ -5,7 +5,6 @@ import { NoAuthProvider } from "../../providers/auth";
 import { useFormik, getIn } from "formik";
 import * as Yup from 'yup';
 import { useRouter } from "next/router";
-
 import { useLoginDispatcher } from '../../redux/reducers/login';
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
 
@@ -60,7 +59,7 @@ const LoginContainer = () => {
                                     <Title text="Hai," />
                                     <Title />
                                 </div>
-                                <a href="./home">
+                                <a href="./for-you">
                                     <ButtonExit />
                                 </a>
                             </div>

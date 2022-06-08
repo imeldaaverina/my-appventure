@@ -4,10 +4,6 @@ import DetailPostContainer from '../containers/detail-post/Detail-post';
 
 const DetailPostPage = () => {
 
-useEffect(() => {
-
-})
-
   return (
     <>
       <Head>

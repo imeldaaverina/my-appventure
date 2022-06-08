@@ -1,18 +1,11 @@
 import useAccount from "../../account/hooks/useAccount";
-import usePostItem from "../hooks/usePostItem";
-import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
+import { ChatIcon } from "@heroicons/react/outline";
 import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
 import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
-import { ButtonFollow, Like, ButtonFollowed } from "../../../components/button";
-import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useListPostDispatcher } from "../../../redux/reducers/listPost";
-import { Carousel } from 'react-responsive-carousel';
-import useHome from "../hooks/useHome";
 import { useHomeDispatcher } from "../../../redux/reducers/home";
 import { callAPI } from "../../../helpers/network";
 import { useHomeProvider } from "../HomeProvider";
-import { useFormik, getIn } from "formik";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,33 +17,16 @@ import 'swiper/css/scrollbar';
 
 dayjs.extend(relativeTime);
 
-const PostItem = ({ data, isFollowed, hideFollowButton}) => {
+const PostItem = ({ data, isFollowed, hideFollowButton }) => {
   const { profile, picture } = useAccount();
-  // const [listFollowing, setListFollowing] = useState([]);
   const [userId, setUserId] = useState();
   const { likeAction, follow } = useHomeDispatcher();
   const { posts, loadPosts } = useHomeProvider();
   const { listFollowing, fetchListFollowing } = useHomeProvider();
-
-  // const fetchListFollowing = async () => {
-  //   const user = JSON.parse(localStorage.getItem('data'))
-  //   try {
-  //     const response = await axios({
-  //       url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
-  //       method: 'get',
-  //       params: {
-  //         idUser: user.id,
-  //         page: 0,
-  //         size: 30,
-  //       }
-  //     });
-  //     console.log("response > ", response.data);
-  //     setListFollowing(response.data.Data.content.map((value) => value.userFollowing.id));
-
-  //   } catch (error) {
-  //     console.log("error > ", error);
-  //   }
-  // }
+  const [isReadMore, setIsReadMore] = useState(true);
+  const toggleReadMore = () => {
+    setIsReadMore(!isReadMore);
+  };
 
   const handleLikeButton = async (detailPost) => {
     console.log(detailPost)
@@ -61,6 +37,7 @@ const PostItem = ({ data, isFollowed, hideFollowButton}) => {
 
     }
   }
+
   const user = JSON.parse(localStorage.getItem('data'))
   const handleUnlikeButton = async (detailPost) => {
     console.log(detailPost)
@@ -100,78 +77,14 @@ const PostItem = ({ data, isFollowed, hideFollowButton}) => {
     }
   };
 
-  const [isReadMore, setIsReadMore] = useState(true);
-  const toggleReadMore = () => {
-    setIsReadMore(!isReadMore);
-  };
-
   useEffect(() => {
     fetchListFollowing();
     loadPosts();
   }, []);
 
-
-
-  // const filePosts = callAPI({
-  //   url: `/post/list/${data.content.filePosts}`,
-  //   method: "get"
-  // });
-
-  // const {
-  //   listPost: { posts },
-  //   loadPosts,
-  // } = useListPostDispatcher();
-
-  // useEffect(() => {
-  //   loadPosts();
-  // }, []);
-
-  // const renderPostItems = () => {
-  //   return (
-  //     posts &&
-  //     posts.length > 0 &&
-  //     posts.map((postItem) => (
-  //       <div className="border p-3">
-  //         <div className="flex justify-between w-full">
-  //           <div className="font-bold">{postItem.attributes.title}</div>
-  //           <div className="">
-  //             <button type="button">edit</button>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     ))
-  //   );
-  // };
-  // const {
-  //   handleChange,
-  //   handleBlur,
-  //   handleSubmit,
-  //   errors,
-  //   touched,
-  //   setFieldValue,
-  // } = useFormik({
-  //   // initialValues,
-  //   // validationSchema,
-  //   onSubmit}
-  // );
   return (
     <main className="m-auto flex justify-center font-Poppins">
       <div className=" rounded-2xl flex justify-center items-center flex-col w-96 shadow-xl my-3 border border-[#16737B]">
-        {/* <Carousel>
-          <div className='flex justify-around'>
-          {data && data.map((item) => {
-              return (
-            <img
-              src={`${data.filePosts}`}
-              className="w-full h-full rounded-t-2xl"
-              width={500}
-              height={320}
-              alt=""
-            />
-             )
-          })}  
-            </div>
-            </Carousel> */}
         <div className="w-96">
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -211,34 +124,19 @@ const PostItem = ({ data, isFollowed, hideFollowButton}) => {
                   </a>
                   <div className="font-normal text-xs text-[#457275]">{dayjs(data.created_date).fromNow()}{" "}</div>
                 </div>
-                <div className="flex justify-center items-center">
-                  {/*                   
-                  <ButtonFollow type="submit" label='Ikuti' />
-                  <ButtonFollowed type="submit" label='Mengikuti' /> */}
 
-                  {/* {
-                data.followedBy.find((follow) => follow.user.id === user.id) 
-                data ? ( */}
+                <div className="flex justify-center items-center">
                   {hideFollowButton ? <div /> : isFollowed ?
                     <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(data.user.id)}>Mengikuti</button> </div>
                     : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(data.user.id)}>Ikuti</button></div>}
-
-
-
-                  {/* <button label='Ikuti' onClick={() => handlefollow(data.user.id)}>Follow</button> */}
-
-
-                  {/* //   ) : (
-              //     <ButtonFollowed type="submit" label='Mengikuti' onClick={()=> handlefollow} />
-              //   )
-              // } */}
                 </div>
+
               </div>
             </div>
           </div>
+
           <div className="text-sm mt-4">
             <div className="w-72 font-light text-sm">
-              {/* {renderPostItems()} */}
               {isReadMore ? data?.text.slice(0, 278) : data?.text}
               {data.text.length > 278 && (
                 <span onClick={toggleReadMore} className="font-semibold">

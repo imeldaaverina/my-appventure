@@ -1,6 +1,6 @@
 import Footer from "./elements/Footer";
 
-const MyProfileLayout = ({children}) => {
+const MyProfileLayout = ({ children }) => {
 
   return (
     <>

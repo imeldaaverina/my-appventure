@@ -6,12 +6,10 @@ import axios from "axios";
 import useAccount from "../account/hooks/useAccount"
 import Image from "next/image"
 import { useEffect, useState } from "react";
-import { ButtonFollow } from "../../components/button";
 import { callAPI } from "../../helpers/network";
 
 const FollowingListContainer = ({ hideFollowButton, isFollowed }) => {
     const { profile } = useAccount();
-
     const [data, setData] = useState([]);
     const [user, setUser] = useState();
     const [listFollowing, setListFollowing] = useState([]);
@@ -89,29 +87,6 @@ const FollowingListContainer = ({ hideFollowButton, isFollowed }) => {
         fetchListFollowing();
         setUser(JSON.parse(localStorage.getItem('data')))
     }, []);
-
-    const [loading, setLoading] = useState(false);
-    const [follow, setFollow] = useState();
-
-    const handleOnFollow = async () => {
-        const user = JSON.parse(localStorage.getItem('data'))
-        await callAPI({
-            url: '/follow/',
-            method: "POST",
-            params: {
-                idFollower: user.id,
-                idFollowing: data[0].userFollowing.id,
-            },
-            headers: {
-                Authorization: `Bearer ${user.access_token}`,
-            },
-
-        });
-
-        setFollow();
-        setLoading(false);
-    };
-
 
     return (
         <AuthProvider>

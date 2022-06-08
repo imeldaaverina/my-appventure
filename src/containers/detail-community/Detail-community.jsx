@@ -8,7 +8,7 @@ import { useHomeProvider } from "../home/HomeProvider";
 import { useHomeDispatcher } from "../../redux/reducers/home";
 import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
 import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
-import { HeartIcon, ChatIcon } from "@heroicons/react/outline";
+import { ChatIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import Image from "next/image";
 import { callAPI } from "../../helpers/network";
@@ -30,6 +30,13 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
     const [followCommunity, setFollowCommunity] = useState();
     const [listFollowing, setListFollowing] = useState([]);
     const [listFollowingCommunity, setListFollowingCommunity] = useState([]);
+    const { likeAction, follow } = useHomeDispatcher();
+    const { posts, loadPosts } = useHomeProvider();
+    const [user, setUser] = useState();
+    const [isReadMore, setIsReadMore] = useState(true);
+    const toggleReadMore = () => {
+        setIsReadMore(!isReadMore);
+    };
 
     const id = query.id;
 
@@ -118,11 +125,6 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
         }
     };
 
-    const [isReadMore, setIsReadMore] = useState(true);
-    const toggleReadMore = () => {
-        setIsReadMore(!isReadMore);
-    };
-
     const fetchDatas = async () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
@@ -163,10 +165,6 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
         fetchData();
     };
 
-    const { likeAction, follow } = useHomeDispatcher();
-    const { posts, loadPosts } = useHomeProvider();
-    const [user, setUser] = useState();
-
     const handleLikeButton = async (detailPost) => {
         console.log(detailPost)
         try {
@@ -175,8 +173,8 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
         } catch (e) {
 
         }
-        // alert("test")
     }
+
     const handleUnlikeButton = async (detailPost) => {
         console.log(detailPost)
         try {
@@ -185,9 +183,7 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
         } catch (e) {
 
         }
-        // alert("test")
     }
-
 
     useEffect(() => {
         if (id) {
@@ -204,7 +200,6 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
 
         }
     }, [data]);
-
 
     return (
         <AuthProvider>

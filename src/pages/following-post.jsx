@@ -5,13 +5,13 @@ import { FollowingNotLoginLayout } from '../components/layout';
 const FollowingNotLoginContainer = () => {
   return (
     <>
-    <Head>
-      <title>Following Post - My Appventure</title>
-    </Head>
-    <NoAuthProvider>
-      <FollowingNotLoginLayout>
-      </FollowingNotLoginLayout>
-    </NoAuthProvider>
+      <Head>
+        <title>Following Post - My Appventure</title>
+      </Head>
+      <NoAuthProvider>
+        <FollowingNotLoginLayout>
+        </FollowingNotLoginLayout>
+      </NoAuthProvider>
     </>
   );
 };

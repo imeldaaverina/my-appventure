@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { callAPI } from "../../../helpers/network";
-import { getJwt } from "../../../helpers/auth";
 import axios from "axios";
 
 const useHome = () => {
@@ -14,7 +13,7 @@ const useHome = () => {
     if (accessToken) {
       headers.Authorization = `Bearer ${accessToken}`;
       headers.Accept = "application/json";
-      headers["Content-Type"]= "application/json"
+      headers["Content-Type"] = "application/json"
     }
     setLoading(true);
     const response = await callAPI({
@@ -27,12 +26,12 @@ const useHome = () => {
       headers: {
         // Authorization: `Bearer ${user.access_token}`,
       }
-      
+
     });
 
     const { data } = response;
     localStorage.getItem("access_token", data.data.access_token);
-    console.log('jadi',response.data.data.content)
+    console.log('jadi', response.data.data.content)
     setPosts(response.data.data);
     setLoading(false);
 
@@ -58,7 +57,6 @@ const useHome = () => {
       console.log("error > ", error);
     }
   }
-
 
   return {
     posts,

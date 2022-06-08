@@ -2,8 +2,7 @@ import FollowingLayout from "../../components/layout/FollowingLayout";
 import AuthProvider from "../../providers/auth/AuthProvider";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { HeartIcon, ChatIcon, LinkIcon } from "@heroicons/react/outline";
-import { ButtonFollow } from "../../components/button";
+import { ChatIcon } from "@heroicons/react/outline";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -22,16 +21,17 @@ import { useHomeProvider } from "../../containers/home/HomeProvider";
 
 dayjs.extend(relativeTime);
 
-const FollowingContainer = (  isFollowed, hideFollowButton ) => {
+const FollowingContainer = (isFollowed, hideFollowButton) => {
     const [isReadMore, setIsReadMore] = useState(true);
+    const [data, setData] = useState();
+    const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState();
+    const { likeAction, follow } = useHomeDispatcher();
+    const { posts, loadPosts } = useHomeProvider();
+    let [color, setColor] = useState("#186F79");
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
     };
-
-    const [data, setData] = useState();
-    const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState()
-    let [color, setColor] = useState("#186F79");
 
     const override = css`
     display: block;
@@ -39,11 +39,6 @@ const FollowingContainer = (  isFollowed, hideFollowButton ) => {
     border-color: red;
   `;
 
-  useEffect(() => {
-    fetchData();
-    setUser(JSON.parse(localStorage.getItem('data')))
-
-}, []);
     const fetchData = async () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
@@ -70,12 +65,6 @@ const FollowingContainer = (  isFollowed, hideFollowButton ) => {
         }
     };
 
-    
-
-    const { likeAction, follow } = useHomeDispatcher();
-
-
-    const { posts, loadPosts } = useHomeProvider();
     const handleLikeButton = async (detailPost) => {
         console.log(detailPost)
         try {
@@ -84,9 +73,8 @@ const FollowingContainer = (  isFollowed, hideFollowButton ) => {
         } catch (e) {
 
         }
-        // alert("test")
     }
-    // const user = JSON.parse(localStorage.getItem('data'))
+
     const handleUnlikeButton = async (detailPost) => {
         console.log(detailPost)
         try {
@@ -95,10 +83,7 @@ const FollowingContainer = (  isFollowed, hideFollowButton ) => {
         } catch (e) {
 
         }
-        // alert("test")
     }
-    // const onSubmit = async () =>{
-    //   console.log("tescuy")
 
     const handlefollow = async (idFollowing) => {
 
@@ -117,7 +102,6 @@ const FollowingContainer = (  isFollowed, hideFollowButton ) => {
                     Authorization: `Bearer ${user.access_token}`
                 },
             });
-            // loadPosts();
             if (response.data.status === "404") {
                 alert(`Failed to follow post`);
                 return;
@@ -127,11 +111,14 @@ const FollowingContainer = (  isFollowed, hideFollowButton ) => {
             console.log(error)
             alert(`Failed to unfollow post`);
         }
-        // loadPosts();
-        // fetchListFollowing();
-
-
     };
+
+    useEffect(() => {
+        fetchData();
+        setUser(JSON.parse(localStorage.getItem('data')))
+
+    }, []);
+
 
     return (
         <AuthProvider>
@@ -188,7 +175,7 @@ const FollowingContainer = (  isFollowed, hideFollowButton ) => {
                                                     <div className="font-normal text-xs text-[#457275]">{dayjs(item.created_date).fromNow()}{" "}</div>
                                                 </div>
                                                 <div className="flex justify-center items-center">
-                                                    { isFollowed ?
+                                                    {isFollowed ?
                                                         <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(item.user.id)}>Mengikuti</button> </div>
                                                         : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(item.user.id)}>Ikuti</button></div>}
                                                 </div>

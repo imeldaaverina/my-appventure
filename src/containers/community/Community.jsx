@@ -3,8 +3,6 @@ import { Icon } from '@iconify/react';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { CommunityLayout } from "../../components/layout";
-import Image from "next/image"
-import { useListCommunityDispatcher } from "../../redux/reducers/listCommunity/slice";
 
 const CommunityContainer = () => {
     const [data, setData] = useState();
@@ -56,10 +54,8 @@ const CommunityContainer = () => {
                                         <>
                                             <a href={`./detail-community?id=${item.id}`}>
                                                 <div className="flex flex-col justify-center items-center mb-10 border-[#008C96] rounded-md border-2 mx-5">
-                                                    {/* <img src={item.urlFileName} className='rounded-full' width={90} height={90} alt='' />
-                                                    <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1> */}
                                                     <img src={item.urlFileName} className='rounded-t-md w-28 h-28' width={90} height={90} alt='' />
-                                                    <h1 className="text-[#329D9C]">{item.namaKomunitas}</h1>
+                                                    <h1 className="text-[#329D9C] text-center">{item.namaKomunitas}</h1>
                                                 </div>
                                             </a>
                                         </>

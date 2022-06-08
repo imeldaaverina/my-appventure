@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHomeProvider } from "../HomeProvider";
 import PostItem from "./PostItem";
-import PostItem2 from "./PostItem2";
 import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
 import axios from 'axios';

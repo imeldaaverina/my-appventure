@@ -1,7 +1,7 @@
 import { SearchIcon } from "@heroicons/react/outline";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const Searchbar = ({ placeholder, type, onChange }) => {
+const Searchbar = ({ type }) => {
     const [text, setText] = useState('')
 
     return (
