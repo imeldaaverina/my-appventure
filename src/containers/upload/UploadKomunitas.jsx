@@ -1,6 +1,4 @@
 import useAccount from "../account/hooks/useAccount";
-// import useUpload from "./hooks/useUpload";
-// import MainLayout from "../../components/layout/MainLayout";
 import ReactDOM from "react-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
@@ -16,6 +14,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { callAPI } from "../../helpers/network";
 import { getJwt, getUser } from "../../helpers/auth";
 import { useRouter } from "next/router";
+import { useCreatePostDispatcher } from '../../redux/reducers/post';
+
 import { Icon } from "@iconify/react";
 import {
   HeartIcon,
@@ -38,13 +38,13 @@ import {
 // import { useUploadtDispatcher } from "../../redux/reducers/upload";
 
 const validationSchema = Yup.object({
-  text: Yup.string().required(),
-  files: Yup.array().max(10, "File maksimal 10").nullable(),
+  text: Yup.string().required("diperlukan text").max(2500, "text tidak lebih dari 2500 kata"),
+  file: Yup.array().max(10, "File maksimal 10").nullable(),
 });
 
 const initialValues = {
   text: "",
-  files: null,
+  file: null,
 };
 
 // const user = JSON.parse(localStorage.getItem("data"));
@@ -53,134 +53,59 @@ const TextAreaInput = styled.textarea`
   height: ${(props) => props.idealHeight || "160px"};
 `;
 
-const Upload = (props) => {
-  const { profile } = useAccount();
-  const { picture } = useAccount();
-
+const UploadKomunitas = () => {
   const [loading, setLoading] = useState(false);
+  const { profile, picture } = useAccount();
+  const { query } = useRouter();
+  const [user, setUser] = useState();
+
+  const id = query.id;
+
+  // const [loading, setLoading] = useState(false);
   const [previews, setPreviews] = useState();
   const { push } = useRouter();
-  // const {
-  //     makeLoading: { loading },
-  //     makePost,
-  //   } = useUploadDispatcher();
 
-  // const {push} = useRouter();
-
-  // const onSubmit = async (values) => {
-  //   await doSubmit(values);
-  // };
   const onSubmit = async (formValues) => {
+    console.log(formValues)
     setLoading(true);
-    console.log(formValues);
-    const user = JSON.parse(localStorage.getItem("data"));
-    console.log({ user });
-
-    const formData = new FormData();
-
-
-    if (formValues.files && formValues.files.length > 0) {
-      for (let i = 0; i < formValues.files.length; i++) {
-        formData.append(`file${i + 1}`, formValues.files[i]);
-      }
-      try {
-        const formData = new FormData();
-
-        if (formValues.files && formValues.files.length > 0) {
-          // formData.append("file1", formValues.files[0]);
-          for (let i = 0; i < formValues.files.length; i++) {
-            formData.append(`file${i + 1}`, formValues.files[i]);
-          }
-          formData.append("idUser", user.id);
-          formData.append("text", formValues.post);
-        } else {
-
-          formData.append("idUser", user.id);
-          formData.append("text", formValues.post);
+    try {
+      //upload profil picture
+      const formData = new FormData();
+      if (formValues.file && formValues.file.length > 0) {
+        for (let i = 0; i < formValues.file.length; i++) {
+          formData.append(`file`, formValues.file[i]);
         }
-
-
-        const response = await callAPI({
-          url: "/post/postingan/save",
-          method: "post",
-          data: formData,
-          headers: {
-            Authorization: `Bearer ${user.access_token}`,
-          },
-        });
-
-        if (response.status == 200) {
-          push('/home');
-        }
-      } catch (error) {
-        alert(error);
-        console.log({ error });
-      } finally {
-        setLoading(false);
+        formData.append("idUser", user.id);
+        formData.append("idKomunitas", id);
+        formData.append("text", formValues.text);
+      } else {
+        formData.append("idKomunitas", id);
+        formData.append("idUser", user.id);
+        formData.append("text", formValues.text);
       }
+
+
+      const response = await callAPI({
+        url: "/post/postingankomunitas/save",
+        method: "post",
+        data: formData,
+        headers: {
+          Authorization: `Bearer ${user.access_token}`,
+        },
+      });
+      console.log(response)
+       if (response.data.status == 200) {
+         push(`./detail-community?id=${id}`);
+       }
+
+
+    } catch (error) {
+      console.log("error > ", error);
+      alert(error);
+      setLoading(false);
 
     }
 
-    // try {
-    //   const formData = new FormData();
-
-    //   if (formValues.files && formValues.files.length > 0) {
-    //     formData.append("file1", formValues.files[0]);
-    //     formData.append("idUser", user.id);
-    //     formData.append("text", formValues.post);
-    //   } else {
-
-    //     formData.append("idUser", user.id);
-    //     formData.append("text", formValues.post);
-    //   }
-
-
-    //   const response = await callAPI({
-    //     url: "/post/addpost",
-    //     method: "post",
-    //     data: formData,
-    //     headers: {
-    //       Authorization: `Bearer ${user.access_token}`,
-    //     },
-    //   });
-
-    //   if (response.status == 200) {
-    //     push('/home');
-    //   }
-    // } catch (error) {
-    //   alert(error);
-    //   console.log({ error });
-    // } finally {
-    //   setLoading(false);
-    // }
-
-    // first upload
-
-    // const fileUrl = upload.data[0].url;
-    // const { post } = formValues;
-    // const payload = {
-    //   data: {
-    //     post,
-    //     // files:`${file1}`,
-    //     // files: `${fileUrl}`,
-    //     photo: `${fileUrl}`,
-    //     isPublish: true,
-    //     postedBy: `${getUser().username}`,
-    //   },
-    // };
-    // const submitPost = await callAPI({
-    //   url: "/post/addpost",
-    //   method: "post",
-    //   data: payload,
-    //   headers: {
-    //     Authorization: `Bearer ${getJwt()}`,
-    //   },
-    // });
-    // if (submitPost.status === 200) {
-    //   setLoading(false);
-    //   alert("Create posts success!");
-    //   push("/");
-    // }
   };
 
   const {
@@ -194,7 +119,7 @@ const Upload = (props) => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit
   });
 
   const handleChangeFiles = (e) => {
@@ -206,7 +131,7 @@ const Upload = (props) => {
       }
 
       setPreviews(filePreviews);
-      setFieldValue("files", filePreviews);
+      setFieldValue("file", filePreviews);
 
       e.target.value = "";
     }
@@ -269,15 +194,22 @@ const Upload = (props) => {
 
   //   const postData = 'besok minggu saya akan pergi berkemah dengan teman - teman saya. Saya berkemah di gunung bromo! Saya sangat tidak sabar!';
 
+  useEffect(() => {
+    if (id) {
+      setUser(JSON.parse(localStorage.getItem('data')))
+    }
+  }, [id]);
+
   return (
     <AuthProvider>
       <UploadLayout>
-        {console.log(previews)}
+
+        {/* {console.log (previews)} */}
         <div className="min-h-screen font-Poppins flex justify-center ">
           <div className="max-w-lg">
             <div className="flex flex-col mt-5 w-96 justify-center items-center">
               <div className="flex justify-center">
-                <Link href="./community">
+                <Link href={`./detail-community?id=${id}`}>
                   <a>
                     <ArrowCircleLeftIcon className="w-10 h-10 " />
                   </a>
@@ -304,59 +236,19 @@ const Upload = (props) => {
                   </div>
                 </div>
                 <form
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    // handleSubmit();
-                    const user = JSON.parse(localStorage.getItem("data"));
-                    // console.log( user.id );
-
-                    const formData = new FormData(e.target)
-                    formData.append("idUser", user.id)
-                    // console.log(formData.get("text"))
-
-                    const response = await callAPI({
-                      url: "/post/postingan/save",
-                      method: "post",
-                      // data: {
-                      //   text:formData.get("text"),
-                      //   idUser:user.id
-                      // },
-                      data: formData,
-                      headers: {
-                        Authorization: `Bearer ${user.access_token}`,
-                        // "Content-Type":"application/json",
-                        // Accept:"application/json"
-                      },
-
-                    });
-                    console.log(response)
-                    if (response.status == 200) {
-                      push('/home');
-                    }
-                    // onSubmit(formData)
-                    console.log("test")
-                  }}
+                  onSubmit={handleSubmit}
                   className="mt-1"
                 >
                   <div className="rounded-lg flex flex-col justify-start items-start">
                     <label className="block w-full mb-3">
-                      {/* <input type="hidden" name="idUser" value={user.id} /> */}
                       <TextAreaInput
-                        // rows={10}
-                        // className="w-full rounded-lg outline-none  scrol"
-                        // placeholder="Tulis cerita kamu disini..."
-                        // name="post"
-                        // onChange={handleChange}
-                        // onBlur={handleBlur}
                         name="text"
                         type="text"
                         className="pt-3 pb-4 focus:ring-0 focus:outline-none font-light w-full resize-none overflow-hidden text-sm"
                         placeholder="Tulis Postingan..."
                         onBlur={handleBlur}
                         data-testid={"input-caption"}
-                        // ref={textareaRef}
-                        value={values.post}
-                        onChange={handleChange("post")}
+                        onChange={handleChange}
                         ref={textAreaRef}
                         idealHeight={idealHeight.current + "px"}
                       />
@@ -369,7 +261,7 @@ const Upload = (props) => {
                         {getIn(touched, "files") &&
                           getIn(errors, "files") && (
                             <div
-                              className="flex items-center justify-start"
+                              className="flex items-center text-sm justify-start"
                               data-testid="error-files"
                             >
                               <ExclamationCircleIcon className="w-5 h-5 text-[#FF8181] pr-1" />
@@ -377,6 +269,19 @@ const Upload = (props) => {
                             </div>
                           )}{" "}
                       </div>
+                      <div>
+                        {getIn(touched, "text") &&
+                          getIn(errors, "text") && (
+                            <div
+                              className="flex items-center justify-start text-sm mb-8"
+                              data-testid="error-text"
+                            >
+                              <ExclamationCircleIcon className="w-5 h-5 text-[#FF8181] pr-1" />
+                              {getIn(errors, "text")}
+                            </div>
+                          )}{" "}
+                      </div>
+
                       <div className="flex justify-between w-96 -ml-4 pl-2 pr-3">
                         <div>
                           <label
@@ -402,7 +307,7 @@ const Upload = (props) => {
                           <ButtonPost
                             disabled={loading}
                             type="submit"
-                            label={loading ? "Mohon tunggu..." : "Posting"}
+                            label={loading ? "Memposting..." : "Posting"}
                           />
                         </div>
                       </div>
@@ -417,4 +322,4 @@ const Upload = (props) => {
     </AuthProvider>
   );
 };
-export default Upload;
+export default UploadKomunitas;

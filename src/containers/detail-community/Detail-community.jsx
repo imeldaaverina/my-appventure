@@ -257,6 +257,22 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
                         </div>
                         }
 
+                        {data && (
+                            <div className="flex justify-end sticky top-24 right-10 mr-10 mt-10">
+                                <Link href={`./upload-community?id=${data.data.id}`} className="" passHref>
+                                    <a>
+                                        <Image
+                                            src="/postIcon.svg"
+                                            className="w-16"
+                                            width={65}
+                                            height={65}
+                                            alt=""
+                                        />
+                                    </a>
+                                </Link>
+                            </div>
+                        )}
+
                         {datas && datas.map((items) => {
                             return (
                                 <>

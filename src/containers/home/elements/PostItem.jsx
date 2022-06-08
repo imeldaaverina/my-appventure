@@ -26,30 +26,31 @@ dayjs.extend(relativeTime);
 
 const PostItem = ({ data, isFollowed, hideFollowButton}) => {
   const { profile, picture } = useAccount();
-  const [listFollowing, setListFollowing] = useState([]);
+  // const [listFollowing, setListFollowing] = useState([]);
   const [userId, setUserId] = useState();
   const { likeAction, follow } = useHomeDispatcher();
   const { posts, loadPosts } = useHomeProvider();
+  const { listFollowing, fetchListFollowing } = useHomeProvider();
 
-  const fetchListFollowing = async () => {
-    const user = JSON.parse(localStorage.getItem('data'))
-    try {
-      const response = await axios({
-        url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
-        method: 'get',
-        params: {
-          idUser: user.id,
-          page: 0,
-          size: 30,
-        }
-      });
-      console.log("response > ", response.data);
-      setListFollowing(response.data.Data.content.map((value) => value.userFollowing.id));
+  // const fetchListFollowing = async () => {
+  //   const user = JSON.parse(localStorage.getItem('data'))
+  //   try {
+  //     const response = await axios({
+  //       url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
+  //       method: 'get',
+  //       params: {
+  //         idUser: user.id,
+  //         page: 0,
+  //         size: 30,
+  //       }
+  //     });
+  //     console.log("response > ", response.data);
+  //     setListFollowing(response.data.Data.content.map((value) => value.userFollowing.id));
 
-    } catch (error) {
-      console.log("error > ", error);
-    }
-  }
+  //   } catch (error) {
+  //     console.log("error > ", error);
+  //   }
+  // }
 
   const handleLikeButton = async (detailPost) => {
     console.log(detailPost)
@@ -93,8 +94,6 @@ const PostItem = ({ data, isFollowed, hideFollowButton}) => {
         alert(`Failed to follow post`);
         return;
       }
-      // await fetchListFollowing();
-      // await loadPosts();
     } catch (error) {
       console.log(error)
       alert(`Failed to unfollow post`);

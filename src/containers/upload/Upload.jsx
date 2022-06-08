@@ -40,7 +40,7 @@ import {
 // import { useUploadtDispatcher } from "../../redux/reducers/upload";
 
 const validationSchema = Yup.object({
-  text: Yup.string().required(),
+  text: Yup.string().required("diperlukan text").max(2500, "text tidak lebih dari 2500 kata"),
   file: Yup.array().max(10, "File maksimal 10").nullable(),
 });
 
@@ -267,7 +267,7 @@ const Upload = () => {
                         {getIn(touched, "files") &&
                           getIn(errors, "files") && (
                             <div
-                              className="flex items-center justify-start"
+                              className="flex items-center text-sm justify-start"
                               data-testid="error-files"
                             >
                               <ExclamationCircleIcon className="w-5 h-5 text-[#FF8181] pr-1" />
@@ -275,6 +275,19 @@ const Upload = () => {
                             </div>
                           )}{" "}
                       </div>
+                      <div>
+                        {getIn(touched, "text") &&
+                          getIn(errors, "text") && (
+                            <div
+                              className="flex items-center justify-start text-sm mb-8"
+                              data-testid="error-text"
+                            >
+                              <ExclamationCircleIcon className="w-5 h-5 text-[#FF8181] pr-1" />
+                              {getIn(errors, "text")}
+                            </div>
+                          )}{" "}
+                      </div>
+
                       <div className="flex justify-between w-96 -ml-4 pl-2 pr-3">
                         <div>
                           <label
@@ -300,7 +313,7 @@ const Upload = () => {
                           <ButtonPost
                             disabled={loading}
                             type="submit"
-                            label={loading ? "Mohon tunggu..." : "Posting"}
+                            label={loading ? "Memposting..." : "Posting"}
                           />
                         </div>
                       </div>

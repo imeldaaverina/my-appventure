@@ -38,10 +38,34 @@ const useHome = () => {
 
   };
 
+  const [listFollowing, setListFollowing] = useState();
+  const fetchListFollowing = async () => {
+    const user = JSON.parse(localStorage.getItem('data'))
+    try {
+      const response = await axios({
+        url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
+        method: 'get',
+        params: {
+          idUser: user.id,
+          page: 0,
+          size: 30,
+        }
+      });
+      console.log("response > ", response.data);
+      setListFollowing(response.data.Data.content.map((value) => value.userFollowing.id));
+
+    } catch (error) {
+      console.log("error > ", error);
+    }
+  }
+
+
   return {
     posts,
     loadPosts,
     loading,
+    listFollowing,
+    fetchListFollowing,
   };
 };
 export default useHome;
