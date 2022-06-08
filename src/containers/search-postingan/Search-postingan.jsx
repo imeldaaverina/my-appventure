@@ -26,7 +26,7 @@ import 'swiper/css/scrollbar';
 
 dayjs.extend(relativeTime);
 
-const SearchPostinganContainer = () => {
+const SearchPostinganContainer = ({hideFollowButton, isFollowed}) => {
 
     const [isReadMore, setIsReadMore] = useState(true);
     const toggleReadMore = () => {
@@ -70,7 +70,7 @@ const SearchPostinganContainer = () => {
                 method: 'get',
                 params: {
                     page: 0,
-                    size: 300,
+                    size: 1000,
                     nama: `${query}`
                 }
             });
@@ -90,31 +90,6 @@ const SearchPostinganContainer = () => {
         setUserId(JSON.parse(localStorage.getItem('data')).id)
     }, [query]);
 
-    // const { likeAction, follow } = useHomeDispatcher();
-    // const { posts, loadPosts } = useHomeProvider();
-    // const user = JSON.parse(localStorage.getItem('data'))
-
-    // const handleLikeButton = async (detailPost) => {
-    //     console.log(detailPost)
-    //     try {
-    //         await likeAction(detailPost.id);
-    //         await loadPosts();
-    //     } catch (e) {
-
-    //     }
-    // }
-
-    // const handleUnlikeButton = async (detailPost) => {
-    //     console.log(detailPost)
-    //     try {
-    //         await likeAction(detailPost.id);
-    //         await loadPosts();
-    //     } catch (e) {
-
-    //     }
-    // };
-
-
     const { likeAction, follow } = useHomeDispatcher();
 
 
@@ -127,9 +102,7 @@ const SearchPostinganContainer = () => {
         } catch (e) {
 
         }
-        // alert("test")
     }
-    // const user = JSON.parse(localStorage.getItem('data'))
     const handleUnlikeButton = async (detailPost) => {
         console.log(detailPost)
         try {
@@ -138,7 +111,6 @@ const SearchPostinganContainer = () => {
         } catch (e) {
 
         }
-        // alert("test")
     }
 
     const handlefollow = async (idFollowing) => {

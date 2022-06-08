@@ -25,20 +25,6 @@ const Jumbotron = () => {
             <Searchbar />
           </a>
         </div>
-
-        {/* <div className="flex justify-center gap-3 my-4">
-          <ButtonJmbtrn label="Pendaki" />
-          <ButtonJmbtrn label="Pantai" />
-          <ButtonJmbtrn label="Air Terjun" />
-          <ButtonJmbtrn label="Tanaman" />
-        </div>
-
-        <div className="flex justify-center gap-3 pb-5">
-          <ButtonJmbtrn label="Arung Jeram" />
-          <ButtonJmbtrn label="Hutan" />
-          <ButtonJmbtrn label="Camping" />
-        </div> */}
-
       </div>
     </main>
   )

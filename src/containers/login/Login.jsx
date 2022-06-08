@@ -4,6 +4,8 @@ import { Title, SubTitle, TitleForm } from "../../components/typography";
 import { NoAuthProvider } from "../../providers/auth";
 import { useFormik, getIn } from "formik";
 import * as Yup from 'yup';
+import { useRouter } from "next/router";
+
 import { useLoginDispatcher } from '../../redux/reducers/login';
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
 
@@ -18,8 +20,8 @@ const initialValues = {
 };
 
 const LoginContainer = () => {
-    const { login: { loading, errMessage }, doLogin } = useLoginDispatcher();
-
+    const { login: { loading, errMessage, errPass }, doLogin } = useLoginDispatcher();
+    const { push } = useRouter();
     const onSubmit = async (values) => {
 
         try {
@@ -71,12 +73,23 @@ const LoginContainer = () => {
                                 <TitleForm text="Masuk ke akun Anda" />
                             </div>
 
-                            {errMessage.title && errMessage.content && (
-                                <div className="flex items-center justify-center text-xs font-semibold text-[#FF8181] pb-4" data-testid="error-password">
-                                    <ExclamationCircleIcon className="w-9 h-9 " />
-                                    <p className="px-1 leading-5">Alamat email atau kata sandi yang <br></br> anda masukan tidak valid</p>
-                                </div>
-                            )}
+                            {
+                                errMessage.title && errMessage.content && (
+                                    <div className="flex items-center justify-center text-xs font-semibold text-[#FF8181] pb-4" data-testid="error-password">
+                                        <ExclamationCircleIcon className="w-9 h-9 " />
+                                        <p className="px-1 leading-5">Alamat email atau kata sandi yang <br></br> anda masukan tidak valid</p>
+                                    </div>
+                                )}
+
+
+                            {
+
+                                errPass.title && errPass.content && (
+                                    <div className="flex items-center justify-center text-xs font-semibold text-[#FF8181] pb-4" data-testid="error-password">
+                                        <ExclamationCircleIcon className="w-9 h-9 " />
+                                        <p className="px-1 leading-5">Kata Sandi Salah </p>
+                                    </div>
+                                )}
 
                             <div className="font-normal text-sm mb-1 flex justify-between">
                                 Email

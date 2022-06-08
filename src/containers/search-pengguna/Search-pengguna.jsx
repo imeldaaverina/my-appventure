@@ -13,7 +13,7 @@ import { useHomeDispatcher } from "../../redux/reducers/home";
 import { callAPI } from "../../helpers/network";
 import { useHomeProvider } from "../home/HomeProvider";
 
-const SearchPenggunaContainer = () => {
+const SearchPenggunaContainer = ({hideFollowButton, isFollowed}) => {
     const [userId, setUserId] = useState();
     const [text, setText] = useState('')
     const [query] = useDebounce(text, 1000);
@@ -52,7 +52,7 @@ const SearchPenggunaContainer = () => {
                 method: 'get',
                 params: {
                     page: 0,
-                    size: 300,
+                    size: 400,
                     nama: `${query}`
                 }
             });
@@ -64,14 +64,6 @@ const SearchPenggunaContainer = () => {
             console.log("error > ", error);
         }
     };
-
-    useEffect(() => {
-        searchUser();
-        fetchListFollowing();
-        setUser(JSON.parse(localStorage.getItem('data')))
-        setUserId(JSON.parse(localStorage.getItem('data')).id)
-    }, [query]);
-
 
     const handlefollow = async (idFollowing) => {
 
@@ -90,7 +82,6 @@ const SearchPenggunaContainer = () => {
                     Authorization: `Bearer ${user.access_token}`
                 },
             });
-            // loadPosts();
             if (response.data.status === "404") {
                 alert(`Failed to follow post`);
                 return;
@@ -101,11 +92,18 @@ const SearchPenggunaContainer = () => {
             console.log(error)
             alert(`Failed to unfollow post`);
         }
-        // loadPosts();
-        // fetchListFollowing();
-
-
     };
+
+    useEffect(() => {
+        searchUser();
+        fetchListFollowing();
+        setUser(JSON.parse(localStorage.getItem('data')))
+        setUserId(JSON.parse(localStorage.getItem('data')).id)
+        // return()=>{
+        //     setListFollowing ({});
+        //     setData ({});
+        // };
+    }, [query]);
 
 
     return (
@@ -152,10 +150,12 @@ const SearchPenggunaContainer = () => {
                                     </div>
                                 </div>
                             </a>
-
-                            {hideFollowButton = search.id === user.id ? <div /> : isFollowed = listFollowing.includes(search.id) ?
-                                <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(search.id)}>Mengikuti</button> </div>
-                                : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(search.id)}>Ikuti</button></div>}
+                            <div className="flex justify-center items-center">
+                                {console.log(search)}
+                                {hideFollowButton = search.id === user.id? <div /> : isFollowed = listFollowing.includes(search.id)?
+                                    <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(search.id)}>Mengikuti</button> </div>
+                                    : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(search.id)}>Ikuti</button></div>}
+                            </div>
                         </div>
                     ))}
                 </section>

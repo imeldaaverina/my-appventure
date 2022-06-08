@@ -13,7 +13,7 @@ const FollowingLayout = ({ children }) => {
       <Jumbotron />
       <main className="min-h-screen max-w-md mx-auto">
         <NavbarFollowing />
-        <div className="flex justify-end sticky top-24 right-10 mr-10 mt-10">
+        <div className="flex justify-end sticky top-24 z-50 right-10 mr-10 mt-10">
           <Link href="/upload" className="" passHref>
             <a>
               <Image

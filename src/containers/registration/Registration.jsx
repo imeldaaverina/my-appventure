@@ -25,7 +25,7 @@ const initialValues = {
 };
 
 const RegistrationContainer = () => {
-  const { registration: { loading }, doRegistration } = useRegistrationDispatcher();
+  const { registration: { loading, errMessage }, doRegistration } = useRegistrationDispatcher();
 
   const { push } = useRouter();
 
@@ -41,7 +41,7 @@ const RegistrationContainer = () => {
       };
 
       await doRegistration(payload);
-      // push('/success-registration');
+
       // window.location.href = "/";  
     } catch (error) {
       console.log(error);
@@ -82,7 +82,7 @@ const RegistrationContainer = () => {
     if (submitRegistration.status === 200) {
       setLoading(false);
       alert('Create posts success!');
-      push('/success-registration');
+      push('/success_registration');
     }
   };
 
@@ -115,7 +115,7 @@ const RegistrationContainer = () => {
           <div className="lg:max-w-7-xl max-w-sm">
             <div className="w-full">
               <div className="flex justify-between">
-                <div className="pr-9 pt-5">
+                <div className="pr-9 pt-3">
                   <Title text="Hai," />
                 </div>
                 <a href="#">
@@ -126,13 +126,20 @@ const RegistrationContainer = () => {
                 <SubTitle content="Belum punya akun?" />
               </div>
             </div>
-            <form className="w-full rounded-xl pr-5 pl-1 p-2 pt-7 pb-4 bg-[#457275]" onSubmit={handleSubmit}>
+            <form className="w-full rounded-xl pr-5 pl-1 p-2 pt-2 pb-4 bg-[#457275]" onSubmit={handleSubmit}>
               <div className="text-center flex-col justify-center items-center">
-                <TitleForm text="Yuk daftar!" />
-                <div className="pt-2">
+                <h1 className="font-normal lg:text-xl text-lg my-2 ">Yuk daftar!</h1>
+                {
+                  errMessage.title && errMessage.content && (
+                    <div className="flex items-center justify-center text-xs font-semibold text-[#FF8181] pb-1" data-testid="error-password">
+                      <ExclamationCircleIcon className="w-9 h-9 " />
+                      <p className="px-1 leading-5">Email atau username sudah terdaftar</p>
+                    </div>
+                  )}
+                <div className="">
                   <label
                     htmlFor="files"
-                    className="w-20 h-20 m-auto flex justify-center items-center rounded-full cursor-pointer bg-white">
+                    className="w-20 h-20 m-auto mb-0 mt-px flex justify-center items-center rounded-full cursor-pointer bg-white">
                     {preview ? <img className="h-full w-full object-cover rounded-full bg-white" src={preview} /> : <CameraIcon className="h-8 w-8 text-gray-600" />}
                     <input id="files" type="file" name="files" className="hidden" accept=".jpg, .png, .jpeg" onChange={handleChangeFile} />
                   </label>
@@ -154,7 +161,7 @@ const RegistrationContainer = () => {
                 placeholder="Ketik username anda disini"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // dataTestId="input-nama"
+              // dataTestId="input-nama"
               />
               {/* <div className="flex justify-center"> */}
               <div className="font-normal text-sm mb-1 flex justify-between">
@@ -173,7 +180,7 @@ const RegistrationContainer = () => {
                 placeholder="Ketik email anda disini"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // dataTestId="input-username"
+              // dataTestId="input-username"
               />
 
               <div className="font-normal text-sm flex justify-between">
@@ -193,7 +200,7 @@ const RegistrationContainer = () => {
                 placeholder="Masukan kata sandi anda"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // dataTestId="input-password"
+              // dataTestId="input-password"
               />
 
               <div className="mt-8">
