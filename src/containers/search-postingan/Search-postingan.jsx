@@ -26,7 +26,7 @@ import 'swiper/css/scrollbar';
 
 dayjs.extend(relativeTime);
 
-const SearchPostinganContainer = ({hideFollowButton, isFollowed}) => {
+const SearchPostinganContainer = ({ hideFollowButton, isFollowed }) => {
 
     const [isReadMore, setIsReadMore] = useState(true);
     const toggleReadMore = () => {
@@ -215,12 +215,14 @@ const SearchPostinganContainer = ({hideFollowButton, isFollowed}) => {
                                             />
                                             <div className="pr-3 w-96 flex justify-between">
                                                 <div className="flex flex-col ml-2">
-                                                    <div className="font-medium text-sm mt-1">{search.user.nama}</div>
+                                                    <a href={`./user-page?nama=${search.user.nama}`}>
+                                                        <div className="font-medium text-sm mt-1">{search.user.nama}</div>
+                                                    </a>
                                                     <div className="font-normal text-xs">{dayjs(search.created_date).fromNow()}{" "}</div>
                                                 </div>
 
                                                 <div className="flex justify-center items-center">
-                                                {hideFollowButton = search.user.id === user.id ? <div /> : isFollowed = listFollowing.includes(search.user.id) ?
+                                                    {hideFollowButton = search.user.id === user.id ? <div /> : isFollowed = listFollowing.includes(search.user.id) ?
                                                         <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(search.user.id)}>Mengikuti</button> </div>
                                                         : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(search.user.id)}>Ikuti</button></div>}
                                                 </div>

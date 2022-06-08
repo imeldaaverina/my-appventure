@@ -3,6 +3,7 @@ import AuthProvider from "../../providers/auth/AuthProvider";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ChatIcon } from "@heroicons/react/outline";
+import Image from "next/image"
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -131,7 +132,15 @@ const FollowingContainer = (isFollowed, hideFollowButton) => {
                         </div>}
                     </div>
 
-                    {console.log(data)}
+                    {data && data.length < 1 && <div className="flex flex-col justify-center text-center mt-12">
+                        <div className="flex justify-center">
+                            <Image src="/Feeling sorry-pana 1.svg" width={250} height={250} alt="" />
+                        </div>
+                        <div className="pt-5 text-lg">
+                            <p>Anda belum mengikuti siapapun</p>
+                        </div>
+                    </div>}
+
                     {data && data.map(item => (
                         <main className="m-auto flex justify-center font-Poppins">
                             <div className=" rounded-2xl flex justify-center items-center w-96 shadow-xl flex-col my-3 border border-[#16737B]">
