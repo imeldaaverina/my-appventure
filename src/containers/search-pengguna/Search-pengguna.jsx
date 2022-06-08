@@ -93,10 +93,6 @@ const SearchPenggunaContainer = ({ hideFollowButton, isFollowed }) => {
         fetchListFollowing();
         setUser(JSON.parse(localStorage.getItem('data')))
         setUserId(JSON.parse(localStorage.getItem('data')).id)
-        // return()=>{
-        //     setListFollowing ({});
-        //     setData ({});
-        // };
     }, [query]);
 
     return (
@@ -145,7 +141,6 @@ const SearchPenggunaContainer = ({ hideFollowButton, isFollowed }) => {
                             </a>
                             
                             <div className="flex justify-center items-center">
-                                {console.log(search)}
                                 {hideFollowButton = search.id === user.id ? <div /> : isFollowed = listFollowing.includes(search.id) ?
                                     <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(search.id)}>Mengikuti</button> </div>
                                     : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(search.id)}>Ikuti</button></div>}

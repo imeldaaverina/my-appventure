@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { DetailCommunityLayout } from "../../components/layout";
 import { useRouter } from 'next/router';
-import { ButtonFollow } from "../../components/button";
-import { HeartIcon, ChatIcon } from "@heroicons/react/outline";
-import Link from "next/link";
+import { callAPI } from "../../helpers/network";
+import { ChatIcon } from "@heroicons/react/outline";
+import { useHomeDispatcher } from "../../redux/reducers/home";
+import LikeOutlineIcon from "@heroicons/react/outline/HeartIcon";
+import LikeSolidIcon from "@heroicons/react/solid/HeartIcon";
 import Image from "next/image";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -19,7 +21,7 @@ import 'swiper/css/scrollbar';
 
 dayjs.extend(relativeTime);
 
-const UserPageContainer = () => {
+const UserPageContainer = ({ isFollowed, hideFollowButton }) => {
     const { query } = useRouter();
     const [data, setData] = useState();
     const [jumlahKomunitas, setJumlahKomunitas] = useState();
@@ -27,13 +29,34 @@ const UserPageContainer = () => {
     const [following, setFollowing] = useState();
     const [follower, setFollower] = useState();
     const [post, setPost] = useState();
-
+    const [user, setUser] = useState()
     const [isReadMore, setIsReadMore] = useState(true);
+    const [listFollowing, setListFollowing] = useState([]);
+    const { likeAction, follow } = useHomeDispatcher();
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
     };
-
     const nama = query.nama;
+
+    const fetchListFollowing = async () => {
+
+        const user = JSON.parse(localStorage.getItem('data'))
+        try {
+            const response = await axios({
+                url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
+                method: 'get',
+                params: {
+                    idUser: user.id,
+                    page: 0,
+                    size: 30,
+                }
+            });
+            console.log("response > ", response.data);
+            setListFollowing(response.data.Data.content.map((value) => value.userFollowing.id));
+        } catch (error) {
+            console.log("error > ", error);
+        }
+    }
 
     const fetchData = async () => {
         try {
@@ -114,6 +137,7 @@ const UserPageContainer = () => {
             });
             console.log("response er> ", response.data.Data);
             setFollower(response.data.Data);
+            await fetchData();
         } catch (error) {
             console.log("error > ", error);
         }
@@ -165,10 +189,58 @@ const UserPageContainer = () => {
         }
     };
 
+    const handlefollow = async (idFollowing) => {
+
+        const user = JSON.parse(localStorage.getItem('data'))
+        try {
+            const formData = new FormData();
+            console.log(data)
+
+            formData.append("idFollowing", idFollowing);
+            formData.append("idFollower", user.id);
+            const response = await callAPI({
+                url: `/follow/`,
+                method: "POST",
+                data: formData,
+                headers: {
+                    Authorization: `Bearer ${user.access_token}`
+                },
+            });
+            if (response.data.status === "404") {
+                alert(`Failed to follow post`);
+                return;
+            }
+            await fetchListFollowing();
+            await fetchData();
+        } catch (error) {
+            console.log(error)
+            alert(`Failed to unfollow post`);
+        }
+    };
+
+    const handleLikeButton = async (detailPost) => {
+        console.log(detailPost)
+        try {
+            await likeAction(detailPost.id);
+            await fetchData();
+        } catch (e) {
+
+        }
+    }
+    const handleUnlikeButton = async (detailPost) => {
+        console.log(detailPost)
+        try {
+            await likeAction(detailPost.id);
+            await fetchData();
+        } catch (e) {
+
+        }
+    }
 
     useEffect(() => {
         if (nama) {
             fetchData();
+            setUser(JSON.parse(localStorage.getItem('data')))
         }
     }, [nama]);
 
@@ -179,6 +251,7 @@ const UserPageContainer = () => {
             fetchKomunitas();
             fetchJumlahFollower();
             fetchJumlahFollowing();
+            fetchListFollowing();
         }
     }, [data]);
 
@@ -207,9 +280,9 @@ const UserPageContainer = () => {
                                     <div>
                                         <img
                                             src={data.urlFileName}
-                                            className="rounded-full w-24 h-24"
-                                            width={50}
-                                            height={50}
+                                            className="rounded-full w-20 h-20"
+                                            width={90}
+                                            height={90}
                                             alt=""
                                         />
                                     </div>
@@ -232,9 +305,13 @@ const UserPageContainer = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-center my-5">
-                            IKUTI
-                        </div>
+                        {data && (
+                            <div className="flex justify-center my-5">
+                                {hideFollowButton = data.id === user.id ? <div /> : isFollowed = listFollowing.includes(data.id) ?
+                                    <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-white border-2 border-[#457275] text-[#457275]"> <button label='diikuti' onClick={() => handlefollow(data.id)}>Mengikuti</button> </div>
+                                    : <div className="font-Poppins flex justify-center text-sm font-medium rounded p-1 w-24 h-18 bg-[#457275] border-2 border-[#457275] text-white"><button label='Ikuti' onClick={() => handlefollow(data.id)}>Ikuti</button></div>}
+                            </div>
+                        )}
 
                         <div className="mb-4">
                             Komunitas
@@ -266,7 +343,6 @@ const UserPageContainer = () => {
                                 )
                             })}
                         </Swiper>
-                        
                         {post && post.length < 1 && <div className="flex flex-col justify-center text-center">
                             <div className="flex justify-center">
                                 <Image src="/User research-pana 1.svg" width={250} height={250} alt="" />
@@ -336,8 +412,24 @@ const UserPageContainer = () => {
                                                 </div>
 
                                                 <div className="bg-white flex justify-start mt-1">
-                                                    <div className="flex justify-center items-center -mx-1 my-3">
-                                                        <HeartIcon className="text-red-500 w-6 h-6" />{item.jumlahLike}
+                                                    <div className="flex justify-center items-center my-3">
+                                                        <div className="cursor-pointer flex flex-row">
+                                                            {
+                                                                item.likedBy.find((like) => like.user.id === user.id) ? (
+                                                                    <LikeSolidIcon
+                                                                        className="text-red-500 w-6 h-6"
+                                                                        onClick={() => handleLikeButton(item)}
+                                                                    />
+                                                                ) : (
+                                                                    <LikeOutlineIcon
+                                                                        className="text-red-500 w-6 h-6"
+                                                                        onClick={() => handleUnlikeButton(item)}
+                                                                    />
+                                                                )
+                                                            }
+
+                                                            {item.jumlahLike}
+                                                        </div>
 
                                                         <a href={`./detail-post?id=${item.id}`}>
                                                             <div className="flex flex-row">
