@@ -132,9 +132,6 @@ const FollowingContainer = (isFollowed, hideFollowButton) => {
                         </div>}
                     </div>
 
-<<<<<<< HEAD
-                    {console.log(data)}
-=======
                     {data && data.length < 1 && <div className="flex flex-col justify-center text-center mt-12">
                         <div className="flex justify-center">
                             <Image src="/Feeling sorry-pana 1.svg" width={250} height={250} alt="" />
@@ -144,7 +141,6 @@ const FollowingContainer = (isFollowed, hideFollowButton) => {
                         </div>
                     </div>}
 
->>>>>>> 04f5ecc08d4beae05e89461af350783c770e8c2a
                     {data && data.map(item => (
                         <main className="m-auto flex justify-center font-Poppins">
                             <div className=" rounded-2xl flex justify-center items-center w-96 shadow-xl flex-col my-3 border border-[#16737B]">
