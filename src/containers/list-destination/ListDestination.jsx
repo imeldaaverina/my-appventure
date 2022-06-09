@@ -27,7 +27,7 @@ const ListDestinationContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list',
                 method: 'get',
                 params: {
                     page: 0,
@@ -49,7 +49,7 @@ const ListDestinationContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/bali',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/bali',
                 method: 'get',
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
@@ -66,7 +66,7 @@ const ListDestinationContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/yogyakarta',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/yogyakarta',
                 method: 'get',
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
@@ -83,7 +83,7 @@ const ListDestinationContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/surabaya',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/surabaya',
                 method: 'get',
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
@@ -100,7 +100,7 @@ const ListDestinationContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/malang',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/malang',
                 method: 'get',
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
@@ -117,7 +117,7 @@ const ListDestinationContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/makassar',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/makassar',
                 method: 'get',
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
@@ -134,7 +134,7 @@ const ListDestinationContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/lombok',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/lombok',
                 method: 'get',
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
@@ -151,7 +151,7 @@ const ListDestinationContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/lampung',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/lampung',
                 method: 'get',
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
@@ -168,7 +168,7 @@ const ListDestinationContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/jakarta',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/jakarta',
                 method: 'get',
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,
@@ -185,7 +185,7 @@ const ListDestinationContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/bandung',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/bandung',
                 method: 'get',
                 headers: {
                     Authorization: `Bearer ${user.access_token}`,

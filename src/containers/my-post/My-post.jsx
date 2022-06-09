@@ -32,7 +32,7 @@ const MyPostContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: `https://myappventure-api.herokuapp.com/api/post/list`,
+                url: `https://api-myappventure.herokuapp.com/api/post/list`,
                 method: 'get',
                 params: {
                     idUser: user.id,

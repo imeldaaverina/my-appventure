@@ -10,7 +10,7 @@ const CommunityContainer = () => {
     const fetchData = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
+                url: 'https://api-myappventure.herokuapp.com/api/komunitas/list',
                 method: 'get',
                 params: {
                     page: 0,

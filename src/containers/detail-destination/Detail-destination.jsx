@@ -20,7 +20,7 @@ const DetailDestinationContainer = () => {
         try {
             const user = JSON.parse(localStorage.getItem('data'))
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/detaildestinasi',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/detaildestinasi',
                 method: 'get',
                 params: {
                     idDestinasi: id,

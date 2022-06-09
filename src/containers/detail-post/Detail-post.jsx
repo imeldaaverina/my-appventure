@@ -41,7 +41,7 @@ const DetailPostContainer = () => {
         try {
 
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/post/detailpost',
+                url: 'https://api-myappventure.herokuapp.com/api/post/detailpost',
                 method: 'get',
                 params: {
                     idPost: id,
@@ -57,7 +57,7 @@ const DetailPostContainer = () => {
     const fetchListKomentar = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/komentar/list',
+                url: 'https://api-myappventure.herokuapp.com/api/komentar/list',
                 method: 'get',
                 params: {
                     idPost: id,
@@ -75,7 +75,7 @@ const DetailPostContainer = () => {
     const doKomentar = async (payload) => {
         const user = JSON.parse(localStorage.getItem('data'))
         await callAPI({
-            url: `https://myappventure-api.herokuapp.com/api/komentar/addkomentar/${id}/${user.id}`,
+            url: `https://api-myappventure.herokuapp.com/api/komentar/addkomentar/${id}/${user.id}`,
             method: 'post',
             data: payload,
             headers: {

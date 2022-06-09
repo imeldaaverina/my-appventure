@@ -45,7 +45,7 @@ const FollowingContainer = (isFollowed, hideFollowButton) => {
         try {
             setLoading(true);
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/post/postbyfollowing',
+                url: 'https://api-myappventure.herokuapp.com/api/post/postbyfollowing',
                 method: 'get',
                 params: {
                     idUser: user.id,

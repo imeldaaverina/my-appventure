@@ -26,7 +26,7 @@ export const useListCommunityDispatcher = () => {
   const doListCommunity = async (payload) => {
     dispatch(toggleLoading(true));
     const response = await callAPI({
-      url: 'https://myappventure-api.herokuapp.com/api/komunitas/list',
+      url: 'https://api-myappventure.herokuapp.com/api/komunitas/list',
       method: 'GET',
       data: payload,
     });

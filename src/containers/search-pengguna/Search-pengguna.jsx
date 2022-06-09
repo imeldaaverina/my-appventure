@@ -21,7 +21,7 @@ const SearchPenggunaContainer = ({ hideFollowButton, isFollowed }) => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
+                url: `https://api-myappventure.herokuapp.com/api/follow/following/${user.id}`,
                 method: 'get',
                 params: {
                     idUser: user.id,
@@ -42,7 +42,7 @@ const SearchPenggunaContainer = ({ hideFollowButton, isFollowed }) => {
         try {
             setLoading(true);
             const baseUrl = await axios({
-                url: `https://myappventure-api.herokuapp.com/api/user/detail/cariuser?q=${query}`,
+                url: `https://api-myappventure.herokuapp.com/api/user/detail/cariuser?q=${query}`,
                 method: 'get',
                 params: {
                     page: 0,

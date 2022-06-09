@@ -16,7 +16,7 @@ const SearchKomunitasContainer = () => {
         try {
             setLoading(true);
             const baseUrl = await axios({
-                url: `https://myappventure-api.herokuapp.com/api/user/detail/carikomunitas?q=${query}`,
+                url: `https://api-myappventure.herokuapp.com/api/user/detail/carikomunitas?q=${query}`,
                 method: 'get',
                 params: {
                     page: 0,

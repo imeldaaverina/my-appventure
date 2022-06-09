@@ -44,7 +44,7 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/komunitas/komunitasuser/',
+                url: 'https://api-myappventure.herokuapp.com/api/komunitas/komunitasuser/',
                 method: 'get',
                 params: {
                     idUser: user.id,
@@ -64,7 +64,7 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: `https://myappventure-api.herokuapp.com/api/follow/following/${user.id}`,
+                url: `https://api-myappventure.herokuapp.com/api/follow/following/${user.id}`,
                 method: 'get',
                 params: {
                     idUser: user.id,
@@ -112,7 +112,7 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
         try {
 
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/komunitas/detailkomunitas',
+                url: 'https://api-myappventure.herokuapp.com/api/komunitas/detailkomunitas',
                 method: 'get',
                 params: {
                     idKomunitas: id,
@@ -129,7 +129,7 @@ const DetailCommunityContainer = ({ hideFollowButton, isFollowed, isFollowedComm
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: `https://myappventure-api.herokuapp.com/api/post/postingankomunitas/list`,
+                url: `https://api-myappventure.herokuapp.com/api/post/postingankomunitas/list`,
                 method: 'get',
                 params: {
                     page: 0,

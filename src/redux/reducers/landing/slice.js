@@ -27,7 +27,7 @@ export const useLandingDispatcher = () => {
   const doLanding = async (payload) => {
     dispatch(toggleLoading(true));
     const response = await callAPI({
-      url: `https://myappventure-api.herokuapp.com/api/subscribe/email/${payload.email}`,
+      url: `https://api-myappventure.herokuapp.com/api/subscribe/email/${payload.email}`,
       method: 'GET',
     });
     const { data } = response;

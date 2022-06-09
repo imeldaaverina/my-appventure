@@ -12,7 +12,7 @@ const MyCommunityContainer = () => {
         const user = JSON.parse(localStorage.getItem('data'))
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/komunitas/komunitasuser/',
+                url: 'https://api-myappventure.herokuapp.com/api/komunitas/komunitasuser/',
                 method: 'get',
                 params: {
                     idUser: user.id,

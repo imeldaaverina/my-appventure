@@ -28,7 +28,7 @@ const AccountContainer = () => {
     const user = JSON.parse(localStorage.getItem('data'))
     try {
       const response = await axios({
-        url: `https://myappventure-api.herokuapp.com/api/follow/jumlahfollowing/${user.id}`,
+        url: `https://api-myappventure.herokuapp.com/api/follow/jumlahfollowing/${user.id}`,
         method: 'get',
         params: {
           idUser: user.id,
@@ -48,7 +48,7 @@ const AccountContainer = () => {
     const user = JSON.parse(localStorage.getItem('data'))
     try {
       const response = await axios({
-        url: `https://myappventure-api.herokuapp.com/api/follow/jumlahfollower/${user.id}`,
+        url: `https://api-myappventure.herokuapp.com/api/follow/jumlahfollower/${user.id}`,
         method: 'get',
         params: {
           idUser: user.id,

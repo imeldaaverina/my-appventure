@@ -26,7 +26,7 @@ const ListDestinationNotLoginContainer = () => {
     const fetchData = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list',
                 method: 'get',
                 params: {
                     page: 0,
@@ -44,7 +44,7 @@ const ListDestinationNotLoginContainer = () => {
     const fetchBali = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/bali',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/bali',
                 method: 'get',
             });
             console.log("response bali> ", response.data.data.content);
@@ -57,7 +57,7 @@ const ListDestinationNotLoginContainer = () => {
     const fetchJogja = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/yogyakarta',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/yogyakarta',
                 method: 'get',
             });
             console.log("response jogja> ", response.data.data.content);
@@ -70,7 +70,7 @@ const ListDestinationNotLoginContainer = () => {
     const fetchSurabaya = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/surabaya',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/surabaya',
                 method: 'get',
             });
             console.log("response surabaya> ", response.data.data.content);
@@ -83,7 +83,7 @@ const ListDestinationNotLoginContainer = () => {
     const fetchMalang = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/malang',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/malang',
                 method: 'get',
             });
             console.log("response malang> ", response.data.data.content);
@@ -96,7 +96,7 @@ const ListDestinationNotLoginContainer = () => {
     const fetchMakassar = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/makassar',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/makassar',
                 method: 'get',
             });
             console.log("response makassar> ", response.data.data.content);
@@ -109,7 +109,7 @@ const ListDestinationNotLoginContainer = () => {
     const fetchLombok = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/lombok',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/lombok',
                 method: 'get',
             });
             console.log("response lombok> ", response.data.data.content);
@@ -122,7 +122,7 @@ const ListDestinationNotLoginContainer = () => {
     const fetchLampung = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/lampung',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/lampung',
                 method: 'get',
             });
             console.log("response lampung> ", response.data.data.content);
@@ -135,7 +135,7 @@ const ListDestinationNotLoginContainer = () => {
     const fetchJakarta = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/jakarta',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/jakarta',
                 method: 'get',
             });
             console.log("response jakarta> ", response.data.data.content);
@@ -148,7 +148,7 @@ const ListDestinationNotLoginContainer = () => {
     const fetchBandung = async () => {
         try {
             const response = await axios({
-                url: 'https://myappventure-api.herokuapp.com/api/destinasi/list/bandung',
+                url: 'https://api-myappventure.herokuapp.com/api/destinasi/list/bandung',
                 method: 'get',
             });
             console.log("response bandung> ", response.data.data.content);
