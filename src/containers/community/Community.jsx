@@ -47,15 +47,20 @@ const CommunityContainer = () => {
                         </div>
 
                         <div className="pt-10">
-                            <div className="grid grid-cols-3">
+                            <div className="grid lg:grid-cols-3 grid-cols-2">
                                 {console.log(data)}
                                 {data && data.map((item) => {
                                     return (
                                         <>
                                             <a href={`./detail-community?id=${item.id}`}>
-                                                <div className="flex flex-col justify-center items-center mb-10 border-[#008C96] rounded-md border-2 mx-5">
-                                                    <img src={item.urlFileName} className='rounded-t-md w-28 h-28' width={90} height={90} alt='' />
+                                                <div className="flex flex-col justify-center h-40 mb-10 border-[#008C96] rounded-md border-2 mx-5">
+                                                    <div className='rounded-t-md w-full h-24'>
+                                                    <img src={item.urlFileName} className='rounded-t-md w-full h-24' width={90} height={90} alt='' />
+                                                    </div>
+                                                    <div className="h-16 items-center flex justify-center text-center">
                                                     <h1 className="text-[#329D9C] text-center">{item.namaKomunitas}</h1>
+                                                    </div>
+                                                    
                                                 </div>
                                             </a>
                                         </>
