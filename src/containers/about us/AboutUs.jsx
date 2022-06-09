@@ -1,4 +1,4 @@
-import AuthProvider from "../../providers/auth/AuthProvider";
+import NoAuthProvider from "../../providers/auth/NoAuthProvider";
 import FollowerListLayout from "../../components/layout/FollowerListLayout";
 import { Icon } from '@iconify/react';
 import Image from 'next/image'
@@ -6,7 +6,7 @@ import Image from 'next/image'
 const AboutUsContainer = () => {
 
     return (
-        <AuthProvider>
+        <NoAuthProvider>
             <FollowerListLayout>
                 <section>
                     <div className="max-w-md mx-auto h-full px-2 font-Poppins">
@@ -16,7 +16,7 @@ const AboutUsContainer = () => {
                                     <Icon icon="eva:arrow-circle-left-outline" width="40" />
                                 </a>
                             </div>
-                            <div className="font-semibold flex items-center justify-center w-96 text-2xl mb-8">
+                            <div className="font-semibold flex items-center justify-center w-80 text-2xl mb-8">
                                 <p>Tentang Kami</p>
                             </div>
                         </div>
@@ -95,7 +95,7 @@ const AboutUsContainer = () => {
                     </div>
                 </section>
             </FollowerListLayout>
-        </AuthProvider>
+        </NoAuthProvider>
     );
 };
 export default AboutUsContainer;

@@ -544,7 +544,6 @@ const ListDestinationContainer = () => {
                             )
                         })}
                     </Swiper>
-
                 </section>
             </ListDestinationLayout>
         </AuthProvider >

@@ -58,7 +58,7 @@ const Navbarmyprofile = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        <div className="flex flex-row ml-7 h-min border-b-2 w-56 mt-2">
+                        <div className="flex flex-row ml-7 h-min border-b-2 w-64 mt-2">
                           <Icon icon="bx:home-alt" width={24} height={24} />
                           <p className="ml-2 mb-3">
                             Beranda
@@ -76,7 +76,7 @@ const Navbarmyprofile = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        <div className="flex flex-row ml-7 h-min border-b-2 w-56">
+                        <div className="flex flex-row ml-7 h-min border-b-2 w-64">
                           <Icon icon="lucide:tent" width={24} height={24} />
                           <p className="ml-2 mb-3">
                             Tantangan
@@ -94,7 +94,7 @@ const Navbarmyprofile = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        <div className="flex flex-row ml-7 h-min border-b-2 w-56">
+                        <div className="flex flex-row ml-7 h-min border-b-2 w-64">
                           <Icon icon="akar-icons:people-group" width={24} height={24} />
                           <p className="ml-2 mb-3">
                             Komunitas
@@ -112,7 +112,7 @@ const Navbarmyprofile = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        <div className="flex flex-row ml-7 h-min border-b-2 w-56">
+                        <div className="flex flex-row ml-7 h-min border-b-2 w-64">
                           <Icon icon="uil:map-pin" width={24} height={24} />
                           <p className="ml-2 mb-3">
                             Destinasi Wisata
