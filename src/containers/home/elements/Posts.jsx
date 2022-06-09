@@ -4,6 +4,7 @@ import PostItem from "./PostItem";
 import { css } from "@emotion/react";
 import FadeLoader from "react-spinners/FadeLoader";
 import axios from 'axios';
+import Image from "next/image"
 
 const Posts = () => {
   const { posts, loadPosts, loading } = useHomeProvider();
@@ -54,6 +55,16 @@ const Posts = () => {
           <p className="mt-2 font-Poppins font-semibold text-xl">Silahkan Tunggu...</p>
         </div>}
       </div>
+
+      {posts && posts.length < 1 && <div className="flex flex-col justify-center text-center mt-12">
+        <div className="flex justify-center">
+          <Image src="/User research-pana 1.svg" width={250} height={250} alt="" />
+        </div>
+        <div className="pt-5 text-lg">
+          <p>Belum ada Unggahan Terbaru</p>
+        </div>
+      </div>}
+
       {posts &&
         posts.content.length > 0 &&
         posts.content.map((post) => {
