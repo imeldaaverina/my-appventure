@@ -6,7 +6,7 @@ import Image from 'next/image'
 const AboutUsContainer = () => {
 
     return (
-        <NoAuthProvider>
+        
             <FollowerListLayout>
                 <section>
                     <div className="max-w-md mx-auto h-full px-2 font-Poppins">
@@ -95,7 +95,7 @@ const AboutUsContainer = () => {
                     </div>
                 </section>
             </FollowerListLayout>
-        </NoAuthProvider>
+      
     );
 };
 export default AboutUsContainer;
